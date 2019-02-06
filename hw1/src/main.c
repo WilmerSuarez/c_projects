@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "const.h"
 #include "debug.h"
 
@@ -16,19 +15,24 @@
 #error "Do not #include <ctype.h>. You will get a ZERO."
 #endif
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     int ret;
-    if(validargs(argc, argv))
+    
+    /* Validate program arguments */
+    if(validargs(argc, argv)) {
         USAGE(*argv, EXIT_FAILURE);
-    debug("Options: 0x%x", global_options);
-    if(global_options & 1)
-        USAGE(*argv, EXIT_SUCCESS);
+    }
+    
+    debug("Options: 0x%08X", global_options);
+    
+    /* Perform Operation - based on global_options */
+    if(global_options & 1) { 
+        USAGE(*argv, EXIT_SUCCESS); /* PRINT UTILITY USAGE */
+    } else if(global_options & 2) {
+        return compress();          /* COMPRESS STDIN DATA */
+    } else if (global_options & 4) {
+        return decompress();        /* DECOMPRESS STDIN DATA */
+    }
 
     return EXIT_SUCCESS;
 }
-
-/*
- * Just a reminder: All non-main functions should
- * be in another file not named main.c
- */

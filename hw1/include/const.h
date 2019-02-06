@@ -6,7 +6,6 @@
 #define CONST_H
 
 #include <stdio.h>
-
 #include "huff.h"
 
 #define USAGE(program_name, retcode) do{ \
@@ -22,7 +21,7 @@ exit(retcode); \
 /* Options info, set by validargs. */
 int global_options;
 
-/**
+/*
  * @brief Validates command line arguments passed to the program.
  * @details This function will validate all the arguments passed to the
  * program, returning 0 if validation succeeds and 1 if validation fails.
@@ -33,14 +32,12 @@ int global_options;
  * @param argc The number of arguments passed to the program from the CLI.
  * @param argv The argument strings passed to the program from the CLI.
  * @return 0 if validation succeeds and 1 if validation fails.
- * Refer to the homework document for the effects of this function on
- * global variables.
  * @modifies global variable "global_options" to contain a bitmap representing
  * the selected options.
  */
 int validargs(int argc, char **argv);
 
-/**
+/*
  * @brief Emits a description of the Huffman tree used to compress the current block.
  * @details This function emits, to the standard output, a description of the
  * Huffman tree used to compress the current block.  Refer to the assignment handout
@@ -70,7 +67,7 @@ void emit_huffman_tree();
  */
 int read_huffman_tree();
 
-/**
+/*
  * @brief Reads one block of data from standard input and emits corresponding
  * compressed data to standard output.
  * @details This function reads raw binary data bytes from the standard input
@@ -83,7 +80,7 @@ int read_huffman_tree();
  */
 int compress_block();
 
-/**
+/*
  * @brief Reads one block of compressed data from standard input and writes
  * the corresponding uncompressed data to standard output.
  * @details This function reads one block of compressed data from the standard
@@ -96,7 +93,7 @@ int compress_block();
  */
 int decompress_block();
 
-/**
+/*
  * @brief Reads raw data from standard input, writes compressed data to
  * standard output.
  * @details This function reads raw binary data bytes from the standard input in
@@ -109,7 +106,7 @@ int decompress_block();
  */
 int compress();
 
-/**
+/*
  * @brief Reads compressed data from standard input, writes uncompressed
  * data to standard output.
  * @details This function reads blocks of compressed data from the standard

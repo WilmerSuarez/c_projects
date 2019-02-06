@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "const.h"
 #include "huff.h"
 #include "debug.h"
@@ -34,17 +33,17 @@
  * YOU WILL GET A ZERO!
  */
 
-/**
+/*
  * @brief Emits a description of the Huffman tree used to compress the current block.
  * @details This function emits, to the standard output, a description of the
  * Huffman tree used to compress the current block.  Refer to the assignment handout
  * for a detailed specification of the format of this description.
  */
 void emit_huffman_tree() {
-    // To be implemented.
+
 }
 
-/**
+/*
  * @brief Reads a description of a Huffman tree and reconstructs the tree from
  * the description.
  * @details  This function reads, from the standard input, the description of a
@@ -57,11 +56,11 @@ void emit_huffman_tree() {
  * if an error occurs.
  */
 int read_huffman_tree() {
-    // To be implemented.
-    return 1;
+
+    return EXIT_FAILURE;
 }
 
-/**
+/*
  * @brief Reads one block of data from standard input and emits corresponding
  * compressed data to standard output.
  * @details This function reads raw binary data bytes from the standard input
@@ -73,11 +72,11 @@ int read_huffman_tree() {
  * @return 0 if compression completes without error, 1 if an error occurs.
  */
 int compress_block() {
-    // To be implemented.
-    return 1;
+
+    return EXIT_FAILURE;
 }
 
-/**
+/*
  * @brief Reads one block of compressed data from standard input and writes
  * the corresponding uncompressed data to standard output.
  * @details This function reads one block of compressed data from the standard
@@ -89,11 +88,11 @@ int compress_block() {
  * @return 0 if decompression completes without error, 1 if an error occurs.
  */
 int decompress_block() {
-    // To be implemented.
-    return 1;
+
+    return EXIT_FAILURE;
 }
 
-/**
+/*
  * @brief Reads raw data from standard input, writes compressed data to
  * standard output.
  * @details This function reads raw binary data bytes from the standard input in
@@ -105,11 +104,11 @@ int decompress_block() {
  * @return 0 if compression completes without error, 1 if an error occurs.
  */
 int compress() {
-    // To be implemented.
-    return 1;
+    debug("Compressing\n");
+    return EXIT_SUCCESS;
 }
 
-/**
+/*
  * @brief Reads compressed data from standard input, writes uncompressed
  * data to standard output.
  * @details This function reads blocks of compressed data from the standard
@@ -120,27 +119,6 @@ int compress() {
  * @return 0 if decompression completes without error, 1 if an error occurs.
  */
 int decompress() {
-    // To be implemented.
-    return 1;
-}
-
-/**
- * @brief Validates command line arguments passed to the program.
- * @details This function will validate all the arguments passed to the
- * program, returning 0 if validation succeeds and 1 if validation fails.
- * Upon successful return, the selected program options will be set in the
- * global variable "global_options", where they will be accessible
- * elsewhere in the program.
- *
- * @param argc The number of arguments passed to the program from the CLI.
- * @param argv The argument strings passed to the program from the CLI.
- * @return 0 if validation succeeds and 1 if validation fails.
- * Refer to the homework document for the effects of this function on
- * global variables.
- * @modifies global variable "global_options" to contain a bitmap representing
- * the selected options.
- */
-int validargs(int argc, char **argv)
-{
-    return 1;
+    debug("De-compressing\n");
+    return EXIT_SUCCESS;
 }
