@@ -46,10 +46,10 @@ strlength(const char *str) {
  * @return Block Size
 */ 
 static int 
-getbsize(char **argv) {
+get_b_size(char **argv) {
     int bsize = 0, len;
     
-    /* Get block string size */
+    /* Get block size string length */
     len = strlength(*(argv+3));
 
     /* Convert String to Integer */
@@ -85,22 +85,22 @@ checkb(int argc, char **argv) {
             if(*s >= '0' && *s <= '9') {
                 continue;    
             } else {
-                return EXIT_FAILURE;
+                return 1;
             }
         }
     
         /* Convert from String to Integer */
-        bsize = getbsize(argv);
+        bsize = get_b_size(argv);
         
         /* Test Block Size Boundaries */
         if(bsize >= MIN_BLOCK_SIZE && bsize <= MAX_BLOCK_SIZE) {
             /* Set block size in global_options */
             global_options |= ((bsize - 1) << G_OP_BS);
-            return EXIT_SUCCESS;
+            return 0;
         }
     }
 
-    return EXIT_FAILURE;
+    return 1;
 }
 
 /*
@@ -118,7 +118,8 @@ checkb(int argc, char **argv) {
  * @modifies global variable "global_options" to contain a bitmap representing
  * the selected options.
  */
-int validargs(int argc, char **argv) {
+int 
+validargs(int argc, char **argv) {
 
     /* Test for too few or too many arguments */
     if(argc >= MIN_ARGS && argc <= MAX_ARGS) {
@@ -128,30 +129,29 @@ int validargs(int argc, char **argv) {
                 case 'h': // --------------------------- HELP --------------------------- //
                     /* Set global_options to display usage in main.c */
                     global_options |= (1 << G_OP_H); 
-                    return EXIT_SUCCESS;
+                    return 0;
                 case 'c': // --------------------------- COMPRESS --------------------------- //
                     /* Set global_options to compress */
                     global_options |= (1 << G_OP_C); 
                     if(argc == MIN_ARGS) { // If optional flag "-b" not provided
                         /* Set default block size */
                         global_options |= (DEFAULT_BLOCK_SIZE << G_OP_BS);
-                        return EXIT_SUCCESS;
+                        return 0;
                     } else if(argc == MAX_ARGS) {
                         /* Test for "-b" and validate block size */
                         return checkb(argc, argv); 
                     }   
                     break;
                 case 'd': // --------------------------- DECOMPRESS --------------------------- //
-                    if(argc > MIN_ARGS) // No arguments after "-d" flag
-                        break;
+                    if(argc > MIN_ARGS) break; // No arguments after "-d" flag allowed
                     /* Set default block size */
                     global_options |= (DEFAULT_BLOCK_SIZE << G_OP_BS);
                     /* Set global_options to decompress */
                     global_options |= (1 << G_OP_D);
-                    return EXIT_SUCCESS;
+                    return 0;
             }
         }
     }
 
-    return EXIT_FAILURE;
+    return 1;
 }

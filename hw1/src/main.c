@@ -23,9 +23,7 @@ int main(int argc, char **argv) {
         USAGE(*argv, EXIT_FAILURE);
     }
     
-    debug("Options: 0x%08X", global_options);
-    
-    /* Perform Operation - based on global_options */
+    /* Perform Operation based on global_options (set by validargs()) */
     if(global_options & 1) { 
         USAGE(*argv, EXIT_SUCCESS); /* PRINT UTILITY USAGE */
     } else if(global_options & 2) {
