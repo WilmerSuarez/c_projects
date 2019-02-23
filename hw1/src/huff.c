@@ -450,7 +450,7 @@ compress() {
     /* Check if EOF is reached */
     if(feof(stdin)) return 0;
 
-    return 1;
+    return 0;
 }
 
 /*
@@ -468,7 +468,10 @@ static void
 push_pop(char bit_val, NODE **sp, int *nnum) {
     /* If 0: create new leaf node and  */
     if(!bit_val) {
-        (*sp)++; // Increment stack pointer ("pushing" new leaf node)
+        /* Initialize New Leaf */
+        (*sp)->left = NULL;
+        (*sp)->right = NULL;
+        ++(*sp); // Increment stack pointer ("pushing" new leaf node)
     } else { 
     /* If 1: pop two nodes - give them a parent */
         NODE *R, *L;
@@ -483,9 +486,9 @@ push_pop(char bit_val, NODE **sp, int *nnum) {
         *L = *(*sp); // Store second popped node
 
         /* Create Parent of popped nodes */
-        (*sp)->left = L;
         (*sp)->right = R;
-
+        (*sp)->left = L;
+        
         (*sp)++; // Increment stack pointer (pushing new parent node)
         
         *nnum -= 2; // Reduce temprary size of Huff Tree
@@ -515,9 +518,6 @@ decode_bit_seq() {
         return 1;
     }
 
-    /* Numberof leaves in the huffman tree of the current compressed block */
-    unsigned nleaf = (num_nodes+1)/2; 
-
     /* Decode post-order bit sequence */
     unsigned bit_count = 0; // Per byte bit counter
     unsigned n_bits = 0; // Number of bits representing structure of the tree (post order traversal)
@@ -539,7 +539,7 @@ decode_bit_seq() {
                     bit_val = s & 0x01; // Get value of last bit
 
                     push_pop(bit_val, &sp, &nnum); // Evaluate scanned value
-                    
+
                     bit_count++; // Increment number of bits evaluated in current byte
                     n_bits++; // Increment number of nodes decoded
                 }
@@ -550,9 +550,7 @@ decode_bit_seq() {
         } else return 1; /* Invalid bit sequence - return error */
     }
 
-     //test that the number of nodes decoded (n_bits) == 
-
-    return 0;
+   return 0;
 }
 
 /*
@@ -574,11 +572,13 @@ restores_symbols(NODE *n, int s) {
                 if((s = getchar()) != EOF) {  // Get next byte after 0xFF
                     if(s == 0x00) { // Check for END node
                         END = n; // Pointer to END node
+                        return 0;
+                    } else {
+                        n->symbol = 0xFF; // Assign 0xFF if next byte != 0x00
                     }
                 } else {
                     return 1;
                 }
-                n->symbol = s; // Assign 0xFF if next byte != 0x00
             }
             n->symbol = s; // Assign symbol
         } else {
@@ -688,7 +688,7 @@ decode() {
                     /* Evaluate decoding completion */
                     switch(decode_data(&nptr, bit_val)) { // Decode bit
                         case 0: break;    // Continue decoding next bit
-                        case 1: return 1; // Error
+                        case 1: return 1; // Error 
                         case 2: return 0; // END node reached - De-compression complete
                     }
                 }
@@ -698,8 +698,6 @@ decode() {
             bit_count = 0;
         } else { return 1; } /* Invalid bit sequence - return error */
     }
-
-    return 0;
 }
 
 /*
@@ -716,12 +714,12 @@ decode() {
 int 
 decompress_block() {
     /* Read and re-construct the Huffman Tree */
-    if(read_huffman_tree()) {
-        return 1;
-    }
+    if(read_huffman_tree()) return 1;
 
     /* De-compress block */
-    return decode();
+    if(decode()) return 1;
+
+    return 0;
 }
 
 /*
@@ -748,5 +746,5 @@ decompress() {
     /* Check if EOF is reached */    
     if(feof(stdin)) return 0;
 
-    return 1;
+    return 0;
 }
