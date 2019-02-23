@@ -1,8 +1,8 @@
 image: hwrunner:latest
 variables:
     GIT_SSL_NO_VERIFY: "true"
-    EXEC: huff
-    HW_DIR: hw1
+    EXEC: ged2html
+    HW_DIR: hw2
 before_script:
     - make clean all -C ${HW_DIR}
 stages:
@@ -16,8 +16,8 @@ build:
 run:
     stage: run
     script:
-        - cd ${HW_DIR} && bin/${EXEC} -h
+        - ${HW_DIR}/bin/${EXEC} -v
 test:
     stage: test
     script:
-        - cd ${HW_DIR} && bin/${EXEC}_tests -S --verbose=0 --timeout 5
+        - ${HW_DIR}/bin/${EXEC}_test -S --verbose=0 --timeout 5

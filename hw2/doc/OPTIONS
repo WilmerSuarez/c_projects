@@ -1,0 +1,25 @@
+Someday I will replace this file with proper documentation, but for now,
+here are meanings of the option flags currently understood by ged2html:
+
+USAGE:
+
+ged2html [-dvHi][-s <individual> ...][-u <URL template>][-f <file template>][-h <header template>][-- <gedcom-file> ...]
+
+ -v			Print version information.
+ -c			Disable automatic capitalization of surnames.
+ -i			Cause an index file to be generated containing
+			all the individuals in the input.
+ -d max_per_directory	Specify number of individuals per subdirectory
+			(0 means no subdirectories).
+ -s individuals ...	Limit the production of output files to a specified
+			set of zero or more selected individuals.
+ -u url_template	Specify a template string for the URL's used
+			in the anchors in the output files (default "%s.html").
+ -f file_template	Specify a template string for the names of the
+			HTML files (default "%s.html").
+ -t individual_template	Specify an HTML template file for individuals.
+ -T index_template	Specify an HTML template file for the index.
+ -H			Print a brief message listing the available options.
+
+The template files contain text interspersed with macro commands to
+control the production of output.  
