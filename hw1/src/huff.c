@@ -33,6 +33,7 @@ sym_byte_seq(NODE *n, short prev_sym) {
         /* END symbol output */
         if(!n->weight) {
             END = n; // Point to END leaf node - for use during encoding
+            /* END symbol is a two byte symbol: 0xFF00 */
             putchar(0xFF);
             putchar(0x00);
             return;
@@ -58,14 +59,11 @@ sym_byte_seq(NODE *n, short prev_sym) {
 /*
  * @brief Post order travesral of Huffman Tree
  * @details When a leaf is reached the output is 0.
- * Output is 1 when an internal node is reached. The 
- * bit sequence is then padded with the necessary 0's
- * to make it a multiple of 8 bits.
+ * Output is 1 when an internal node is reached.
  * 
  * @param n Current node being evaluated
  * @param bit_sequence Holds the bit evaluation results of the nodes
 */
-
 static void
 bitseq(NODE *n, char *bit_sequence, int *bit_pos, int *bit_count) {
     /* If leaf node (either left or right = NULL) */
@@ -74,7 +72,7 @@ bitseq(NODE *n, char *bit_sequence, int *bit_pos, int *bit_count) {
         /* If full byte filled */
         if(++(*bit_count) == BYTE) {
             putchar(*bit_sequence);
-            *bit_pos = 7; // Go back to MSb
+            *bit_pos = 7;   // Go back to MSb
             *bit_count = 0; // Reset count
         }
         return;
@@ -90,15 +88,13 @@ bitseq(NODE *n, char *bit_sequence, int *bit_pos, int *bit_count) {
     /* If full byte filled */
     if(++(*bit_count) == BYTE) {
         putchar(*bit_sequence);
-        *bit_pos = 7; // Go back to MSb
+        *bit_pos = 7;   // Go back to MSb
         *bit_count = 0; // Reset count
     } 
 }
 
 /*
- * @brief Emits a description of the Huffman tree used to compress the current block.
- * @details This function emits, to the standard output, a description of the
- * Huffman Tree used to compress the current block.
+ * @brief Emits the description of the Huffman tree used to compress the current block.
  * Huffman Tree Description: 
  *     1. Number of nodes: two-byte sequence in big-endian order
  *     2. Sequence of bits: 0 indicates leaf, 1 indicates internal node
@@ -107,22 +103,23 @@ bitseq(NODE *n, char *bit_sequence, int *bit_pos, int *bit_count) {
 void 
 emit_huffman_tree() {
     /* Emit number of nodes */
-    short nnum = num_nodes;
+    short nnum = num_nodes;         // Copy of number of nodes
     putchar((nnum >> BYTE) & 0xFF); // MSB 
-    putchar(nnum & 0xFF); // LSB
+    putchar(nnum & 0xFF);           // LSB
 
     /* Emit node bit sequence */
-    char bit_sequence = 0;
-    int bit_count = 0; // Keeps track of number of bits
-    int bit_pos = 7; // Bit Shift amount
+    char bit_sequence = 0; // Holds bit sequence to be outputted
+    int bit_count = 0;     // Keeps track of number of bits
+    int bit_pos = 7;       // Bit Shift amount
+    /* Generate the bit sequence */
     bitseq(nodes, &bit_sequence, &bit_pos, &bit_count);
-    if(nnum % BYTE) {
-        /* Zero padding */
+    /* Zero-padding the last byte in the bit sequence to make it a multiple of 8 bits */
+    if(nnum % BYTE) { // Zero-padding only when not a multiple of 8 bits
         while(nnum % BYTE) {
             bit_sequence &= ~(1 << bit_pos--); // Clear next bit 
             ++nnum;
         }
-        putchar(bit_sequence);
+        putchar(bit_sequence); // Output last zero-padded byte
     }
 
     /* Emit symbol byte sequence */
@@ -153,16 +150,16 @@ swap(int n1, int n2) {
 */
 static void 
 min_heapify(int i, const int heapnum) {
-    int l = 2*i+1; // Left child index
-    int r = 2*i+2; // Right child index
+    int l = 2*i+1;    // Left child index
+    int r = 2*i+2;    // Right child index
     int smallest = i; // Initial smallest value
     if(l < heapnum && (*(nodes+l)).weight < (*(nodes+i)).weight) 
         smallest = l;
     if(r < heapnum && (*(nodes+r)).weight < (*(nodes+smallest)).weight)
         smallest = r;
     if(smallest != i) {
-        swap(i, smallest);
-        min_heapify(smallest, heapnum);
+        swap(i, smallest); // Swap the previous smalles with current smallest
+        min_heapify(smallest, heapnum); 
     }
 }
 
@@ -172,8 +169,9 @@ min_heapify(int i, const int heapnum) {
  * 
  * @param *heapnum The current size of the min-heap
  * @param *n The number of nodes
+ * @return 0 when Huffman tree constructed, 1 when not
 */
-static void 
+static int 
 remove_min(int *heapnum, int *n) {
     NODE *temp_node1, *temp_node2;
     int p = (*n+1)/2-2; // Parent index of current nodes
@@ -184,7 +182,7 @@ remove_min(int *heapnum, int *n) {
     /* Replace the root node - 1st min-wieght node - with last node in min-heap */  
     *nodes = *(nodes+(*heapnum-1)); 
     *heapnum -= 1; // Decrement size of the min-heap after replacing root node
-    min_heapify(0, *heapnum); // Re-heapify the min-heap
+    min_heapify(0, *heapnum); // Fix the min-heap
 
     /* Replace the root node - 2nd min-weight node - with last node in min-heap*/
     temp_node2 = nodes+(*n-2);
@@ -192,18 +190,20 @@ remove_min(int *heapnum, int *n) {
     *nodes = *(nodes+(*heapnum-1)); 
 
     /* Create parent for the 2 min-weight nodes */
-    (*(nodes+p)).left = temp_node1; // Left Child
+    (*(nodes+p)).left = temp_node1;  // Left Child
     (*(nodes+p)).right = temp_node2; // Right Child
     (*(nodes+p)).weight = temp_node1->weight + temp_node2->weight; // Parent wight = sum of children weight
     (*(nodes+p)).symbol = 'P'; // Arbitrary parent symbol
-    *n = *n - 2; // Reduce temporary size of Huff tree
-    min_heapify(0, *heapnum);
+    *n = *n - 2;               // Reduce temporary size of Huff tree
+    min_heapify(0, *heapnum);  // Fix the min-heap
 
-    if(*heapnum == 1) *heapnum -= 1;
+    if(*heapnum == 1) return 0; // Huffman Tree Complete
+
+    return 1; // Continue Huffman Tree construction
 }
 
 /*
- * @brief Sets the parent member pointers of the 
+ * @brief Sets the parent pointers of the 
  * Nodes with parents in the nodes array. The function
  * also populates the node_for_symbol array.
  * 
@@ -217,10 +217,7 @@ set_parents(NODE *n, NODE *prnt) {
 
     /* If leaf node (either left or right = NULL) */
     if(n->left == NULL) {
-        /* 
-            Set pointer to leaf nodes corresponding to 
-            their symbol value.
-        */
+        /* Set pointer to leaf nodes corresponding to their symbol value. */
         *(nfsptr+((int)n->symbol)) = n; 
         return;
     } 
@@ -235,14 +232,23 @@ set_parents(NODE *n, NODE *prnt) {
  * @brief Output the compressed data representing the 
  * uncompressed data.
  * @details Traverse the Huffman Tree, outputting the code
- * bits for characters in the current block.
+ * bits for the current symbol pointed to by nptr.
+ * The weight fields of the nodes are used to store the directions
+ * of the tree edges.
+ * 
+ * @param nptr: Pointer to current symbol to be encoded
+ * @param naddr: Address of the previous node
+ * @param bit_pos: Bit shift amount
+ * @param bit_count: Number of bits processed
+ * @param num_bits: Total number of bits in the encoded data
+ * @param bit_sequence: Holds bit sequence to be outputted
 */
 static void
 encode_data(NODE *nptr, NODE *naddr, unsigned *bit_pos, unsigned *bit_count, 
             unsigned *num_bits, char *bit_sequence) {
     /* Set-up bit sequence */
     while(nptr->parent) {
-        naddr = nptr; // Store current node address
+        naddr = nptr;        // Store current node address
         nptr = nptr->parent; // Move to parent node
 
         /* Previous node: left or right child? */
@@ -253,28 +259,28 @@ encode_data(NODE *nptr, NODE *naddr, unsigned *bit_pos, unsigned *bit_count,
         }
     }
 
-    /* Output encoded bit sequence  */ 
+    /* Output encoded bit sequence for current symbol */ 
     while(nptr->left || nptr->right) {
-        if(nptr->weight) {  // If direction is 1, go right
+        if(nptr->weight) {                      // If direction is 1, go right
             *bit_sequence |= 1 << (*bit_pos)--; // Set next bit 
             (*num_bits)++;
             /* If full byte filled */
             if(++(*bit_count) == BYTE) {
                 putchar(*bit_sequence);
-                *bit_pos = 7; // Go back to MSb
+                *bit_pos = 7;   // Go back to MSb
                 *bit_count = 0; // Reset count
             }
-            nptr = nptr->right; // Go to next node in the sequence
+            nptr = nptr->right;    // Go to next node in the sequence
         } else if(!nptr->weight) { // If direction is 0, go left
             *bit_sequence &= ~(1 << (*bit_pos)--); // Clear next bit 
             (*num_bits)++;
             /* If full byte filled */
             if(++(*bit_count) == BYTE) {
                 putchar(*bit_sequence);
-                *bit_pos = 7; // Go back to MSb
+                *bit_pos = 7;   // Go back to MSb
                 *bit_count = 0; // Reset count
             }
-            nptr = nptr->left; // Go to next node in the sequence
+            nptr = nptr->left;  // Go to next node in the sequence
         }
     }
 }
@@ -282,31 +288,35 @@ encode_data(NODE *nptr, NODE *naddr, unsigned *bit_pos, unsigned *bit_count,
 /*
  * @brief Output the compressed data representing the 
  * uncompressed data.
+ * @details Traverses the Huffman Tree using the current_block array
+ * content as the index to the node_for_symbol array to reference the leaf nodes 
+ * of the Huffman Tree.
+ * 
+ * @param bbcnt Size of block
 */
 static void
 encode(int bbcnt) {
-    char bit_sequence = 0;
-    unsigned num_bits = 0; // Total number of bits in the sequence
-    unsigned bit_pos = 7; // Bit Shift amount
-    unsigned bit_count = 0; // Keeps track of number of bits
     unsigned char *cbptr = current_block; // Pointer to current block array
-    unsigned char s; // Holds current character being compressed
-    NODE *nptr = NULL; // Points to the current node used to compress "s"
-    NODE *naddr = NULL; // Address of the previous node
+    char bit_sequence = 0;  // Holds bit sequence to be outputted
+    unsigned num_bits = 0;  // Total number of bits in the sequence
+    unsigned bit_pos = 7;   // Bit Shift amount
+    unsigned bit_count = 0; // Keeps track of number of bits
+    unsigned char s;        // Holds current character being compressed
+    NODE *nptr = NULL;      // Points to the current node used to compress "s"
+    NODE *naddr = NULL;     // Address of the previous node
 
     /* Encode Characters and output code bits */
     for(int i = 0; i < bbcnt; ++i) {
-        s = *(cbptr+i); // Get next character to compress
-        nptr = node_for_symbol[s]; // Pointer to node of symbol "s"
-
+        s = *(cbptr+i);              // Get next character to compress
+        nptr = *(node_for_symbol+s); // Pointer to node of symbol "s"
         encode_data(nptr, naddr, &bit_pos, &bit_count, &num_bits, &bit_sequence);
     }
 
     /* Encode END symbol */
     encode_data(END, naddr, &bit_pos, &bit_count, &num_bits, &bit_sequence);
 
-    /* Zero padding */
-    if(num_bits % BYTE) {
+    /* Zero-padding the last byte in the bit sequence to make it a multiple of 8 bits */
+    if(num_bits % BYTE) { // Zero-padding only when not a multiple of 8 bits
         while(num_bits % BYTE) {
             bit_sequence &= ~(1 << bit_pos--); // Clear next bit 
             ++num_bits;
@@ -349,32 +359,33 @@ res_nodes(NODE *nptr) {
  */
 int 
 compress_block() {
-    int s; // Holds current character Symbol from stdin
-    unsigned bbcnt = 0; // Keep track of block byte count
     const unsigned bsz = (unsigned)global_options >> 16; // Current Block Size 
-    unsigned char *cbptr = current_block; // Pointer to block array
-    int heapnum; // Number of nodes in the min-heap
-    int done = 0; // Flag for file compression completion
-
+    unsigned char *cbptr = current_block;                // Pointer to block array
+    int s;              // Holds current character Symbol from stdin
+    int heapnum;        // Number of nodes in the min-heap
+    int done = 0;       // Flag for file compression completion
+    unsigned bbcnt = 0; // Keep track of block byte count
+    
     NODE *nptr = nodes+1; // Point to 2nd index of nodes array (1st index is END node)
-    num_nodes++; // Initialize number of nodes to 1 (END node) 
+    num_nodes++;          // Initialize number of nodes to 1 (END node) 
     
     /* Read first byte of data to be compressed from standard input */
     if((s = getchar()) != EOF) { // Get first char from stdin
         *(cbptr++) = s; // Update current block storage
-        bbcnt++; // Update Block Byte Count
+        bbcnt++;        // Update Block Byte Count
     } else {
-        return 1; // Empty file
+        return 1;       // Empty file
     }
+
+    /* Read the remaining data */
     for(;;) {
         if((s = getchar()) != EOF) { // Get next char from stdin
             *(cbptr++) = s; // Update current block storage
-            bbcnt++; // Update Block Byte Count
+            bbcnt++;        // Update Block Byte Count
         } 
         if(bbcnt > bsz || s == EOF) {
             /* Set "done" flag if End of File reached */
             if(s == EOF) done = 1;
-
             break;
         }
     }
@@ -382,35 +393,33 @@ compress_block() {
     /* Create Symbol Histogram */
     cbptr = current_block; // Reset pointer to block array
     for(int i = 0; i < bbcnt; ++i) {
-        s = *(cbptr+i);
+        s = *(cbptr+i);    // Get the next symbol
         for(int j = 1; j < (2*MAX_SYMBOLS - 1); ++j) {
-            /* If the symbol already exists in the node array or it does not */
+            /* If the symbol already exists in the node array or if it does not */
             if(nptr->symbol == s || !nptr->symbol) {
                 if(!nptr->symbol)
-                    num_nodes++; // Increment the node count in the nodes array
+                    num_nodes++;  // Increment the node count in the nodes array
                 nptr->symbol = s; // Update Symbol
-                nptr->weight++; // Incrememnt Symbol occurrence
+                nptr->weight++;   // Incrememnt Symbol occurrence
                 break;
             }
-            nptr++; // Go to next node
+            nptr++;     // Go to next node
         }
         nptr = nodes+1; // Point back to 2nd index
     }
 
-    heapnum = num_nodes; // Number of nodes currently in the min-heap
+    heapnum = num_nodes;       // Number of nodes currently in the min-heap
     num_nodes = 2*num_nodes-1; // Number of nodes to be in Huffman tree of current block
 
-    /* Histogram -> Min-Heap */
+    /* Histogram to Min-Heap */
     for(int i = heapnum/2; i >= 0; i--) {
         min_heapify(i, heapnum);
     }
 
     /* Huffman Tree Construction */
     int n = num_nodes; // Copy of the number of nodes 
-    while(heapnum) {
-        /* Remove 2 minimum weight nodes - and Construct Huffman Tree*/
-        remove_min(&heapnum, &n);
-    }
+    /* Repeatedly remove 2 minimum weight nodes until Huffman Tree Constructed */
+    while(remove_min(&heapnum, &n));
 
     /* Set Parent Node Pointers & populate node_for_symbol array */ 
     set_parents(nodes, nodes);
@@ -630,11 +639,11 @@ decode_data (NODE **nptr, char bit_val) {
     if(bit_val) {
         if((*(*nptr)).right) {
             *nptr = (*(*nptr)).right;
-            if(!(*(*nptr)).right) { // Check if leaf node
+            if(!(*(*nptr)).right) {        // Check if leaf node
                 if(*nptr == END) return 2; // If END node - De-compression complete 
             
                 putchar((*(*nptr)).symbol); // Output decoded symbol
-                *nptr = nodes; // Reset pointer back to root of Huffman Tree
+                *nptr = nodes;              // Reset pointer back to root of Huffman Tree
             }
         } else {
             return 1;
@@ -642,10 +651,10 @@ decode_data (NODE **nptr, char bit_val) {
     } else {
         if((*(*nptr)).left) {
             *nptr = (*(*nptr)).left;
-            if(!(*(*nptr)).left) { // Check if leaf node
-                if(*nptr == END) return 2; // If END node - De-compression complete 
+            if(!(*(*nptr)).left) {          // Check if leaf node
+                if(*nptr == END) return 2;  // If END node - De-compression complete 
                 putchar((*(*nptr)).symbol); // Output decoded symbol
-                *nptr = nodes; // Reset pointer back to root of Huffman Treeo
+                *nptr = nodes;              // Reset pointer back to root of Huffman Treeo
             }
         } else {
             return 1;
@@ -655,7 +664,6 @@ decode_data (NODE **nptr, char bit_val) {
     return 0;
 }
 
-
 /*
  * @brief Decode and output compressed data.
  * @details Go through the bit seqeunce and decode them 
@@ -663,10 +671,10 @@ decode_data (NODE **nptr, char bit_val) {
 */
 static int
 decode() {
-    int s; // Current byte being analyze
-    unsigned bit_count = 0; // Per byte bit counter
+    int s;        // Current byte being analyze
     char bit_val; // Holds Current bit being evaluated 
-    NODE *nptr = nodes; // Pointer to root of Huffman Tree
+    unsigned bit_count = 0; // Per byte bit counter
+    NODE *nptr = nodes;     // Pointer to root of Huffman Tree
 
     for(;;) {
         if((s = getchar()) != EOF) { // Get next byte from stdin
@@ -683,7 +691,7 @@ decode() {
 
                 if(bit_count == (BYTE - 1)) {
                     bit_val = s & 0x01; // Get value of last bit
-                    bit_count++; // Increment number of bits evaluated in current byte
+                    bit_count++;        // Increment number of bits evaluated in current byte
 
                     /* Evaluate decoding completion */
                     switch(decode_data(&nptr, bit_val)) { // Decode bit
@@ -727,7 +735,7 @@ decompress_block() {
  * data to standard output.
  * @details This function reads blocks of compressed data from the standard
  * input until EOF is reached, it decompresses each block, and it outputs
- * the uncompressed data to the standard output.  The input data blocks
+ * the uncompressed data to the standard output. The input data blocks
  * are assumed to be in the format produced by compress().
  *
  * @return 0 if decompression completes without error, 1 if an error occurs.
