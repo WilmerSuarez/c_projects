@@ -20,8 +20,8 @@
 #define MAX_ARGS    4
 
 /*
- * @brief Calculate length of str
- * @details Cycle through String with a temporary pointer and
+ * @brief Calculate length of a String
+ * @details Cycle through a String with a temporary pointer and
  * then subtract the address of the temp pointer from the one 
  * passed in to get the number of characters in the String.
  *
@@ -68,7 +68,7 @@ get_b_size(char **argv) {
  *
  * @param argc The number of arguments passed to the program from the CLI.
  * @param argv The argument strings passed to the program from the CLI.
- * @return EXIT_SUCCESS if validation succeeds and EXIT_FAILURE if validation fails.
+ * @return 0 if validation succeeds and 1 if validation fails.
  * @modifies global_options variable
 */
 static int 
@@ -109,8 +109,7 @@ checkb(int argc, char **argv) {
  * program, returning EXIT_SUCCESS if validation succeeds and EXIT_FAILURE 
  * if validation fails.
  * Upon successful return, the selected program options will be set in the
- * global variable "global_options", where they will be accessible
- * elsewhere in the program.
+ * global variable "global_options".
  *
  * @param argc The number of arguments passed to the program from the CLI.
  * @param argv The argument strings passed to the program from the CLI.
@@ -129,14 +128,14 @@ validargs(int argc, char **argv) {
                 case 'h': // --------------------------- HELP --------------------------- //
                     /* Set global_options to display usage in main.c */
                     global_options |= (1 << G_OP_H); 
-                    return 0;
+                    return EXIT_SUCCESS;
                 case 'c': // --------------------------- COMPRESS --------------------------- //
                     /* Set global_options to compress */
                     global_options |= (1 << G_OP_C); 
                     if(argc == MIN_ARGS) { // If optional flag "-b" not provided
                         /* Set default block size */
                         global_options |= (DEFAULT_BLOCK_SIZE << G_OP_BS);
-                        return 0;
+                        return EXIT_SUCCESS;
                     } else if(argc == MAX_ARGS) {
                         /* Test for "-b" and validate block size */
                         return checkb(argc, argv); 
@@ -148,10 +147,10 @@ validargs(int argc, char **argv) {
                     global_options |= (DEFAULT_BLOCK_SIZE << G_OP_BS);
                     /* Set global_options to decompress */
                     global_options |= (1 << G_OP_D);
-                    return 0;
+                    return EXIT_SUCCESS;
             }
         }
     }
 
-    return 1;
+    return EXIT_FAILURE;
 }
