@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,8 +30,7 @@ int generate_index;
 char **selected_individuals;
 struct node head;
 
-main(int argc, char *argv[])
-{
+main(int argc, char *argv[]) {
   struct node *np;
   int i, optc;
   extern char *optarg;
@@ -60,77 +58,77 @@ main(int argc, char *argv[])
   while((optc = getopt(argc, argv, "Hviscd:u:h:f:t:T:")) != -1) {
     FILE *tempf;
     long size;
-    char *temps, *tempe, c;
+    char *temps, *tempe;
+    int c;
 
     switch(optc) {
-    case 'v':	/* Version */
-      printf("GEDCOM to HTML translator, version %s by Gene Stark "
-	     "(stark@cs.sunysb.edu)\n", VERSION);
-      exit(0);
-    case 'c':   /* Disable automatic capitalization of surnames */
-      capitalization = 0;
-      break;
-    case 'i':	/* Generate index */
-      generate_index = 1;
-      break;
-    case 's':	/* Generate record(s) for selected individual(s) */
-      {
-	int i = 0;
-	int j;
-	while(argv[optind+i] && argv[optind+i][0] != '-')
-	  i++;
-	if(!(selected_individuals = malloc((i+1) * sizeof(char *))))
-	  out_of_memory();
-	for (j = 0; j < i; j++)
-	  selected_individuals[j] = argv[optind+j];
-	selected_individuals[j]=NULL;
-	optind += i;
-      }
-      break;
-    case 't':	/* Template file for individuals */
-    case 'T':	/* Template file for the index */
-      if((tempf = fopen(optarg, "r")) == NULL) {
-	fprintf(stderr, "Can't open template file '%s'\n", optarg);
-	break;
-      }
-      if(fseek(tempf, 0L, SEEK_END) == -1 || (size = ftell(tempf)) == -1){
-	fprintf(stderr, "Can't determine length of template file '%s'\n",
-		optarg);
-	fclose(tempf);
-	break;
-      }
-      rewind(tempf);
-      if((temps = malloc((size_t) size+1)) == NULL) {
-	fprintf(stderr, "Can't allocate memory for template string\n");
-	fclose(tempf);
-	break;
-      }
-      tempe = temps;
-      while((c = fgetc(tempf)) != EOF && tempe-temps <= size)
-	*tempe++ = c;
-      *tempe = '\0';
-      if(optc == 't')
-	individual_template = temps;
-      else
-	index_template = temps;
-      break;
-    case 'd':	/* Specify max per directory */
-      max_per_directory = atoi(optarg);
-      break;
-    case 'u':	/* Template for URL's within HTML anchors */
-      url_template = optarg;
-      break;
-    case 'f':	/* Template for file names */
-      file_template = optarg;
-      break;
-    case 'H':
-      printf(USAGE);
-      printf(OPTIONS);
-      exit(0);
-    case '?':
-    default:
-      fprintf(stderr, USAGE);
-      exit(1);
+      case 'v':	/* Version */
+        printf("GEDCOM to HTML translator, version %s by Gene Stark "
+        "(stark@cs.sunysb.edu)\n", VERSION);
+        exit(0);
+      case 'c':   /* Disable automatic capitalization of surnames */
+        capitalization = 0;
+        break;
+      case 'i':	/* Generate index */
+        generate_index = 1;
+        break;
+      case 's':	/* Generate record(s) for selected individual(s) */
+        {
+          int i = 0;
+          int j;
+          while(argv[optind+i] && argv[optind+i][0] != '-')
+            i++;
+          if(!(selected_individuals = malloc((i+1) * sizeof(char *))))
+            out_of_memory();
+          for (j = 0; j < i; j++)
+            selected_individuals[j] = argv[optind+j];
+          selected_individuals[j]=NULL;
+          optind += i;
+        }
+        break;
+      case 't':	/* Template file for individuals */
+      case 'T':	/* Template file for the index */
+        if((tempf = fopen(optarg, "r")) == NULL) {
+          fprintf(stderr, "Can't open template file '%s'\n", optarg);
+          break;
+        }
+        if(fseek(tempf, 0L, SEEK_END) == -1 || (size = ftell(tempf)) == -1){
+          fprintf(stderr, "Can't determine length of template file '%s'\n",
+            optarg);
+          fclose(tempf);
+          break;
+        }
+        rewind(tempf);
+        if((temps = malloc((size_t) size+1)) == NULL) {
+          fprintf(stderr, "Can't allocate memory for template string\n");
+          fclose(tempf);
+          break;
+        }
+        tempe = temps;
+        while((c = fgetc(tempf)) != EOF && tempe-temps <= size) *tempe++ = c;
+        *tempe = '\0';
+        if(optc == 't')
+          individual_template = temps;
+        else
+          index_template = temps;
+        break;
+      case 'd':	/* Specify max per directory */
+        max_per_directory = atoi(optarg);
+        break;
+      case 'u':	/* Template for URL's within HTML anchors */
+        url_template = optarg;
+        break;
+      case 'f':	/* Template for file names */
+        file_template = optarg;
+        break;
+      case 'H':
+        printf(USAGE);
+        printf(OPTIONS);
+        exit(0);
+      case '?':
+      default:
+        fprintf(stderr, USAGE);
+        exit(1);
     }
   }
   if(optind == argc) {
@@ -142,13 +140,13 @@ main(int argc, char *argv[])
       current_gedcom = argv[optind];
       current_lineno = 0;
       if((gedcom_file = fopen(argv[optind], "r")) == NULL) {
-	fprintf(stderr, "Can't open GEDCOM file '%s'.\n", argv[optind]);
-	continue;
+	      fprintf(stderr, "Can't open GEDCOM file '%s'.\n", argv[optind]);
+	      continue;
       }
       read_gedcom(gedcom_file, np, 0);
       fclose(gedcom_file);
       while(np->siblings)
-	np = np->siblings;
+        np = np->siblings;
     }
   }
   if(head.siblings == NULL) {
@@ -177,9 +175,9 @@ main(int argc, char *argv[])
 
     if(selected_individuals != NULL) {
       for(av = selected_individuals; *av != NULL; av++)
-	if(!strcmp(*av, all_individuals[i]->xref)) {
-	  all_individuals[i]->serial = ++serial;
-	}
+	    if(!strcmp(*av, all_individuals[i]->xref)) {
+	      all_individuals[i]->serial = ++serial;
+	    }
     } else {
       all_individuals[i]->serial = ++serial;
     }
@@ -196,21 +194,19 @@ main(int argc, char *argv[])
     int size = 0;
     if(max_per_directory) {
       for(i = 0; i < individual_template_subdir_size; i++)
-	size += strlen(individual_template_subdir[i]);
-      if((individual_template = malloc(size)) == NULL)
-	out_of_memory();
+	      size += strlen(individual_template_subdir[i]);
+      if((individual_template = malloc(size)) == NULL) out_of_memory();
       *individual_template = '\0';
       for(i = 0; i < individual_template_subdir_size; i++)
-	strcat(individual_template, individual_template_subdir[i]);
-    } else {
-      for(i = 0; i < individual_template_nosubdir_size; i++)
-	size += strlen(individual_template_nosubdir[i]);
-      if((individual_template = malloc(size)) == NULL)
-	out_of_memory();
-      *individual_template = '\0';
-      for(i = 0; i < individual_template_nosubdir_size; i++)
-	strcat(individual_template, individual_template_nosubdir[i]);
-    }
+        strcat(individual_template, individual_template_subdir[i]);
+      } else {
+        for(i = 0; i < individual_template_nosubdir_size; i++)
+	        size += strlen(individual_template_nosubdir[i]);
+        if((individual_template = malloc(size)) == NULL) out_of_memory();
+        *individual_template = '\0';
+        for(i = 0; i < individual_template_nosubdir_size; i++)
+	        strcat(individual_template, individual_template_nosubdir[i]);
+      }
   }
   for(i = 0; i < total_individuals; i++) {
     if(all_individuals[i]->serial)

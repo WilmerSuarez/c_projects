@@ -1,12 +1,10 @@
 /*
  * HTML Output Routines
  */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
-
 #include "tags.h"
 #include "node.h"
 #include "database.h"
@@ -36,9 +34,7 @@ int max_per_directory = 0;
  * "stone knives and bearskins" Microsoft compiler has a limit on
  * the length of a string literal.
  */
-
-char *individual_template_subdir[] =
-{
+char *individual_template_subdir[] = {
   "<HTML>\n" \
   "<HEAD>\n" \
   "!IF @.TITLE\n" \
@@ -157,8 +153,7 @@ char *individual_template_subdir[] =
 int individual_template_subdir_size =
   sizeof(individual_template_subdir)/sizeof(char *);
 
-char *individual_template_nosubdir[] =
-{
+char *individual_template_nosubdir[] = {
   "<HTML>\n" \
   "<HEAD>\n" \
   "!IF @.TITLE\n" \
@@ -272,7 +267,7 @@ char *individual_template_nosubdir[] =
   "!INCLUDE @.inc\n" \
   "</BODY>\n" \
   "</HTML>\n"
-  };
+};
 
 int individual_template_nosubdir_size =
   sizeof(individual_template_subdir)/sizeof(char *);
@@ -296,7 +291,6 @@ char *index_template =
 /*
  * Record types
  */
-
 typedef enum {
   T_INTEGER, T_STRING, T_PLACE, T_NOTE, T_XREF, T_SOURCE,
   T_EVENT, T_INDIV, T_FAMILY, T_CONT, T_URL
@@ -305,7 +299,6 @@ typedef enum {
 /*
  * Interpreter state
  */
-
 int skipping;
 
 #define CONTROL_STACK_SIZE 100
@@ -358,19 +351,17 @@ void xref_select(char *field);
 
 void construct_url(char *dest, struct individual_record *indiv);
 
-void output_individual(struct individual_record *rt)
-{
+void output_individual(struct individual_record *rt) {
   FILE *ofile;
   char path[FILENAME_MAX+1];
   char url[FILENAME_MAX+1];
 
   if(max_per_directory) {
-    sprintf(path, "D%07d",
-	    rt->serial / max_per_directory);
+    sprintf(path, "D%07d", rt->serial / max_per_directory);
     mkdir(path, 0777);
     strcat(path, "/");
   } else {
-    sprintf(path, "");
+    sprintf(path, "%s", "");
   }
   sprintf(url, file_template, rt->xref);
   strcat(path, url);
@@ -387,8 +378,7 @@ void output_individual(struct individual_record *rt)
   fclose(ofile);
 }
 
-void output_index(struct individual_record *rt)
-{
+void output_index(struct individual_record *rt) {
   FILE *ofile;
   char path[FILENAME_MAX+1];
 
@@ -410,9 +400,7 @@ void output_index(struct individual_record *rt)
  * to "ofile".  The individual "root" is the starting point for
  * the interpretation of variables.
  */
-
-void interpret(FILE *ofile)
-{
+void interpret(FILE *ofile) {
   char c;
   int start_of_line = 1;
 
@@ -423,14 +411,12 @@ void interpret(FILE *ofile)
       /* fall through intentional */
     case ' ':
     case '\t':
-      if(!skipping)
-	fputc(c, ofile);
+      if(!skipping) fputc(c, ofile);
       continue;
     case '!':
       if(!start_of_line) {
-	if(!skipping)
-	  fputc(c, ofile);
-	continue;
+        if(!skipping) fputc(c, ofile);
+        continue;
       }
       template--;
       command(ofile);
@@ -439,22 +425,21 @@ void interpret(FILE *ofile)
       start_of_line = 0;
       variable(ofile);
       if(!skipping) {
-	if(current_type == T_STRING) {
-	  fprintf(ofile, "%s", current_value.string);
-	} else if(current_type == T_URL) {
-	  fprintf(ofile, current_value.url);
-	} else if(current_type == T_INTEGER) {
-	  /* Integer variables start from 1 */
-	  fprintf(ofile, "%d", current_value.integer + 1);
-	} else {
-	  output_error("Attempt to output something not an integer or string");
-	}
+        if(current_type == T_STRING) {
+          fprintf(ofile, "%s", current_value.string);
+        } else if(current_type == T_URL) {
+          fprintf(ofile, "%s", current_value.url);
+        } else if(current_type == T_INTEGER) {
+          /* Integer variables start from 1 */
+          fprintf(ofile, "%d", current_value.integer + 1);
+        } else {
+          output_error("Attempt to output something not an integer or string");
+        }
       }
       continue;
     default:
       start_of_line = 0;
-      if(!skipping)
-	fputc(c, ofile);
+      if(!skipping) fputc(c, ofile);
       continue;
     }
   }
@@ -463,12 +448,11 @@ void interpret(FILE *ofile)
 /*
  * After having seen the initial $, interpret a simple or compound variable. 
  */
-
-void variable(FILE *ofile)
-{
+void variable(FILE *ofile) {
   char c, *selector;
   int braces = 0;
   int first = 1;
+
   /*
    * $$ means output a single $
    */
@@ -486,16 +470,17 @@ void variable(FILE *ofile)
       first = 0;
       template++;
       if(!skipping) {
-	current_value.indiv = root;
-	current_type = T_INDIV;
+	      current_value.indiv = root;
+	      current_type = T_INDIV;
       }
       if(*template == '.') {
-	template++;
-	continue;
+	      template++;
+	      continue;
       } else if(*template == '[') 
-	continue;
+	      continue;
       else
-	return;
+        return;
+
       /*
        * Braces in variables simply serve as delimiters
        */
@@ -506,169 +491,169 @@ void variable(FILE *ofile)
     case '}':
       template++;
       if(braces) {
-	braces--;
-	if(braces)
-	  continue;
-	else
-	  return;
+      	braces--;
+	      if(braces)
+	        continue;
+	      else
+	        return;
       } else {
-	if(!skipping)
-	  fputc(c, ofile);
-	return;
+	      if(!skipping) fputc(c, ofile);
+	      return;
       }
+
       /*
        * Brackets indicate integer subscripts
        */
     case '[':
       first = 0;
       template++;
+
       /*
        * Integer constant
        */
       if(*template >= '0' && *template <= '9') {
-	/*
-	 * Convert integer value and leave on top of stack
-	 * (if not skipping)
-	 */
+      /*
+      * Convert integer value and leave on top of stack
+      * (if not skipping)
+      */
       }
       /*
        * Variable subscript
        */
       else {
-	record_type previous_type;
-	union value previous_value;
+	      record_type previous_type;
+	      union value previous_value;
 	
-	previous_type = current_type;
-	previous_value = current_value;
-	variable(ofile);
-	if(!skipping && current_type != T_INTEGER)
-	  output_error("Subscript is not an integer variable");
-	else {
-	  current_index = current_value.integer;
-	  current_type = previous_type;
-	  current_value = previous_value;
-	}
-	if(*template != ']') {
-	  output_error("Subscript fails to end with ']'");
-	} else {
-	  template++;
-	}
+        previous_type = current_type;
+        previous_value = current_value;
+        variable(ofile);
+	      if(!skipping && current_type != T_INTEGER)
+	        output_error("Subscript is not an integer variable");
+	      else {
+          current_index = current_value.integer;
+          current_type = previous_type;
+          current_value = previous_value;
+	      }
+        if(*template != ']') {
+          output_error("Subscript fails to end with ']'");
+        } else {
+          template++;
+        }
       }
       if(!skipping) {
-	switch(current_type) {
-	case T_INTEGER:
-	case T_STRING:
-	case T_URL:
-	  output_error("Can't apply subscript to an integer, string, or URL");
-	  break;
-	case T_PLACE:
-	  while(current_index--) place_select("NEXT");
-	  break;
-	case T_NOTE:
-	  while(current_index--) note_select("NEXT");
-	  break;
-	case T_SOURCE:
-	  while(current_index--) source_select("NEXT");
-	  break;
-	case T_CONT:
-	  while(current_index--) cont_select("NEXT");
-	  break;
-	case T_EVENT:
-	  while(current_index--) event_select("NEXT");
-	  break;
-	case T_INDIV:
-	  while(current_index--) indiv_select("NEXT");
-	  break;
-	case T_FAMILY:
-	  while(current_index--) family_select("NEXT");
-	  break;
-	case T_XREF:
-	  while(current_index--) xref_select("NEXT");
-	  break;
-	}
+        switch(current_type) {
+          case T_INTEGER:
+          case T_STRING:
+          case T_URL:
+            output_error("Can't apply subscript to an integer, string, or URL");
+            break;
+          case T_PLACE:
+            while(current_index--) place_select("NEXT");
+            break;
+          case T_NOTE:
+            while(current_index--) note_select("NEXT");
+            break;
+          case T_SOURCE:
+            while(current_index--) source_select("NEXT");
+            break;
+          case T_CONT:
+            while(current_index--) cont_select("NEXT");
+            break;
+          case T_EVENT:
+            while(current_index--) event_select("NEXT");
+            break;
+          case T_INDIV:
+            while(current_index--) indiv_select("NEXT");
+            break;
+          case T_FAMILY:
+            while(current_index--) family_select("NEXT");
+            break;
+          case T_XREF:
+            while(current_index--) xref_select("NEXT");
+            break;
+	      }
       }
       if(*template == '.') {
-	template++;
-	continue;
+        template++;
+        continue;
       } else if(*template == '[' || *template == '}') 
-	continue;
+	      continue;
       else
-	return;
+	      return;
       /*
        * An ampersand means turn the current individual into a URL
        */
     case '&':
       template++;
       if(!skipping) {
-	if(current_type == T_INDIV) {
-	  current_type = T_URL;
-	  construct_url(current_url, current_value.indiv);
-	  current_value.url = current_url;
-	} else
-	  output_error("Can only make a URL from an individual\n");
+        if(current_type == T_INDIV) {
+          current_type = T_URL;
+          construct_url(current_url, current_value.indiv);
+          current_value.url = current_url;
+        } else
+          output_error("Can only make a URL from an individual\n");
       }
       if(*template == '}')
-	continue;
+	      continue;
       else
-	return;
+	      return;
       /*
        * Alphabetic characters indicate selector name.
        * Anything else is a delimiter.
        */
     default:
       collect_identifier(&selector);
-      if(*selector == '\0')
-	return;
+      if(*selector == '\0') return;
       if(first) {
-	if(!skipping) {
-	  current_value.integer = get_variable(selector);
-	  current_type = T_INTEGER;
-	}
-	if(*template == '}')
-	  continue;
-	else
-	  return;
+        if(!skipping) {
+          current_value.integer = get_variable(selector);
+          current_type = T_INTEGER;
+        }
+        if(*template == '}')
+          continue;
+        else
+          return;
       }
       if(!skipping) {
-	switch(current_type) {
-	case T_INTEGER:
-	case T_STRING:
-	case T_URL:
-	  output_error("Can't apply selector to an integer, string, or URL");
-	  break;
-	case T_PLACE:
-	  place_select(selector);
-	  break;
-	case T_NOTE:
-	  note_select(selector);
-	  break;
-	case T_SOURCE:
-	  source_select(selector);
-	  break;
-	case T_CONT:
-	  cont_select(selector);
-	  break;
-	case T_EVENT:
-	  event_select(selector);
-	  break;
-	case T_INDIV:
-	  indiv_select(selector);
-	  break;
-	case T_FAMILY:
-	  family_select(selector);
-	  break;
-	case T_XREF:
-	  xref_select(selector);
-	  break;
-	}
+        switch(current_type) {
+        case T_INTEGER:
+        case T_STRING:
+        case T_URL:
+          output_error("Can't apply selector to an integer, string, or URL");
+          break;
+        case T_PLACE:
+          place_select(selector);
+          break;
+        case T_NOTE:
+          note_select(selector);
+          break;
+        case T_SOURCE:
+          source_select(selector);
+          break;
+        case T_CONT:
+          cont_select(selector);
+          break;
+        case T_EVENT:
+          event_select(selector);
+          break;
+        case T_INDIV:
+          indiv_select(selector);
+          break;
+        case T_FAMILY:
+          family_select(selector);
+          break;
+        case T_XREF:
+          xref_select(selector);
+          break;
+        }
       }
       if(*template == '.') {
-	template++;
-	continue;
+        template++;
+        continue;
       } else if(*template == '[' || *template == '}') 
-	continue;
+	      continue;
       else
-	return;
+	      return;
     }
   }
 }
@@ -676,9 +661,7 @@ void variable(FILE *ofile)
 /*
  * Record field selection operations
  */
-
-void family_select(char *field)
-{
+void family_select(char *field) {
   struct family_record *r = current_value.family;
   if(!strcmp(field, "XREF")) {
     current_type = T_STRING;
@@ -711,8 +694,7 @@ void family_select(char *field)
   }
 }
 
-void indiv_select(char *field)
-{
+void indiv_select(char *field) {
   struct individual_record *r = current_value.indiv;
   if(!strcmp(field, "XREF")) {
     current_type = T_STRING;
@@ -788,8 +770,7 @@ void indiv_select(char *field)
   }
 }
 
-void event_select(char *field)
-{
+void event_select(char *field) {
   struct event_structure *r = current_value.event;
   if(!strcmp(field, "TAG")) {
     current_type = T_STRING;
@@ -807,8 +788,7 @@ void event_select(char *field)
   }
 }
 
-void note_select(char *field)
-{
+void note_select(char *field) {
   struct note_structure *r = current_value.note;
 
   if(!strcmp(field, "XREF")) {
@@ -827,8 +807,7 @@ void note_select(char *field)
   }
 }
 
-void source_select(char *field)
-{
+void source_select(char *field) {
   struct source_record *r = current_value.source;
 
   if(!strcmp(field, "XREF")) {
@@ -845,8 +824,7 @@ void source_select(char *field)
   }
 }
 
-void cont_select(char *field)
-{
+void cont_select(char *field) {
   struct continuation *c = current_value.cont;
 
   if(!strcmp(field, "TEXT")) {
@@ -859,8 +837,7 @@ void cont_select(char *field)
   }
 }
 
-void place_select(char *field)
-{
+void place_select(char *field) {
   struct place_structure *r = current_value.place;
   if(!strcmp(field, "NAME")) {
     current_type = T_STRING;
@@ -873,8 +850,7 @@ void place_select(char *field)
   }
 }
 
-void xref_select(char *field)
-{
+void xref_select(char *field) {
   struct xref *r = current_value.xref;
   if(!strcmp(field, "INDIV")) {
     current_type = T_INDIV;
@@ -895,9 +871,7 @@ void xref_select(char *field)
 /*
  * Perform a control command.
  */
-
-void command(FILE *ofile)
-{
+void command(FILE *ofile) {
   char *buf;
   char *start = template++; 
 
@@ -924,19 +898,19 @@ void command(FILE *ofile)
     if(*template == '\n') {
       template++;
       if(current_type == T_STRING) {
-	if(!strcmp(current_value.string, "")) {
-	  skipping++;
-	  if_stack[if_stack_top++] = 1;
-	} else {
-	  if_stack[if_stack_top++] = 0;
-	}
+	      if(!strcmp(current_value.string, "")) {
+          skipping++;
+          if_stack[if_stack_top++] = 1;
+        } else {
+          if_stack[if_stack_top++] = 0;
+        }
       } else {
-	if(!current_value.integer) {
-	  skipping++;
-	  if_stack[if_stack_top++] = 1;
-	} else {
-	  if_stack[if_stack_top++] = 0;
-	}
+        if(!current_value.integer) {
+          skipping++;
+          if_stack[if_stack_top++] = 1;
+        } else {
+          if_stack[if_stack_top++] = 0;
+        }
       }
     } else {
       output_error("Newline expected");
@@ -945,11 +919,11 @@ void command(FILE *ofile)
     if(*template == '\n') {
       template++;
       if(if_stack[if_stack_top-1]) {
-	skipping--;
-	if_stack[if_stack_top-1] = 0;
+        skipping--;
+        if_stack[if_stack_top-1] = 0;
       } else {
-	skipping++;
-	if_stack[if_stack_top-1] = 1;
+        skipping++;
+        if_stack[if_stack_top-1] = 1;
       }
     } else {
       output_error("Newline expected");
@@ -957,8 +931,7 @@ void command(FILE *ofile)
   } else if(!strcmp(buf, "ENDIF")) {
     if(*template == '\n') {
       template++;
-      if(if_stack[--if_stack_top])
-	skipping--;
+      if(if_stack[--if_stack_top]) skipping--;
     } else {
       output_error("Newline expected");
     }
@@ -968,15 +941,15 @@ void command(FILE *ofile)
       template++;
       while_stack[while_stack_top++] = start;
       if(!skipping) {
-	if(current_type == T_STRING) {
-	  if(!strcmp(current_value.string, ""))
-	    skipping++;
-	} else {
-	  if(!current_value.integer)
-	    skipping++;
-	}
+        if(current_type == T_STRING) {
+          if(!strcmp(current_value.string, ""))
+            skipping++;
+        } else {
+          if(!current_value.integer)
+            skipping++;
+        }
       } else {
-	skipping++;
+	      skipping++;
       }
     } else {
       output_error("Newline expected");
@@ -985,12 +958,11 @@ void command(FILE *ofile)
     if(*template == '\n') {
       template++;
       if(skipping) {
-	skipping--;
-        if(while_stack_top)
-	  while_stack_top--;
+	      skipping--;
+        if(while_stack_top) while_stack_top--;
       } else {
         if(while_stack_top)
-	  template = while_stack[--while_stack_top];
+	        template = while_stack[--while_stack_top];
       }
     } else {
       output_error("Newline expected");
@@ -999,7 +971,7 @@ void command(FILE *ofile)
     if(*template == '\n') {
       template++;
       if(!skipping && root)
-	root = root->next;
+	      root = root->next;
     }
   } else if(!strcmp(buf, "INCLUDE")) {
     char path[FILENAME_MAX+1], *pp;
@@ -1007,26 +979,25 @@ void command(FILE *ofile)
 
     skip_white_space();
     for(pp = path; pp - path <= FILENAME_MAX
-	&& *template && *template != '\n'; ) {
+	      && *template && *template != '\n'; ) {
       if(*template == '@') {
-	template++;
-	if(*template == '@') {
-	  template++;
-	  *pp++ = '@';
-	} else {
-	  char *id = root->xref;
-	  while(*id && pp - path <= FILENAME_MAX)
-	    *pp++ = *id++;
-	}
+      	template++;
+        if(*template == '@') {
+          template++;
+          *pp++ = '@';
+        } else {
+          char *id = root->xref;
+          while(*id && pp - path <= FILENAME_MAX)
+            *pp++ = *id++;
+        }
       } else {
-	*pp++ = *template++;
+	      *pp++ = *template++;
       }
     }
     *pp = '\0';
     if((incf = fopen(path, "r")) != NULL) {
-      char c;
-      while((c = fgetc(incf)) != EOF)
-	fputc(c, ofile);
+      int c;
+      while((c = fgetc(incf)) != EOF) fputc(c, ofile);
       fclose(incf);
     }
   } else {
@@ -1037,29 +1008,24 @@ void command(FILE *ofile)
 /*
  * Pick up the next identifier in the template.
  */
-
 #define IDENTIFIER_MAX 63
 
-void collect_identifier(char **ret)
-{
+void collect_identifier(char **ret) {
   static char id[IDENTIFIER_MAX+1];
   char *ip, c;
 
   ip = id;
   while(((c = *template) >= 'A' && c <= 'Z')
-	|| (c >= 'a' && c <= 'z')) {
+	      || (c >= 'a' && c <= 'z')) {
     template++;
-    if(ip - id < IDENTIFIER_MAX)
-      *ip++ = c;
+    if(ip - id < IDENTIFIER_MAX) *ip++ = c;
   }
   *ip = '\0';
   *ret = id;
 }
 
-void skip_white_space()
-{
-  while(*template == ' ' || *template == '\t')
-    template++;
+void skip_white_space() {
+  while(*template == ' ' || *template == '\t') template++;
 }
 
 struct binding {
@@ -1068,8 +1034,7 @@ struct binding {
   struct binding *next;
 } *environment;
 
-void set_variable(char *name, int value)
-{
+void set_variable(char *name, int value) {
   struct binding *b;
   for(b = environment; b != NULL; b = b->next) {
     if(!strcmp(name, b->name)) {
@@ -1077,49 +1042,43 @@ void set_variable(char *name, int value)
       return;
     }
   }
-  if((b = malloc(sizeof(struct binding))) == NULL)
-    out_of_memory();
+  if((b = malloc(sizeof(struct binding))) == NULL) out_of_memory();
   b->name = strdup(name);
   b->value = value;
   b->next = environment;
   environment = b;
 }
 
-int get_variable(char *name)
-{
+int get_variable(char *name) {
   struct binding *b;
   for(b = environment; b != NULL; b = b->next) {
-    if(!strcmp(name, b->name))
-      return(b->value);
+    if(!strcmp(name, b->name)) return(b->value);
   }
   set_variable(name, 0);
   return(0);
 }
 
-void output_error(char *msg)
-{
+void output_error(char *msg) {
   char *tp;
   int line = 1;
 
   for(tp = template_start; tp < template; tp++)
-    if(*tp == '\n')
-      line++;
+    if(*tp == '\n') line++;
   fprintf(stderr, "Output error: ");
   fprintf(stderr, "%s template line %d: %s\n",
 	  template_start == individual_template ? "individual" : "index",
 	  line, msg);
 }
 
-void construct_url(char *dest, struct individual_record *indiv)
-{
+void construct_url(char *dest, struct individual_record *indiv) {
   char url[FILENAME_MAX+1];
 
   if(max_per_directory) {
     if(!doing_index)
       sprintf(dest, "../");
-    sprintf(url, "D%07d/", indiv->serial / max_per_directory);
+      sprintf(url, "D%07d/", indiv->serial / max_per_directory);
   } else {
-    sprintf(url, "");
+    sprintf(url, "%s", "");
   }
   strcat(dest, url);
   sprintf(url, url_template, indiv->xref);

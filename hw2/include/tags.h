@@ -1,3 +1,6 @@
+#ifndef TAGS_H
+#define TAGS_H
+
 #define ADDR 257
 #define ADOP 258
 #define AFN 259
@@ -284,7 +287,6 @@ struct tag {
  * Initializations of these tables in tags.c must be modified
  * to include strings for additional languages.
  */
-
 extern struct tag gedcom_tags[];
 extern int gedcom_tags_size;
 extern struct tag gedcom_special[];
@@ -294,3 +296,5 @@ extern int gedcom_other_size;
 
 struct tag *findtag(char *s, struct tag *tab, int nmemb);
 void validate_tags_tables();
+
+#endif /* TAGS_H */

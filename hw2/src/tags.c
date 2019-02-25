@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "tags.h"
 
 /*
@@ -290,46 +289,41 @@ struct tag gedcom_other[] = {
 
 int gedcom_other_size = sizeof(gedcom_other)/sizeof(struct tag);
 
-int mystrcmp(char *a, struct tag *b)
-{
+int mystrcmp(char *a, struct tag *b) {
   return(strcmp(a, b->name));
 }
 
-struct tag *findtag(char *s, struct tag *tab, int nmemb)
-{
+struct tag *findtag(char *s, struct tag *tab, int nmemb) {
   struct tag *t;
   t = bsearch(s, tab, nmemb, sizeof(struct tag),
 		 (int (*)(const void *, const void *))mystrcmp);
   return(t);
 }
 
-struct tag *validate_tags_table(struct tag *tab, int nmemb)
-{
+struct tag *validate_tags_table(struct tag *tab, int nmemb) {
   struct tag *prev = NULL;
   while(nmemb--) {
-    if(prev && strcmp(prev->name, tab->name) >= 0)
-      return(tab);
+    if(prev && strcmp(prev->name, tab->name) >= 0) return(tab);
     prev = tab++;
   }
   return(NULL);
 }
 
-void validate_tags_tables()
-{
+void validate_tags_tables() {
   struct tag *tab;
-  if(tab = validate_tags_table(gedcom_tags, gedcom_tags_size)) {
+  if((tab = validate_tags_table(gedcom_tags, gedcom_tags_size))) {
     fprintf(stderr, "Internal error: GEDCOM tag table out of order at tag '%s'.\n",
-	    tab->name);
+	          tab->name);
     exit(1);
   }
   if(tab = validate_tags_table(gedcom_special, gedcom_special_size)) {
     fprintf(stderr, "Internal error: special tag table out of order at tag '%s'.\n",
-	    tab->name);
+	          tab->name);
     exit(1);
   }
   if(tab = validate_tags_table(gedcom_other, gedcom_other_size)) {
     fprintf(stderr, "Internal error: 'other' tag table out of order at tag '%s'.\n",
-	    tab->name);
+	          tab->name);
     exit(1);
   }
 }

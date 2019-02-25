@@ -1,3 +1,6 @@
+#ifndef DATABASE_H
+#define DATABASE_H
+
 /*
  * GEDCOM lineage-linked database structure definitions
  */
@@ -5,7 +8,6 @@
 /*
  * Counts of various kinds of top-level records
  */
-
 extern int total_individuals;
 extern int total_families;
 extern int total_events;
@@ -17,7 +19,6 @@ extern int total_submitters;
 /*
  * Flag controlling capitalization of surnames
  */
-
 int capitalization = 1;
 
 /*
@@ -109,7 +110,6 @@ struct continuation {
 /*
  * Function prototypes
  */
-
 void process_records(struct node *np);
 void process_individual_record(struct node *np);
 void process_family_record(struct node *np);
@@ -128,3 +128,4 @@ void link_family_record(struct node *np);
 int compare_name(struct individual_record **ipp1,
 		 struct individual_record **ipp2);
 
+#endif /* DATABASE_H */

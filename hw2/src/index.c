@@ -4,7 +4,6 @@
  * If too much time is being spent in this code, replace it with something
  * more sophisticated.
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,8 +22,7 @@ void out_of_memory();
 
 struct ientry *hashtab[HASHSIZE];
 
-int hash(char *id)
-{
+int hash(char *id) {
   unsigned int h = 0;
   while(*id) {
     h = (h * HASHMULT) + *id;
@@ -33,8 +31,7 @@ int hash(char *id)
   return(h % HASHSIZE);
 }
 
-int index_enter(char *id, void *value)
-{
+int index_enter(char *id, void *value) {
   int h;
   struct ientry *ip, *pip, *new;
 
@@ -45,8 +42,7 @@ int index_enter(char *id, void *value)
       return(-1);
     }
   }
-  if((new = malloc(sizeof(struct ientry))) == NULL)
-    out_of_memory();
+  if((new = malloc(sizeof(struct ientry))) == NULL) out_of_memory();
   new->id = strdup(id);
   new->value = value;
   new->next = NULL;
@@ -57,8 +53,7 @@ int index_enter(char *id, void *value)
   }
 }
 
-void *index_find(char *id)
-{
+void *index_find(char *id) {
   int h;
   struct ientry *ip;
 

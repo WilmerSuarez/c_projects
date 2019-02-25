@@ -1,7 +1,3 @@
-
-
-
-
                                           THE GEDCOM STANDARD
 
 
@@ -43,7 +39,7 @@ Telephone (USA) 801-240-4534
                     240-5225
 
 
-       "Copyright þ 1987,1989,1992,1993 by Corporation of the President of The Church of Jesus Christ of Latter-day
+       "Copyright ï¿½ 1987,1989,1992,1993 by Corporation of the President of The Church of Jesus Christ of Latter-day
        Saints. This document may be copied for purposes of review or programming of genealogical software, provided this
        notice is included. All other rights reserved."TABLE OF CONTENTS
 
@@ -3209,149 +3205,148 @@ ANSEL Non-spacing graphic characters
 8-bit
 C/R   wpcode    Dec  Graphic    Name              example of use
 
-14/0      2,4      224    þ    low rising tone mark                  cþui
+14/0      2,4      224    ï¿½    low rising tone mark                  cï¿½ui
 
-14/1      1,0      225    þ    grave accent                          rþegle
+14/1      1,0      225    ï¿½    grave accent                          rï¿½egle
 
-14/2      1,6      226    þ    acute accent                          estþa
+14/2      1,6      226    ï¿½    acute accent                          estï¿½a
 
-14/3      1,3      227    þ    circumflex accent                     mþeme
+14/3      1,3      227    ï¿½    circumflex accent                     mï¿½eme
 
-14/4      1,2      228    þ    tilde                                 niþno
+14/4      1,2      228    ï¿½    tilde                                 niï¿½no
 
-14/5      1,8      229    þ    macron                                gþajþejs
+14/5      1,8      229    ï¿½    macron                                gï¿½ajï¿½ejs
 
-14/6      1,22     230    þ    breve                                 altþa
+14/6      1,22     230    ï¿½    breve                                 altï¿½a
 
-14/7      1,15     231    þ    dot above                             þzaba
+14/7      1,15     231    ï¿½    dot above                             ï¿½zaba
 
-14/8      1,7      232    þ    umlaut (diaeresis)                    þoppna
+14/8      1,7      232    ï¿½    umlaut (diaeresis)                    ï¿½oppna
 
-14/9      1,19     233    þ    hacek                                 vþzdy
+14/9      1,19     233    ï¿½    hacek                                 vï¿½zdy
 
-14/10     1,14     234    ø    circle above (angstrm)                høarANSEL Non-spacing graphic characters
+14/10     1,14     234    ï¿½    circle above (angstrm)                hï¿½arANSEL Non-spacing graphic characters
 8-bit
 C/R   wpcode    Dec  Graphic    Name              example of use
 
-14/11     2,11     235    þ    ligature, left half                   akademiiþþa
+14/11     2,11     235    ï¿½    ligature, left half                   akademiiï¿½ï¿½a
 
-14/12     2,12     236    þ    ligature, right hlf                   akademiiþþa
+14/12     2,12     236    ï¿½    ligature, right hlf                   akademiiï¿½ï¿½a
 
-14/13     1,10     237    þ    high comma, off center                rozdeþlovac
+14/13     1,10     237    ï¿½    high comma, off center                rozdeï¿½lovac
 
-14/14     1,16     238    þ    double acute accent                   idþoszaki
+14/14     1,16     238    ï¿½    double acute accent                   idï¿½oszaki
 
-14/15     2,25     239    þ    candrabindu                           Aliþiev
+14/15     2,25     239    ï¿½    candrabindu                           Aliï¿½iev
 
-15/0      2,15     240    þ    cedilla                               þca
+15/0      2,15     240    ï¿½    cedilla                               ï¿½ca
 
-15/1      2,17     241    þ    right hook                            vietþa
+15/1      2,17     241    ï¿½    right hook                            vietï¿½a
 
-15/2      2,0      242    þ    dot below                             teþda
+15/2      2,0      242    ï¿½    dot below                             teï¿½da
 
-15/3      2,1      243    þ    double dot below                      khuþtbah
+15/3      2,1      243    ï¿½    double dot below                      khuï¿½tbah
 
-15/4      2,3      244    þ    circle below                          Maharþsicaritamþrtam
+15/4      2,3      244    ï¿½    circle below                          Maharï¿½sicaritamï¿½rtam
 
-15/5      2,6      245    þ    double underscore                     þGhulam
+15/5      2,6      245    ï¿½    double underscore                     ï¿½Ghulam
 
-15/6      2,7      246    þ    underscore                            samar
+15/6      2,7      246    ï¿½    underscore                            samar
 
-15/7      2,16     247    þ    left hook                             darziþna
+15/7      2,16     247    ï¿½    left hook                             darziï¿½na
 
-15/8      2,14     248    þ    right cedilla                         khþong
+15/8      2,14     248    ï¿½    right cedilla                         khï¿½ong
 
-15/9      2,9      249    þ    half circle below                     þhumantuþs
+15/9      2,9      249    ï¿½    half circle below                     ï¿½humantuï¿½s
 
-15/10              250         double tilde, left half               þngalan
+15/10              250         double tilde, left half               ï¿½ngalan
 
-15/11              251         double tilde, right hlf               þngalan
+15/11              251         double tilde, right hlf               ï¿½ngalan
 
-15/12     1,5      252    þ    diacritic slash through char (LDS extension)
+15/12     1,5      252    ï¿½    diacritic slash through char (LDS extension)
 15/13
-15/14     1,9      254    þ    high comma, centered                  gþeotermika
+15/14     1,9      254    ï¿½    high comma, centered                  gï¿½eotermika
 ANSEL Spacing graphic characters
 8-bit
 C/R   wpcode    Dec  Graphic    Name              example of use
 10/0      
-10/1      1,152    161    þ    slash L - uppercase                   þ¢dþ
+10/1      1,152    161    ï¿½    slash L - uppercase                   ï¿½ï¿½dï¿½
 
-10/2      1,80     162    þ    slash O - uppercase                   þst
+10/2      1,80     162    ï¿½    slash O - uppercase                   ï¿½st
 
-10/3      1,78     163    þ    slash D - uppercase                   þuro
+10/3      1,78     163    ï¿½    slash D - uppercase                   ï¿½uro
 
-10/4      1,88     164    þ    thorn - uppercase                     þann
+10/4      1,88     164    ï¿½    thorn - uppercase                     ï¿½ann
 
-10/5      1,36     165    ’    ligature AE - uppercase               ’gir
+10/5      1,36     165    ï¿½    ligature AE - uppercase               ï¿½gir
 
-10/6      1,166    166    þ    ligature OE - uppercase               þuvre
+10/6      1,166    166    ï¿½    ligature OE - uppercase               ï¿½uvre
 
-10/7      1,6      167    þ    miagkii znak                          fakulþtet
+10/7      1,6      167    ï¿½    miagkii znak                          fakulï¿½tet
 
-10/8      1,1      168    þ    middle dot                            novelþla
+10/8      1,1      168    ï¿½    middle dot                            novelï¿½la
 
-10/9      5,28     169    þ    musical flat                          Bþ
+10/9      5,28     169    ï¿½    musical flat                          Bï¿½
 
-10/10     4,22     170    þ    patent mark                           ABCþ
+10/10     4,22     170    ï¿½    patent mark                           ABCï¿½
 
-10/11     6,1      171    ñ    plus or minus                         AñB
+10/11     6,1      171    ï¿½    plus or minus                         Aï¿½B
 
-10/12     1,230    172    þ    hook O - uppercase                    Bþ
+10/12     1,230    172    ï¿½    hook O - uppercase                    Bï¿½
 
-10/13     1,232    173    þ    hook U - uppercase                    XþA
+10/13     1,232    173    ï¿½    hook U - uppercase                    Xï¿½A
 
-10/14     1,11     174    þ    alif                                  Unþyusho
+10/14     1,11     174    ï¿½    alif                                  Unï¿½yusho
 10/15              175                                               reserved - future
 
-11/0      2,11     176    þ    ayn                                   faþil
+11/0      2,11     176    ï¿½    ayn                                   faï¿½il
 
-11/1      1,153    177    þ    slash l - lowercase                   rozbiþ
+11/1      1,153    177    ï¿½    slash l - lowercase                   rozbiï¿½
 
-11/2      1,81     178    þ    slash o - lowercase                   hþj
+11/2      1,81     178    ï¿½    slash o - lowercase                   hï¿½j
 
-11/3      1,79     179    þ    slash d - lowercase                   þavola
+11/3      1,79     179    ï¿½    slash d - lowercase                   ï¿½avola
 
-11/4      1,89     180    þ    thorn - lowercase                     þannANSEL Spacing graphic characters (cont.)
+11/4      1,89     180    ï¿½    thorn - lowercase                     ï¿½annANSEL Spacing graphic characters (cont.)
 C/R   wpcode    Dec  Graphic    Name              example of use
 
-11/5      1,37     181    ‘    ligature ae - lowercase               sk‘g
+11/5      1,37     181    ï¿½    ligature ae - lowercase               skï¿½g
 
-11/6      1,167    182    þ    ligature oe - lowercase               þuvre
+11/6      1,167    182    ï¿½    ligature oe - lowercase               ï¿½uvre
 
-11/7      1,16     183    þ    tverdyi znak                          obþiavlenie
+11/7      1,16     183    ï¿½    tverdyi znak                          obï¿½iavlenie
 
-11/8      1,24     184    þ    dotless i - lowercase                 masalþ
+11/8      1,24     184    ï¿½    dotless i - lowercase                 masalï¿½
 
-11/9      4,11     185    œ    British pound                         œ5.00
+11/9      4,11     185    ï¿½    British pound                         ï¿½5.00
 
 11/10              186         eth
 11/11              187         reserved - future
 
-11/12     1,231    188    þ    hook o - lowercase                    Sþ
+11/12     1,231    188    ï¿½    hook o - lowercase                    Sï¿½
 
-11/13     1,233    189    þ    hook u - lowercase                    Tþ Dþc
+11/13     1,233    189    ï¿½    hook u - lowercase                    Tï¿½ Dï¿½c
 
 11/14              190         empty box (LDS-extension)
 
 11/15              191         black box (LDS-extension)
 
-12/0      6,33     192    þ    degree sign                           10þ C
+12/0      6,33     192    ï¿½    degree sign                           10ï¿½ C
 
-12/1      6,49     193    þ    script l                              25þ.
+12/1      6,49     193    ï¿½    script l                              25ï¿½.
 
-12/2      4,71     194    þ    phonograph cpyright mrk               Deccaþ
+12/2      4,71     194    ï¿½    phonograph cpyright mrk               Deccaï¿½
 
-12/3      4,23     195    þ    copyright mark                        þ1993
+12/3      4,23     195    ï¿½    copyright mark                        ï¿½1993
 
-12/4      5,27     196    þ    musical sharp                         Dþ
+12/4      5,27     196    ï¿½    musical sharp                         Dï¿½
 
-12/5      4,8      197    ¨    inverted question mark                ¨Que
+12/5      4,8      197    ï¿½    inverted question mark                ï¿½Que
 
-12/6      4,7      198    ­    inverted exclamtn mrk                 ­Esta
+12/6      4,7      198    ï¿½    inverted exclamtn mrk                 ï¿½Esta
 
 12/13              205         e in middle of line (LDS extension)
 
 12/14              206         o in middle of line (LDS extension)
 
-12/15     1,23     207    á    Es Zet                                Preuáen
-
+12/15     1,23     207    ï¿½    Es Zet                                Preuï¿½en

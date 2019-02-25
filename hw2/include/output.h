@@ -1,3 +1,6 @@
+#ifndef OUTPUT_H
+#define OUTPUT_H
+
 extern char *individual_template;
 extern char *individual_template_subdir[];
 extern int individual_template_subdir_size;
@@ -10,3 +13,5 @@ extern int max_per_directory;
 
 void output_individual(struct individual_record *ip);
 void output_index(struct individual_record *ip);
+
+#endif /* OUTPUT_H */
