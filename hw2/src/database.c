@@ -22,6 +22,11 @@ int total_repositories;
 int total_submitters;
 
 /*
+ * Flag controlling capitalization of surnames.
+ */
+int capitalization = 1;
+
+/*
  * Arrays for each access to top-level records
  */
 struct individual_record **all_individuals;

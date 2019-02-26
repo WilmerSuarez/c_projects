@@ -30,12 +30,11 @@ int generate_index;
 char **selected_individuals;
 struct node head;
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   struct node *np;
   int i, optc;
   extern char *optarg;
   extern int optind;
-  FILE *gedcom_file;
   int serial = 0;
 #ifdef MSDOS
   int getopt(int argc, char *const *argv, const char *optstring);
@@ -55,7 +54,9 @@ main(int argc, char *argv[]) {
     exit(1);
   }
 #endif
-  while((optc = getopt(argc, argv, "Hviscd:u:h:f:t:T:")) != -1) {
+
+  /* Validate Arguments */
+  while((optc = getopt(argc, argv, "Hcivd:s:u:f:t:T:")) != -1) {
     FILE *tempf;
     long size;
     char *temps, *tempe;
@@ -78,8 +79,7 @@ main(int argc, char *argv[]) {
           int j;
           while(argv[optind+i] && argv[optind+i][0] != '-')
             i++;
-          if(!(selected_individuals = malloc((i+1) * sizeof(char *))))
-            out_of_memory();
+          if(!(selected_individuals = malloc((i+1) * sizeof(char *)))) out_of_memory();
           for (j = 0; j < i; j++)
             selected_individuals[j] = argv[optind+j];
           selected_individuals[j]=NULL;
@@ -131,12 +131,17 @@ main(int argc, char *argv[]) {
         exit(1);
     }
   }
+
+  /* PHASE I */
+  /* */
   if(optind == argc) {
     current_gedcom = "stdin";
     current_lineno = 0;
     read_gedcom(stdin, &head, 0);
   } else {
     for(np = &head ; optind < argc; optind++) {
+      FILE *gedcom_file;
+      
       current_gedcom = argv[optind];
       current_lineno = 0;
       if((gedcom_file = fopen(argv[optind], "r")) == NULL) {
@@ -149,13 +154,14 @@ main(int argc, char *argv[]) {
         np = np->siblings;
     }
   }
+
   if(head.siblings == NULL) {
     fprintf(stderr, "No valid GEDCOM lines found\n");
     exit(1);
   }
   process_records(head.siblings);
   link_records(head.siblings);
-  fprintf(stderr, "Processed %d GEDCOM lines", gedcom_lines);
+  fprintf(stderr, "Processed %ld GEDCOM lines", gedcom_lines);
   if(total_individuals)
     fprintf(stderr, ", %d individuals", total_individuals);
   if(total_families)
@@ -212,5 +218,6 @@ main(int argc, char *argv[]) {
     if(all_individuals[i]->serial)
       output_individual(all_individuals[i]);
   }
+
   exit(0);
 }

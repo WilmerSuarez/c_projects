@@ -17,21 +17,19 @@ extern int total_repositories;
 extern int total_submitters;
 
 /*
- * Flag controlling capitalization of surnames
+ * Flag controlling capitalization of surnames.
  */
-int capitalization = 1;
+extern int capitalization;
 
 /*
  * Arrays for each access to top-level records
  */
-
 struct individual_record **all_individuals;
 struct family_record **all_familes;
 
 /*
  * Database structure definitions
  */
-
 struct individual_record {
   int serial;
   char *xref;
@@ -125,7 +123,7 @@ struct name_structure *process_name(struct node *np);
 void link_records(struct node *np);
 void link_individual_record(struct node *np);
 void link_family_record(struct node *np);
-int compare_name(struct individual_record **ipp1,
-		 struct individual_record **ipp2);
+int compare_name(struct individual_record **ipp1, 
+                 struct individual_record **ipp2);
 
 #endif /* DATABASE_H */
