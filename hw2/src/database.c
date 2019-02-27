@@ -84,8 +84,10 @@ process_individual_record(struct node *np) {
   struct xref *xp;
  
   if((ip = malloc(sizeof(*ip))) == NULL) out_of_memory();
+  memset(ip, 0, sizeof(*ip));
   np->hook = ip;
   ip->xref = np->xref;
+  /* Enter current node with xref to Hash Table */
   index_enter(ip->xref, ip);
   for(np = np->children ; np != NULL; np = np->siblings) {
     switch(np->tag->value) {
