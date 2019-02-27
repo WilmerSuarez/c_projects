@@ -41,6 +41,7 @@ read_gedcom(FILE *f, struct node *prev, int level) {
 
   while(prev && (line = fgetln(f, &size))) {
     gedcom_lines++;
+
     /*
      * Allocate node and copy line into it
      */
@@ -62,15 +63,18 @@ read_gedcom(FILE *f, struct node *prev, int level) {
       }
     } while(size);
     line = node->line;
+
     /*
      * Figure out level number
      */
     rest = line;
     while(*rest == ' ') rest++;
-    if(*rest == '\0') continue; /* Ignore blank line */
+    /* Ignore blank line */
+    if(*rest == '\0') continue; 
     levp = rest;
     while(*rest >= '0' && *rest <= '9')
       rest++;
+    /* If no space between xref or TAG */
     if(*rest != ' ') {
       fprintf(stderr, "%s: %ld: Malformed GEDCOM line ignored\n",
 	      current_gedcom, current_lineno);

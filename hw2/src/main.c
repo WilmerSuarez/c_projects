@@ -41,7 +41,12 @@ int main(int argc, char *argv[]) {
   extern char *optarg;
   extern int optind;
 #endif
-
+  /* 
+    Make sure the tag tables are in the correct 
+    order. Will be used by bsearch() when reading
+    the GEDCOM file(s). 
+    (bsearch expects an assorted array)
+  */
   validate_tags_tables();
 #ifdef MSDOS
   if(argc <= 1) {
@@ -132,17 +137,16 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  /* PHASE I */
-  /* */
-  if(optind == argc) {
+  /* PHASE I - CREATE NODES */
+  if(optind == argc) { 
     current_gedcom = "stdin";
     current_lineno = 0;
     read_gedcom(stdin, &head, 0);
   } else {
-    for(np = &head ; optind < argc; optind++) {
+    for(np = &head; optind < argc; optind++) {
       FILE *gedcom_file;
-      
-      current_gedcom = argv[optind];
+
+      current_gedcom = argv[optind]; // GEDCOM file path
       current_lineno = 0;
       if((gedcom_file = fopen(argv[optind], "r")) == NULL) {
 	      fprintf(stderr, "Can't open GEDCOM file '%s'.\n", argv[optind]);
@@ -152,14 +156,17 @@ int main(int argc, char *argv[]) {
       fclose(gedcom_file);
       while(np->siblings)
         np = np->siblings;
-    }
-  }
+    } 
+  } 
 
+  /* PHASE II - PROCESS NODES */
   if(head.siblings == NULL) {
     fprintf(stderr, "No valid GEDCOM lines found\n");
     exit(1);
   }
   process_records(head.siblings);
+
+  /* PHASE III - FILL XREF STRUCTS */
   link_records(head.siblings);
   fprintf(stderr, "Processed %ld GEDCOM lines", gedcom_lines);
   if(total_individuals)
@@ -173,13 +180,12 @@ int main(int argc, char *argv[]) {
   if(total_notes)
     fprintf(stderr, ", %d notes", total_notes);
   fprintf(stderr, "\n");
-  /*
-   * Determine individuals to be output, and assign them serial numbers.
-   */
-  for(i = 0; i < total_individuals; i++) {
-    char **av;
 
+  /* PHASE IV - OUTPUT HTML FILE(S) */
+  /* Determine individuals to be output, and assign them serial numbers. */
+  for(i = 0; i < total_individuals; i++) {
     if(selected_individuals != NULL) {
+      char **av;
       for(av = selected_individuals; *av != NULL; av++)
 	    if(!strcmp(*av, all_individuals[i]->xref)) {
 	      all_individuals[i]->serial = ++serial;
