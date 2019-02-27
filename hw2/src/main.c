@@ -60,8 +60,24 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
+  /* Long Argument Options */
+  const struct option long_options[] = {
+    {"help", no_argument, NULL, 'H'},
+    {"no-surname-caps", no_argument, NULL, 'c'},
+    {"index", no_argument, NULL, 'i'},
+    {"version", no_argument, NULL, 'v'},
+    {"files-per-directory", required_argument, NULL, 'd'},
+    {"select", required_argument, NULL, 's'},
+    {"url-template", required_argument, NULL, 'u'},
+    {"filename-template", required_argument, NULL, 'f'},
+    {"individual-template", required_argument, NULL, 't'},
+    {"index-template", required_argument, NULL, 'T'},
+    {"change-directory", required_argument, NULL, 'g'},
+    {0, 0, 0, 0}
+  };
+
   /* Validate Arguments */
-  while((optc = getopt(argc, argv, "Hcivd:s:u:f:t:T:")) != -1) {
+  while((optc = getopt_long(argc, argv, "Hcivd:s:u:f:t:T:", long_options, NULL)) != -1) {
     FILE *tempf;
     long size;
     char *temps, *tempe;
@@ -126,6 +142,9 @@ int main(int argc, char *argv[]) {
       case 'f':	/* Template for file names */
         file_template = optarg;
         break;
+      case 'g':
+        printf("g");
+        break;
       case 'H':
         printf(USAGE);
         printf(OPTIONS);
@@ -159,7 +178,11 @@ int main(int argc, char *argv[]) {
     } 
   } 
 
-  /* PHASE II - PROCESS NODES */
+  /* 
+    PHASE II:
+      PROCESS NODES  
+      ALLOCATE STRUCTURES OF PROPER TYPE 
+  */
   if(head.siblings == NULL) {
     fprintf(stderr, "No valid GEDCOM lines found\n");
     exit(1);
@@ -181,7 +204,7 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, ", %d notes", total_notes);
   fprintf(stderr, "\n");
 
-  /* PHASE IV - OUTPUT HTML FILE(S) */
+  /* PHASE IV - OUTPUT HTML FILES */
   /* Determine individuals to be output, and assign them serial numbers. */
   for(i = 0; i < total_individuals; i++) {
     if(selected_individuals != NULL) {
