@@ -16,7 +16,6 @@
 
 char *url_template="%s.html";
 char *file_template="%s.html";
-char *output_path="./";
 
 #ifdef MSDOS
 int max_per_directory = 100;

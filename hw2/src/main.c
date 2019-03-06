@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
+#include <unistd.h>
 #include "node.h"
 #include "read.h"
 #include "database.h"
@@ -10,23 +11,26 @@
 
 #define VERSION "2.1 (17 April 1995)"
 #define USAGE "Usage: %s [-Hciv][-d <max-per-directory>][-s <individual> ...][-u <URL template>][-f <file-template>][-t <individual-template>][-T <index-template>] [-- <gedcom-file> ...]\n", argv[0]
-#define OPTIONS " -v\t\t\tPrint version information.\n" \
-" -c\t\t\tDisable automatic capitalization of surnames.\n" \
+#define OPTIONS " -v\t\t\t\tPrint version information.\n" \
+" -c\t\t\t\tDisable automatic capitalization of surnames.\n" \
 " -d max_per_directory\t\tSpecify number of individuals per subdirectory\n" \
-"\t\t\t(0 means no subdirectories)\n" \
-" -i\t\t\tCause an index file to be generated containing\n" \
-"\t\t\tall the individuals in the input.\n" \
-" -s individuals ...\tLimit the production of output files to a specified\n" \
-"\t\t\tset of zero or more selected individuals.\n" \
-" -u url_template\tSpecify a template string for the URL's used\n" \
-"\t\t\tin anchors in the output files (default '%%s.html').\n" \
-" -f file_template\tSpecify a template string for the names of the\n" \
-"\t\t\tHTML files (default '%%s.html').\n" \
-" -t individual_template\tSpecify an HTML template file for individuals.\n" \
-" -T index_template\tSpecify an HTML template file for the index.\n" \
-" -H\t\t\tPrint a brief message listing the available options.\n"
+"\t\t\t\t(0 means no subdirectories)\n" \
+" -i\t\t\t\tCause an index file to be generated containing\n" \
+"\t\t\t\tall the individuals in the input.\n" \
+" -s individuals ...\t\tLimit the production of output files to a specified\n" \
+"\t\t\t\tset of zero or more selected individuals.\n" \
+" -u url_template\t\tSpecify a template string for the URL's used\n" \
+"\t\t\t\tin anchors in the output files (default '%%s.html').\n" \
+" -f file_template\t\tSpecify a template string for the names of the\n" \
+"\t\t\t\tHTML files (default '%%s.html').\n" \
+" -t individual_template\t\tSpecify an HTML template file for individuals.\n" \
+" -T index_template\t\tSpecify an HTML template file for the index.\n" \
+" -H\t\t\t\tPrint a brief message listing the available options.\n" \
+" --change-directory dirname\tCreate HTML files at specified directory\n"
 
 int generate_index;
+int change_d;
+char *output_path="./"; // Name of existing directory to output HTML files
 char **selected_individuals;
 struct node head;
 
@@ -143,7 +147,8 @@ int main(int argc, char *argv[]) {
         file_template = optarg;
         break;
       case 'g':
-        printf("g");
+        change_d = 1; // Change directory flag set
+        output_path = optarg; // HTML files output path
         break;
       case 'H':
         printf(USAGE);
@@ -204,8 +209,19 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, ", %d notes", total_notes);
   fprintf(stderr, "\n");
 
-  /* PHASE IV - OUTPUT HTML FILES */
-  /* Determine individuals to be output, and assign them serial numbers. */
+  /* 
+    PHASE IV - OUTPUT HTML FILES
+      - Determine individuals to be output, 
+        and assign them serial numbers. 
+  */
+  /* Change the CWD */
+  // if(change_d) {
+  //   if(chdir(output_path) == -1) {
+  //     fprintf(stderr, "Bad directory path\n");
+  //     exit(1);
+  //   }
+  // }
+
   for(i = 0; i < total_individuals; i++) {
     if(selected_individuals != NULL) {
       char **av;

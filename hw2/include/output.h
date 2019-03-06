@@ -9,7 +9,6 @@ extern int individual_template_nosubdir_size;
 extern char *index_template;
 extern char *url_template;
 extern char *file_template;
-extern char *output_path;
 extern int max_per_directory;
 
 void output_individual(struct individual_record *ip);
