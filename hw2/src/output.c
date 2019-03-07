@@ -1083,6 +1083,6 @@ void construct_url(char *dest, struct individual_record *indiv) {
 
   strcat(dest, url);
   sprintf(url, url_template, indiv->xref);
-  sprintf(dest, "%s", "");
+  dest[0] = '\0';
   strcat(dest, url);
 }

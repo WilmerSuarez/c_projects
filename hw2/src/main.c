@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
   };
 
   /* Validate Arguments */
-  while((optc = getopt_long(argc, argv, "Hcivd:s:u:f:t:T:", long_options, NULL)) != -1) {
+  while((optc = getopt_long(argc, argv, "Hcivd:s:u:h:f:t:T:", long_options, NULL)) != -1) {
     FILE *tempf;
     long size;
     char *temps, *tempe;
@@ -239,6 +239,7 @@ int main(int argc, char *argv[]) {
    */
   if (generate_index)
     output_index(*all_individuals);
+
   /*
    * Output individuals
    */
