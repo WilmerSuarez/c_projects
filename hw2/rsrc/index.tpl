@@ -7,9 +7,9 @@
 <P>
 !WHILE @
 !IF @.TITLE
-<A HREF="${@.XREF.&}">${@.NAME} (${@.TITLE})</A>
+<A HREF="${@.&}">${@.NAME} (${@.TITLE})</A>
 !ELSE
-<A HREF="${@.XREF.&}">${@.NAME}</A>
+<A HREF="${@.&}">${@.NAME}</A>
 !ENDIF
  (${@.BIRTH.DATE} - ${@.DEATH.DATE})<BR>
 !NEXT

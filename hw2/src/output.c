@@ -1080,7 +1080,9 @@ void construct_url(char *dest, struct individual_record *indiv) {
   } else {
     sprintf(url, "%s", "");
   }
+
   strcat(dest, url);
   sprintf(url, url_template, indiv->xref);
+  sprintf(dest, "%s", "");
   strcat(dest, url);
 }

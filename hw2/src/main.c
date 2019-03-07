@@ -214,13 +214,14 @@ int main(int argc, char *argv[]) {
       - Determine individuals to be output, 
         and assign them serial numbers. 
   */
+
   /* Change the CWD */
-  // if(change_d) {
-  //   if(chdir(output_path) == -1) {
-  //     fprintf(stderr, "Bad directory path\n");
-  //     exit(1);
-  //   }
-  // }
+  if(change_d) {
+    if(chdir(output_path) == -1) {
+      fprintf(stderr, "Bad directory path\n");
+      exit(EXIT_FAILURE);
+    }
+  }
 
   for(i = 0; i < total_individuals; i++) {
     if(selected_individuals != NULL) {

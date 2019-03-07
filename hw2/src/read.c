@@ -126,7 +126,8 @@ read_gedcom(FILE *f, struct node *prev, int level) {
     tagp = rest;
     while(*rest != '\0' && *rest != ' ') rest++;
     if(*rest) *rest++ = '\0';
-    if((tp = findtag(tagp, gedcom_tags, gedcom_tags_size))) node->tag = tp;
+    if((tp = findtag(tagp, gedcom_tags, gedcom_tags_size))) 
+      node->tag = tp;
     while(*rest == ' ') rest++;
     node->rest = rest;
 
