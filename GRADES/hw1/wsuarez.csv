@@ -1,0 +1,103 @@
+TEST NAME, POINTS,OUT OF,NOTES
+validargs_test_suite/validargs_invalid_test2,1,1,
+validargs_test_suite/validargs_invalid_test1,1,1,
+validargs_test_suite/validargs_invalid_test0,1,1,
+validargs_test_suite/validargs_invalid_order_test,1,1,
+validargs_test_suite/validargs_invalid_compress_test,1,1,
+validargs_test_suite/validargs_invalid_combination_test0,1,1,
+validargs_test_suite/validargs_help_test3,1,1,
+validargs_test_suite/validargs_help_test2,1,1,
+validargs_test_suite/validargs_help_test1,1,1,
+validargs_test_suite/validargs_help_test0,1,1,
+validargs_test_suite/validargs_double_combinations_test,1,1,
+validargs_test_suite/validargs_double_block_test,1,1,
+validargs_test_suite/validargs_default_compress_test,1,1,
+validargs_test_suite/validargs_decompress_test,1,1,
+validargs_test_suite/validargs_compress_test2,1,1,
+validargs_test_suite/validargs_compress_test1,1,1,
+validargs_test_suite/validargs_compress_test0,1,1,
+validargs_test_suite/validargs_compress_invalid_block_test2,0,1,1 assertion(s) failed.: tests/validargs_tests.c:126: Invalid return for valid args. Got 0 | Expected: 1
+validargs_test_suite/validargs_compress_invalid_block_test1,1,1,
+validargs_test_suite/validargs_compress_invalid_block_test0,1,1,
+read_huffman_tree_suite/read_huff_tree_trunc_at_traversal,1,1,
+read_huffman_tree_suite/read_huff_tree_trunc_at_symbols,0,1,1 assertion(s) failed.: tests/decompress_tests.c:453: Invalid return for read huffman tree. Got 0 | Expected: 1
+read_huffman_tree_suite/read_huff_tree_test2,0,1,1 assertion(s) failed.: tests/decompress_tests.c:560: Invalid Tree Structure
+read_huffman_tree_suite/read_huff_tree_test1,0,1,1 assertion(s) failed.: tests/decompress_tests.c:527: Invalid Tree Structure, tree not Isomorphic with reference tree
+read_huffman_tree_suite/read_huff_tree_test0,0,1,1 assertion(s) failed.: tests/decompress_tests.c:486: Invalid Tree Structure
+read_huffman_tree_suite/read_huff_tree_single_byte,1,1,
+read_huffman_tree_suite/read_huff_tree_no_leaf_nodes,0,1,1 assertion(s) failed.: tests/decompress_tests.c:357: Invalid return for read huffman tree. Got 0 | Expected: 1
+read_huffman_tree_suite/read_huff_tree_no_internal_nodes,0,1,1 assertion(s) failed.: tests/decompress_tests.c:369: Invalid return for read huffman tree. Got 0 | Expected: 1
+read_huffman_tree_suite/read_huff_tree_invalid_num_nodes,0,1,3 assertion(s) failed.: tests/decompress_tests.c:400: Invalid return for read huffman tree. Got 0 | Expected: 1
+tests/decompress_tests.c:391: Invalid return for read huffman tree. Got 0 | Expected: 1
+tests/decompress_tests.c:382: Invalid return for read huffman tree. Got 0 | Expected: 1
+read_huffman_tree_suite/read_huff_tree_empty,1,1,
+emit_huffman_tree_suite/emit_huffman_tree_test3,0,1,1 assertion(s) failed.: tests/compress_tests.c:385: The output tree for emit huffman tree is not correct. Got 2 | Expected: 0
+emit_huffman_tree_suite/emit_huffman_tree_test2,0,1,1 assertion(s) failed.: tests/compress_tests.c:357: The output tree for emit huffman tree is not correct. Got 2 | Expected: 0
+emit_huffman_tree_suite/emit_huffman_tree_test1,1,1,
+emit_huffman_tree_suite/emit_huffman_tree_test0,0,1,1 assertion(s) failed.: tests/compress_tests.c:300: The output tree for emit huffman tree is not correct. Got 2 | Expected: 0
+decompress_test_suite/decompress_test1,1,1,
+decompress_test_suite/decompress_test0,1,1,
+decompress_test_suite/decompress_block_trunc_at_traversal,1,1,
+decompress_test_suite/decompress_block_trunc_at_symbols,1,1,
+decompress_test_suite/decompress_block_test6,1,1,
+decompress_test_suite/decompress_block_test5,1,1,
+decompress_test_suite/decompress_block_test4,1,1,
+decompress_test_suite/decompress_block_test3,1,1,
+decompress_test_suite/decompress_block_test2,1,1,
+decompress_test_suite/decompress_block_test1,1,1,
+decompress_test_suite/decompress_block_test0,1,1,
+decompress_test_suite/decompress_block_no_leaf_nodes,1,1,
+decompress_test_suite/decompress_block_single_byte,1,1,
+decompress_test_suite/decompress_block_no_internal_nodes,1,1,
+decompress_test_suite/decompress_block_no_end_symbol,1,1,
+decompress_test_suite/decompress_block_no_end_block,1,1,
+decompress_test_suite/decompress_block_invalid_num_nodes,1,1,
+decompress_test_suite/decompress_block_empty,1,1,
+decompress_system_suite/decompress_trunc_at_traversal,0,1,1 assertion(s) failed.: tests/system_tests.c:401: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_trunc_at_symbols,0,1,1 assertion(s) failed.: tests/system_tests.c:435: Invalid return for decompress. Got 139 | Expected: 1
+decompress_system_suite/decompress_test6,1,1,
+decompress_system_suite/decompress_test5,1,1,
+decompress_system_suite/decompress_test4,1,1,
+decompress_system_suite/decompress_test3,1,1,
+decompress_system_suite/decompress_test2,1,1,
+decompress_system_suite/decompress_test1,1,1,
+decompress_system_suite/decompress_test0,1,1,
+decompress_system_suite/decompress_single_byte,0,1,1 assertion(s) failed.: tests/system_tests.c:423: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_pipe_test,1,1,
+decompress_system_suite/decompress_no_leaf_nodes,0,1,1 assertion(s) failed.: tests/system_tests.c:357: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_no_internal_nodes,0,1,1 assertion(s) failed.: tests/system_tests.c:368: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_no_end_symbol,0,1,1 assertion(s) failed.: tests/system_tests.c:345: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_no_end_block,0,1,1 assertion(s) failed.: tests/system_tests.c:334: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_invalid_num_nodes,0,1,3 assertion(s) failed.: tests/system_tests.c:389: Invalid return for decompress. Got 0 | Expected: 1
+tests/system_tests.c:384: Invalid return for decompress. Got 0 | Expected: 1
+tests/system_tests.c:379: Invalid return for decompress. Got 0 | Expected: 1
+decompress_system_suite/decompress_empty,1,1,
+compress_test_suite/compress_test0,1,1,
+compress_test_suite/compress_block_test7,0,1,
+compress_test_suite/compress_block_test6,0,1,
+compress_test_suite/compress_block_test5,0,1,1 assertion(s) failed.: tests/compress_tests.c:170: Invalid return for compress_block. Got 1 | Expected: 0
+compress_test_suite/compress_block_test4,0,1,2 assertion(s) failed.: tests/compress_tests.c:156: The output when decompressed is not equivalent to the original file. Got 2 | Expected: 0
+tests/compress_tests.c:144: Invalid return for compress_block. Got 1 | Expected: 0
+compress_test_suite/compress_block_test3,0,1,1 assertion(s) failed.: tests/compress_tests.c:118: Invalid return for compress_block. Got 1 | Expected: 0
+compress_test_suite/compress_block_test2,1,1,
+compress_test_suite/compress_block_test1,0,1,1 assertion(s) failed.: tests/compress_tests.c:76: The output when decompressed is not equivalent to the original file. Got 2 | Expected: 0
+compress_test_suite/compress_block_test0,0,1,1 assertion(s) failed.: tests/compress_tests.c:38: Invalid return for compress_block. Got 1 | Expected: 0
+compress_test_suite/compress_block_1024_test,0,1,
+compress_system_suite/compress_test4,0,1,1 assertion(s) failed.: tests/system_tests.c:105: The output when decompressed is not equivalent to the original file. Got 1 | Expected: 0
+compress_system_suite/compress_test3,0,1,1 assertion(s) failed.: tests/system_tests.c:88: The output when decompressed is not equivalent to the original file. Got 1 | Expected: 0
+compress_system_suite/compress_test2,0,1,2 assertion(s) failed.: tests/system_tests.c:71: The output when decompressed is not equivalent to the original file. Got 1 | Expected: 0
+tests/system_tests.c:66: Invalid return for compress. Got 139 | Expected: 0
+compress_system_suite/compress_test1,1,1,
+compress_system_suite/compress_test0,1,1,
+compress_system_suite/compress_single_byte,1,1,
+compress_system_suite/compress_pipe_test,1,1,
+compress_system_suite/compress_large,0,1,2 assertion(s) failed.: tests/system_tests.c:190: The output when decompressed is not equivalent to the original file. Got 1 | Expected: 0
+tests/system_tests.c:185: Invalid return for compress. Got 139 | Expected: 0
+compress_system_suite/compress_empty,1,1,
+compress_system_suite/compress_emoji_ascii,0,1,1 assertion(s) failed.: tests/system_tests.c:173: The output when decompressed is not equivalent to the original file. Got 1 | Expected: 0
+compress_system_suite/compress_emoji,1,1,
+basecode_tests_suite/validargs_help_test,1,1,
+basecode_tests_suite/validargs_error_test,1,1,
+basecode_tests_suite/validargs_compress_test,1,1,
+basecode_tests_suite/help_system_test,1,1,
+total,62,94
