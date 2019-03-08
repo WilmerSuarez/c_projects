@@ -10,7 +10,7 @@
 #include "tags.h"
 
 #define VERSION "2.1 (17 April 1995)"
-#define USAGE "Usage: %s [-Hciv][-d <max-per-directory>][-s <individual> ...][-u <URL template>][-f <file-template>][-t <individual-template>][-T <index-template>] [-- <gedcom-file> ...]\n", argv[0]
+#define USAGE "Usage: %s [-Hciv][-d <max-per-directory>][-s <individual> ...][-u <URL template>][-f <file-template>][-t <individual-template>][-T <index-template>] [--change-directory <dirname>] [-- <gedcom-file> ...]\n", argv[0]
 #define OPTIONS " -v\t\t\t\tPrint version information.\n" \
 " -c\t\t\t\tDisable automatic capitalization of surnames.\n" \
 " -d max_per_directory\t\tSpecify number of individuals per subdirectory\n" \
@@ -30,7 +30,7 @@
 
 int generate_index;
 int change_d;
-char *output_path="./"; // Name of existing directory to output HTML files
+char *output_path; // Name of existing directory to output HTML files
 char **selected_individuals;
 struct node head;
 
@@ -102,11 +102,11 @@ int main(int argc, char *argv[]) {
         {
           int i = 0;
           int j;
-          while(argv[optind+i] && argv[optind+i][0] != '-')
+          while(argv[optind-1+i] && argv[optind-1+i][0] != '-')
             i++;
           if(!(selected_individuals = malloc((i+1) * sizeof(char *)))) out_of_memory();
           for (j = 0; j < i; j++)
-            selected_individuals[j] = argv[optind+j];
+            selected_individuals[j] = argv[optind-1+j];
           selected_individuals[j]=NULL;
           optind += i;
         }
@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
           index_template = temps;
         break;
       case 'd':	/* Specify max per directory */
-        max_per_directory = atoi(optarg);
+        max_per_directory = strtol(optarg, NULL, 10);
         break;
       case 'u':	/* Template for URL's within HTML anchors */
         url_template = optarg;
@@ -248,14 +248,14 @@ int main(int argc, char *argv[]) {
     if(max_per_directory) {
       for(i = 0; i < individual_template_subdir_size; i++)
 	      size += strlen(individual_template_subdir[i]);
-      if((individual_template = malloc(size)) == NULL) out_of_memory();
+      if((individual_template = malloc(size+1)) == NULL) out_of_memory();
       *individual_template = '\0';
-      for(i = 0; i < individual_template_subdir_size; i++)
+      for(i = 0; i < individual_template_subdir_size; i++) 
         strcat(individual_template, individual_template_subdir[i]);
       } else {
         for(i = 0; i < individual_template_nosubdir_size; i++)
 	        size += strlen(individual_template_nosubdir[i]);
-        if((individual_template = malloc(size)) == NULL) out_of_memory();
+        if((individual_template = malloc(size+1)) == NULL) out_of_memory();
         *individual_template = '\0';
         for(i = 0; i < individual_template_nosubdir_size; i++)
 	        strcat(individual_template, individual_template_nosubdir[i]);
