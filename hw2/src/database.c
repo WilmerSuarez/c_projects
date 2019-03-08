@@ -90,8 +90,13 @@ process_individual_record(struct node *np) {
   /* Enter current node with xref to Hash Table */
   index_enter(ip->xref, ip);
   for(np = np->children ; np != NULL; np = np->siblings) {
+    if(np->tag == NULL) continue;
     switch(np->tag->value) {
       case NAME:
+        if(ip->personal_name) {
+          free(ip->personal_name->name);
+          free(ip->personal_name);
+        }
         ip->personal_name = process_name(np);
         break;
       case FAMS:
@@ -369,6 +374,7 @@ process_name(struct node *np) {
 
   for(i = 0, cp = np->rest; *cp != '\0'; cp++, i++);
   if((p = malloc(i+1)) == NULL) out_of_memory();
+  p[0] = '\0';
   if((nsp = malloc(sizeof(*nsp))) == NULL) out_of_memory();
   memset(nsp, 0, sizeof(*nsp));
   nsp->name = p;
