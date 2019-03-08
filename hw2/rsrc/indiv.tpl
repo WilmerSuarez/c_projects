@@ -74,7 +74,7 @@
 !INCREMENT i
 !END
 <BR>
-<A HREF="ZzINDEXzZ.html">INDEX</A><BR><BR>
+<A HREF="INDEX.html">INDEX</A><BR><BR>
 !IF @.NOTE
 <H2>Notes</H2>
 !RESET i
