@@ -1,0 +1,13 @@
+
+The files "g2hdos.exe" and "g2hwin.exe" are MS-DOS and MS-WINDOWS executables,
+respectively.  The MS-DOS version is useful only for small GEDCOMS of under
+about 100K bytes, as the program cannot make use of extended or expanded
+memory.  The MS-WINDOWS version can process much larger GEDCOMS, depending
+on the amount of memory and swap area available to the system.  As the MS-DOS
+filesystem appears to use a file creation algorithm that takes time quadratic
+in the number of entries in a directory, if too many files are created in
+one directory the program starts to run very slowly.  Thus, under MS-DOS or
+MS-WINDOWS, the default is to create several subdirectories for the individual
+HTML files, and to limit the number of files per subdirectory to 100.
+The default value can be overridden with the "-d" option.
+

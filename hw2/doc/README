@@ -1,0 +1,203 @@
+
+	          A GEDCOM to HTML Translator
+			   Gene Stark
+		     (stark@cs.sunysb.edu)
+		  Version 2.0 (6 April, 1995)
+
+This program reads a GEDCOM file as input and produces a set of HTML files,
+one for each individual record in the GEDCOM file.  Each individual file
+contains hypertext links (relative URL's) to the files for the parents,
+spouses, and children for that individual.  Birth, marriage, and death events
+are included in the file, as are notes records associated with the individual,
+and also certain source information.  A sorted index file can also be created,
+with a hypertext link to each individual.  The program can also automatically
+insert additional HTML text into each individual file.  This feature can be
+used add additional text, images, audio, or whatever you want to each
+individual.  Moreover, you only have to create the included files for the
+individuals on which you have extra information, and you can maintain all your
+other data on whatever system you are using to produce the GEDCOM output.
+If you get an updated GEDCOM file, simply go to the directory where the
+individual files are stored and run "ged2html" again.  It will update each
+individual file with the new GEDCOM data and will automatically insert the
+additional HTML text again.
+
+I wrote this program because I tried the GEDCOM to HTML translator posted
+by Frode Kvam (frode@ifi.unit.no), and found it insufficiently flexible.
+Since it only parses a limited portion of the GEDCOM file, not including
+notes records, there wasn't an easy way to modify his program to get
+all my notes into the output files.  So, I decided to write a YACC-based
+parser for the GEDCOM standard, and to base the translator on that.
+The YACC parser was used in version 1 of this program, however as I got
+more experience with the GEDCOM standard and how it is actually used in
+practice, I decided that it was too difficult to make the YACC-based parser
+accept the variety of GEDCOM's that actually exist.  So, for the current
+version I have rewritten the parser so that it will accept essentially
+"any" GEDCOM file, and will only complain about grossly malformed input.
+
+I have tested this program on a large number of GEDCOM's, including the
+following:
+
+	* The "royal92.ged" file from ROOTS-L, which contains 30,682
+		lines of GEDCOM and 3,010 individuals.
+
+	* The "Richard Austin database" (produced by PAF 2.3), which
+		contains 82,874 lines of GEDCOM and 6,482 individuals.
+		This database was provided to me by Bill Minnick
+		(svpafug@rahul.net).
+
+	* A database (produced by Family Scrapbook), which contains
+		30521 lines and 2121 individuals.  This database was
+		provided to me by Bill Spurlock (shadow@mindspring.com).
+
+	* All the databases on Yvon Cyr's Acadian/French Canadian CD-ROM.
+
+The program parses GEDCOM's fairly rapidly, at about 3700 GEDCOM lines
+per second on my Intel 486/33MHz PC with 16MB of RAM running the FreeBSD
+operating system.  Parsing of the 82,874 line "Richard Austin database"
+takes 22 seconds of wall clock time, and it takes another 10 seconds or
+so to produce the 500KB sorted index file.  Under FreeBSD, complete
+processing of Austin database, including the production of the 6482 output
+files, takes just over 5 minutes of wall clock time.  Under DOS or Windows,
+creation of a large number of output files can take substantially longer,
+due to the less efficient filesystems used in those operating systems.
+
+I have used this program to prepare my own data for presentation on the
+World-Wide Web.  You can view this data by starting from URL
+
+	 http://www.cs.sunysb.edu/~stark
+
+and following the links.  I preprocessed my GEDCOM file to produce
+approximately 700 individual files, which are linked together between
+themselves and to my hypertext family history document.  Birger Wathne
+(Birger.Wathne@vest.sdata.no) and others are using version 1 of this program
+in various demonstrations of genealogy over the World-Wide Web.  Many of these
+demonstrations do not preprocess the data into HTML files, but rather use
+LifeLines to manage the database in GEDCOM format, and ged2html to process the
+output of queries for presentation over the Web.
+
+I have developed and run this program on an Intel 486DX/33 under the
+FreeBSD operating system.  If you using another flavor of *ix, you
+shouldn't have too much trouble getting it to run.  You do need an ANSI C
+compiler (like GCC), as I am no longer interested in writing old-style C.
+I have also compiled the program for MS-DOS and MS-WINDOWS using Microsoft
+Visual C.  See the file MSDOS for details.
+
+The GEDCOM parser in the program is built around the GEDCOM 5.3 standard.
+Whereas version 1 of this program checked the GEDCOM input fairly stringently
+for conformance to the standard, the current version attempts to make sense
+out of anything that looks like a GEDCOM file.  It will complain about
+grossly malformed GEDCOM files, but it still tries to get through to the
+end and produce whatever output it can.
+
+The output processor is template-driven.  That is, it consists of an
+interpreter for a simple macro language, which produces output files by
+processing template strings and filling in information from the GEDCOM
+database.  The template-driven output scheme was used to obtain flexibility
+and language-independence.  The default templates use the cross-reference ID's
+in the GEDCOM file to name the HTML files, and will insert one "image" file
+(if it exists) near the beginning of each individual file and one "additional
+information" file (if it exists) at the end of each individual file.
+For example, an individual with cross-reference ID "I101" would receive an
+HTML file "I101.html".  As this file is created, the file "I101.img" would be
+inserted near the beginning, and the file "I101.inc" would be inserted at the
+end.  Default templates are compiled into the program, and they will be used
+unless you specify an alternative template using the appropriate command-line
+argument.
+
+If you like the default output format, and you are happy with English as
+the output language, then there is no need for you to understand anything
+about the template macro language.  This is a good thing, because the
+macro language is not that pleasant to program in.  If you do want to
+write your own templates, have a look at the files "indiv.tpl"
+and "index.tpl".  These use most, if not all, the available constructs
+in the output language.  A template file consists of text interspersed
+with variable references and control commands.  Variable references start
+with "$", and are used to insert in-line information from the GEDCOM database.
+Constructs that can appear in variables are as follows:
+
+	@		denotes the "current individual"
+
+	[i]		is a subscripting operation that selects the i-th
+			family, event, note, etc. in a list.  The identifier
+			i is an "index variable", which takes on values
+			1, 2, 3, etc.
+
+	.fieldname	is a selection operation that follows associations
+			in the database.  For example ${@.FATHER} denotes
+			the individual record corresponding to the father
+			of the current individual.  You have to look at
+			the sample template files and the code in output.c
+			to see what selectors are understood.
+		
+	.&		is a selection operation that turns a string into
+			a URL to be output in an HTML anchor.
+
+	i		refers to the index variable i.
+
+	{}		appearing in a variable name act as delimiters.
+			They must be properly matched.
+
+Control constructs are signalled by a "!" appearing at the beginning of
+a template line.  The control constructs are:
+
+	!IF condition
+	!THEN
+	!ELSE
+	!ENDIF
+
+The above constructs provide for conditional output based on whether
+particular fields in the database have non-null values.
+
+	!WHILE condition
+	!END
+
+These constructs provide for repetitive output of a particular section of
+the template, based on what is in the database.  For example, it can be
+used to iterate over all the marriages of a particular individual.
+
+In both the !IF and !WHILE constructs, the "condition" is a variable,
+only without the $ that would normally precede it if the variable were
+to appear in normal text.
+
+	!RESET index_variable
+
+Resets the value of an index variable to 1.
+
+	!INCREMENT index_variable
+
+Increments the value of an index variable.
+
+	!NEXT
+
+Advances "@" to refer to the "next" individual in the database.
+
+	!INCLUDE filename_template
+
+Any occurrences of "@" in the "filename_template" are replaced by the
+cross-reference ID of the current individual.  The substituted template
+is then used as the name of a file to be included in the output stream.
+If the file does not exist, this construct is ignored.  The included
+file is inserted verbatim into the output stream; no macroprocessing is
+performed on it.
+
+I have reorganized the program so that it is language-independent,
+except for the tables in "tags.c".  All strings in the output come either
+from the templates or from those tables.  If you want to make the program
+produce output in another language, have a look at "tags.h" and "tags.c"
+to see what to do.  You should also change the compilation flags in
+"Makefile".  At the moment, only English is supported.  If you create
+tables for another language, I'd appreciate receiving them so that I
+can integrate them back into the source.  Thanks!
+
+DISCLAIMER:  I'm not real proud of this program, in the sense that I want
+to promote it as an example of great (or even good) coding.  However, it
+does the job for me, and I spent a reasonable amount of time on it, so I
+figured it might be useful for others as well.  If you make substantial
+additions or changes to this program, please let me know.  I will probably
+make some changes myself, and I will make the new versions available by
+anonymous FTP.
+
+THANKS: go to Birger Wathne for contributing useful ideas and code.
+
+							Gene Stark
+							stark@cs.sunysb.edu

@@ -1,0 +1,1140 @@
+0 HEAD
+1 CHAR ASCII
+1 SOUR APPROVED_SOURCE_NAME
+2 VERS Version number of source-program
+2 NAME Name of source-program
+2 CORP Corporation name
+3 ADDR Corporation address line 1
+4 CONT Corporation address line 2
+4 CONT Corporation address line 3
+4 CONT Corporation address line 4
+4 ADR1 Corporation address line 1
+4 ADR2 Corporation address line 2
+4 CITY Corporation address city
+4 STAE Corporation address state
+4 POST Corporation address ZIP code
+4 CTRY Corporation address country
+3 PHON Corporation phone number 1
+3 PHON Corporation phone number 2
+3 PHON Corporation phone number 3 (last one!)
+3 LANG English
+1 DEST Destination of transmission
+1 SUBM @SUBMITTER@
+1 FILE ALLGED.GED
+1 GEDC
+2 VERS 5.5
+2 FORM LINEAGE-LINKED
+1 LANG language
+1 NOTE A general note about this file:
+2 CONT It demonstrates most of the data which can be submitted using GEDCOM5.5. It shows the relatives of @PERSON1@: His 2 wifes (@PERSON2@, @PERSON8@), his parents (father: @PERSON5@, mother not given), 
+2 CONT his adoptive-parents (mother: @PERSON6@, father not given) and his 3 children (@PERSON3@, @PERSON4@ and @PERSON7@). In @PERSON1@, @FAMILY1@, @SUBMITTER@ and @SOURCE1@ as many datafields as possible are used. 
+2 CONT All other individuals/families contain no data. Note, that many data tags can appear more than once (in this transmission this is demonstrated with tags: NAME, OCCU, PLACE and NOTE. Seek the word 'another'.
+2 CONT The meaning of some tags is not clear for me. Seek the word 'whatever'.
+2 CONT This file is created by H. Eichmann: h.eichmann@mbox.iqo.uni-hannover.de. Feel free to copy and use it for any non-commercial purpose. 
+2 CONT For the creation the GEDCOM standard Release 5.5 (2 JAN 1996) has been used. Copyright: The church of Jesus Christ of latter-day saints, gedcom@gedcom.org
+2 CONT Note continued here. The word TE
+2 CONC ST should not be broken!
+1 _MYOWNTAG
+0 _MYOWNTAG
+0 @SUBMITTER@ SUBM
+1 RFN Submitter registered RFN
+1 RIN Automated record ID
+1 NAME Submitter-Name
+1 ADDR Submitter address line 1
+2 CONT Submitter address line 2
+2 CONT Submitter address line 3
+2 CONT Submitter address line 4
+2 ADR1 Submitter address line 1
+2 ADR2 Submitter address line 2
+2 CITY Submitter address city
+2 STAE Submitter address state
+2 POST Submitter address ZIP code
+2 CTRY Submitter address country
+1 PHON Submitter phone number 1
+1 PHON Submitter phone number 2
+1 PHON Submitter phone number 3 (last one!)
+1 LANG English
+1 _MYOWNTAG
+0 @PERSON1@ INDI
+1 AFN Ancestral File number
+1 RFN Reference number
+1 REFN User reference number
+2 TYPE User reference type
+1 RIN Automated record ID
+1 NOTE @NOTE1@
+1 NAME given name /surname/jr.
+2 NOTE @NOTE1@
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE BEF 1 JAN 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 0
+3 NOTE A note (1)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Personal Name note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NAME another name /surname/
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE AFT 1 JAN 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 1
+3 NOTE A note (2)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Personal Name note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 SEX M
+1 BIRT
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 2
+3 NOTE A note (3)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Birth event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 FAMC @PARENTS@
+1 CHR
+2 DATE BEF 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (4)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Christening event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 CHR
+2 DATE AFT 30 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (5)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Alternative christening event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 DEAT
+2 DATE BET 31 DEC 1997 AND 1 JAN 1998
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (6)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Death event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 BURI
+2 DATE ABT 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (7)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Burial event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 CREM Y
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (8)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Cremation event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 ADOP
+2 DATE CAL 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (9)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Adoption event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 FAMC @ADOPTIVE_PARENTS@
+3 ADOP BOTH
+1 BAPM
+2 DATE EST 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (10)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Baptism event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 BARM
+2 DATE INT 31 DEC 1997 (12/31/97)
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (11)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE BARM event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 BASM
+2 DATE FROM 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (12)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE BASM event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 BLES
+2 DATE TO 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (13)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Blessing event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 CHRA
+2 DATE FROM 31 DEC 1997 TO 1 FEB 1998
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (14)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE CHRA event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 CONF
+2 DATE @#DGREGORIAN@ 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (15)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Confirmation event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 FCOM
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (16)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE FCOM event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 ORDN
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (17)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE ORDN event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NATU
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (18)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE NATU event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 EMIG
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (19)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE EMIG event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 IMMI
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (20)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Immigration event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 CENS
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (21)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE CENS event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 PROB
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (22)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE PROB event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 WILL
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (23)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE WILL event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 GRAD
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (24)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Graduation event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 RETI
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (25)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Retirement event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 EVEN
+2 TYPE Event type
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (26)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Other event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 CAST Cast name
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (27)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Cast event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 DSCR Physical description
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (28)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Physical description event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 EDUC Education
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (29)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Education event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NATI National or tribe origin
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (30)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE National origin event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NCHI 42
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (31)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Children number event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NMR 42
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (32)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Marriages number event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 OCCU Occupation
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (33)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Occupation event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 OCCU Another occupation
+2 DATE 31 DEC 1998
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (34)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Occupation event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 PROP Possessions
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (35)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Possessions event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 RELI Religion
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (36)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Religion event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 SSN 6942
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (37)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Social security number event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 TITL Nobility title
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (38)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Nobility title event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 FAMC @PARENTS@
+2 PEDI birth
+2 NOTE Note about the link to parents
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 NOTE Another note about the link to parents
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 FAMC @ADOPTIVE_PARENTS@
+2 PEDI adopted
+2 NOTE Note about the link to adoptive parents
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 FAMS @FAMILY1@
+2 NOTE Note about the link to spouse
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 NOTE Another note about the link to spouse
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 FAMS @FAMILY2@
+1 SOUR @SOURCE1@
+2 PAGE 42
+2 DATA
+3 DATE 31 DEC 1900
+3 TEXT a sample text
+4 CONT Sample text continued here. The word TE
+4 CONC ST should not be broken!
+2 QUAY 0
+2 NOTE A note (39)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 OBJE
+2 FORM gif
+2 TITL A gif picture
+2 FILE \\network\drive\path\file name.gif
+2 NOTE A note (40)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NOTE A note about the individual
+2 CONT Note continued here. The word TE
+2 CONC ST should not be broken!
+1 CHAN 
+2 DATE 1 APR 1998
+3 TIME 12:34:56.789
+2 NOTE A note (41)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 _MYOWNTAG
+0 @PERSON2@ INDI
+1 NAME /Wife/
+1 FAMS @FAMILY1@
+0 @PERSON3@ INDI
+1 NAME /Child 1/
+1 FAMC @FAMILY1@
+0 @PERSON4@ INDI
+1 NAME /Child 2/
+1 FAMC @FAMILY1@
+0 @PERSON5@ INDI
+1 NAME /Father/
+1 FAMS @PARENTS@
+0 @PERSON6@ INDI
+1 NAME /Adoptive-mother/
+1 SEX F
+1 FAMS @ADOPTIVE_PARENTS@
+0 @PERSON7@ INDI
+1 NAME /Child 3/
+1 FAMC @FAMILY2@
+0 @PERSON8@ INDI
+1 NAME /2nd Wife/
+1 FAMS @FAMILY2@
+0 @FAMILY1@ FAM
+1 REFN User reference number
+2 TYPE User reference type
+1 RIN Automated record ID
+1 ANUL
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (42)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Anulation event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE 42y 6m
+1 CENS
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (43)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE CENS event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y 6m 9d
+2 WIFE
+3 AGE 6m 9d
+1 DIV
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (44)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Divorce event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y 3d
+2 WIFE
+3 AGE 42m
+1 DIVF
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note (45)
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE DIVF event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42d
+2 WIFE
+3 AGE CHILD
+1 ENGA
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Engagement event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE STILLBORN
+1 MARR
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Marriage event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE 42y 6m
+1 MARB
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE MARB event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE 42y 6m
+1 MARC
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE MARC event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE >42y 6m
+1 MARL
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE MARL event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE <42y 6m
+1 MARS
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE MARS event note (whatever it might be)
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE INFANT
+1 EVEN
+2 TYPE Other event type
+2 DATE 31 DEC 1997
+2 PLAC The place
+2 SOUR @SOURCE1@
+3 PAGE 42
+3 DATA
+4 DATE 31 DEC 1900
+4 TEXT a sample text
+5 CONT Sample text continued here. The word TE
+5 CONC ST should not be broken!
+3 QUAY 3
+3 NOTE A note
+4 CONT Note continued here. The word TE
+4 CONC ST should not be broken!
+2 NOTE Other event note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 HUSB
+3 AGE 42y
+2 WIFE
+3 AGE 42y 6m
+1 HUSB @PERSON1@
+1 WIFE @PERSON2@
+1 CHIL @PERSON3@
+1 CHIL @PERSON4@
+1 NCHI 42
+1 SOUR @SOURCE1@
+2 PAGE 42
+2 DATA
+3 DATE 31 DEC 1900
+3 TEXT a sample text
+4 CONT Sample text continued here. The word TE
+4 CONC ST should not be broken!
+2 QUAY 0
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 OBJE
+2 FORM bmp
+2 TITL A bmp picture
+2 FILE \\network\drive\path\file name.bmp
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NOTE A note about the family
+2 CONT Note continued here. The word TE
+2 CONC ST should not be broken!
+1 CHAN 
+2 DATE 1 APR 1998
+3 TIME 12:34:56.789
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+0 @PARENTS@ FAM
+1 HUSB @PERSON5@
+0 @ADOPTIVE_PARENTS@ FAM
+1 WIFE @PERSON6@
+0 @FAMILY2@ FAM
+1 HUSB @PERSON1@
+1 WIFE @PERSON8@
+1 CHIL @PERSON7@
+0 @NOTE1@ NOTE This is a note at level zero
+1 CONT which is continued on another line.
+1 CONT Note continued here. The word TE
+1 CONC ST should not be broken!
+1 REFN User reference number
+2 TYPE User reference type
+1 RIN Automated record ID
+0 @SOURCE1@ SOUR
+1 REPO @REPOSITORY1@
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+2 CALN Source call number
+3 MEDI Source media type
+2 CALN Alternate source call number
+3 MEDI Alternate source media type
+1 REFN User reference number
+2 TYPE User reference type
+1 RIN Automated record ID
+1 DATA
+2 EVEN BIRT, CHR
+3 DATE FROM 1 JAN 1980 TO 1 FEB 1982
+3 PLACE Place
+2 EVEN DEAT
+3 DATE FROM 1 JAN 1980 TO 1 FEB 1982
+3 PLACE Another place
+2 AGNC Resposible agency
+2 NOTE A note about whatever
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 AUTH Author of source
+2 CONT Author continued here. The word TE
+2 CONC ST should not be broken!
+1 TITL Title of source
+2 CONT Title continued here. The word TE
+2 CONC ST should not be broken!
+1 ABBR Short title
+1 PUBL Source publication facts
+2 CONT Publication facts continued here. The word TE
+2 CONC ST should not be broken!
+1 TEXT Citation from source
+2 CONT Citation continued here. The word TE
+2 CONC ST should not be broken!
+1 OBJE
+2 FORM bmp
+2 TITL A bmp picture
+2 FILE \\network\drive\path\file name.bmp
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+1 NOTE A note about the source
+2 CONT Note continued here. The word TE
+2 CONC ST should not be broken!
+1 CHAN 
+2 DATE 1 APR 1998
+3 TIME 12:34:56.789
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+0 @REPOSITORY1@ REPO
+1 NAME Repository name
+1 ADDR Address of repository
+2 CONT continuation of address
+2 ADR1 Address line 1
+2 ADR2 Address line 2
+2 CITY Address city
+2 STAE Address state
+2 POST Address postal code
+2 CTRY Address country
+1 PHON Phone number
+1 NOTE A note about the repository
+2 CONT Note continued here. The word TE
+2 CONC ST should not be broken!
+1 REFN User reference number
+2 TYPE User reference type
+1 RIN Automated record ID
+1 CHAN 
+2 DATE 1 APR 1998
+3 TIME 12:34:56.789
+2 NOTE A note
+3 CONT Note continued here. The word TE
+3 CONC ST should not be broken!
+0 TRLR
