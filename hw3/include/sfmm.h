@@ -278,7 +278,7 @@ void *sf_mem_end();
 void sf_show_header(sf_header *hp);
 void sf_show_block(sf_block *bp);
 void sf_show_blocks();
-void sf_show_free_list();
+void sf_show_free_lists();
 void sf_show_quick_lists();
 void sf_show_heap();
 
