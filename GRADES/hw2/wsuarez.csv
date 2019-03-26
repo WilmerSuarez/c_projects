@@ -4,18 +4,18 @@ basecode_suite/end_to_end_royal92_test,1,1,
 basecode_suite/end_to_end_testall_test,1,1,
 basecode_suite/valgrind_full_test,1,1,
 grading_suite/chdir_error_test,1,1,
-grading_suite/chdir_no_arg_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:56: The output was not what was expected (diff exited with status 1).
+grading_suite/chdir_no_arg_test,1,1,
 grading_suite/chdir_success_test,1,1,
-grading_suite/long_opt_short_opt_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:63: The output was not what was expected (diff exited with status 1).
-grading_suite/long_options_help_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:56: The output was not what was expected (diff exited with status 1).
-grading_suite/long_options_prefix_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:56: The output was not what was expected (diff exited with status 1).
+grading_suite/long_opt_short_opt_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:70: The output was not what was expected (diff exited with status 1).
+grading_suite/long_options_help_test,1,1,
+grading_suite/long_options_prefix_test,1,1,
 grading_suite/no_individuals_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:36: The program did not exit normally (status = 0x8b00).
-grading_suite/short_options_help_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:56: The output was not what was expected (diff exited with status 1).
+grading_suite/short_options_help_test,1,1,
 grading_suite/short_options_invalid_test,1,1,
 grading_suite/short_options_version_test,1,1,
 grading_suite/unknown_tag_test,1,1,
-grading_suite/valgrind_blank_line_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:67: Valgrind reported errors -- see ../valgrind_blank_line_test.out
+grading_suite/valgrind_blank_line_test,0,1,1 assertion(s) failed.: tests/ged2html_tests.c:74: Valgrind reported errors -- see ../valgrind_blank_line_test.out
 grading_suite/valgrind_malformed_lines_test,1,1,
 grading_suite/valgrind_multiple_names_test,1,1,
 grading_suite/valgrind_uninitialized_test,1,1,
-total,12,19
+total,16,19
