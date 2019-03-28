@@ -28,8 +28,41 @@ int main(int argc, char const *argv[]) {
     // sf_show_heap();
 
     /* SF_FREE */
-    void *ptr = sf_malloc(12);
-    sf_free(ptr);
+    /* Teset Flushing */
+    // void *a = sf_malloc(130);
+    // void *b = sf_malloc(130);
+    // void *c = sf_malloc(130);
+    // void *d = sf_malloc(130);
+    // void *e = sf_malloc(130);
+    // void *f = sf_malloc(130);
+    // sf_free(a);
+    // sf_free(b);
+    // sf_free(c);
+    // sf_free(d);
+    // sf_free(e);
+    // sf_free(f);
+
+    // sf_show_heap();
+
+    /* Test Coalescing with Block going Directly to Main Free List */
+    // void *a = sf_malloc(200);
+    // void *b = sf_malloc(2000);
+    // void *c = sf_malloc(200);
+    // sf_malloc(320);
+
+    // sf_show_heap();
+
+    // sf_free(a);
+    // sf_show_heap();
+    // sf_free(c);
+    // sf_show_heap();
+    // sf_free(b);
+
+    // sf_show_heap();
+
+    // /* Test multiple Pages */
+    // sf_malloc(12928);
+    // sf_show_heap();
 
     sf_mem_fini();
 

@@ -16,13 +16,13 @@ void assert_free_block_count(size_t size, int count) {
     int cnt = 0;
     sf_block *bp = sf_free_list_head.body.links.next;
     while(bp != &sf_free_list_head) {
-		if(size == 0 || size == (bp->header.block_size & BLOCK_SIZE_MASK))
-			cnt++;
-		bp = bp->body.links.next;
+			if(size == 0 || size == (bp->header.block_size & BLOCK_SIZE_MASK))
+				cnt++;
+			bp = bp->body.links.next;
     }
     for(int n = 0; n < NUM_QUICK_LISTS; n++) {
-		if(size == 0 || size == (n << 4) + MIN_BLOCK_SIZE)
-		cnt += sf_quick_lists[n].length;
+			if(size == 0 || size == (n << 4) + MIN_BLOCK_SIZE)
+				cnt += sf_quick_lists[n].length;
     }
     cr_assert_eq(cnt, count, "Wrong number of free blocks (exp=%d, found=%d)", count, cnt);
 }
@@ -217,7 +217,7 @@ Test(sf_memsuite_student, realloc_smaller_block_free_block, .init = sf_mem_init,
 //DO NOT DELETE THESE COMMENTS
 //############################################
 
-/* Test Allocating multiple pages & Coalescing */
+/* Test Allocating Multiple Pages & Coalescing */
 // Test(sf_memsuite_student, multi_page_alloc, .init = sf_mem_init, .fini = sf_mem_fini) {
 // 	void *ptr = sf_malloc(8116);
 
@@ -234,3 +234,7 @@ Test(sf_memsuite_student, realloc_smaller_block_free_block, .init = sf_mem_init,
 
 //     // sf_show_heap();
 // }
+
+/* Test No Coalescing When No Free Adjacent Blocks */
+
+/* Test Invalid Free Pointers */
