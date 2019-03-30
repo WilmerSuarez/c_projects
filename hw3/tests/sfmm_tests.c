@@ -217,33 +217,129 @@ Test(sf_memsuite_student, realloc_smaller_block_free_block, .init = sf_mem_init,
 //DO NOT DELETE THESE COMMENTS
 //############################################
 
-// /* Basic Allocating */
-// Test() {
+/* Allocating minimum Block size */
+Test(sf_memsuite_student, min_block_size_alloc, .init = sf_mem_init, .fini = sf_mem_fini) {
+	sf_errno = 0;
 
-// }
+	char* ptr = sf_malloc(7);
 
-/* Test Allocating Multiple Pages & Coalescing */
-// Test(sf_memsuite_student, multi_page_alloc, .init = sf_mem_init, .fini = sf_mem_fini) {
-// 	void *ptr = sf_malloc(8116);
+	/* Assure proper amount of space was allocated */
+	cr_assert((sf_mem_start() + PAGE_SZ == sf_mem_end())
+						&& (sf_mem_start() != sf_mem_end()), "Too much or no memory allocated");
 
-//     *ptr = 
+	ptr[0] = 'W';
+	ptr[1] = 'i';
+	ptr[2] = 'l';
+	ptr[3] = 'm';
+	ptr[4] = 'e';
+	ptr[5] = 'r';
+	ptr[6] = '\0';
+	cr_assert(!strcmp(ptr, "Wilmer"), "Space was not allocated properly");
 
-//     // sf_show_heap();
-// }
+	/* Assure Main Free List and Quick Lists are as expected */
+	assert_free_block_count(0, 1);
+	assert_free_block_count(4016, 1);
+	assert_quick_list_block_count(0, 0);
 
-// /* Test Block Splitting */
-// Test(sf_memsuite_student) {
-// 	void *ptr = sf_malloc(32);
+	/* No errors should have arrised from sf_malloc (sf_errno == 0) */
+	cr_assert(sf_errno == 0, "sf_errno != 0");
+}
 
-//     *ptr = 
+/* Allocating Multiple Pages & Coalescing */
+Test(sf_memsuite_student, multi_page_alloc, .init = sf_mem_init, .fini = sf_mem_fini) {
+	sf_errno = 0;
 
-//     // sf_show_heap();
-// }
+	void *ptr = sf_malloc(PAGE_SZ * 2);
 
-/* Test No Coalescing When No Free Adjacent Blocks */
+	/* Assure proper amount of space was allocated */
+	cr_assert((sf_mem_start() + PAGE_SZ * 3 == sf_mem_end())
+						&& (sf_mem_start() != sf_mem_end()), "Too much or no memory allocated");
 
-/* Test Invalid Free Pointers */
+	/* Assure Main Free List and Quick Lists are as expected */
+	assert_free_block_count(0, 1);
+	assert_free_block_count(4032, 1);
+	assert_quick_list_block_count(0, 0);
 
-/* Test equal data after Realloc */
+	sf_free(ptr);
 
-/* Realloc to same size */
+	/* Assure blocks were Coalesced after freeing */
+	assert_free_block_count(0, 1);
+	assert_free_block_count(12240, 1);
+	assert_quick_list_block_count(0, 0);
+
+	/* No errors should have arrised from sf_malloc (sf_errno == 0) */
+	cr_assert(sf_errno == 0, "sf_errno != 0");
+}
+
+/* Flushing */
+Test(sf_memsuite_student, flush_quick_list, .init = sf_mem_init, .fini = sf_mem_fini) {
+	sf_errno = 0;
+
+	void *a = sf_malloc(130);
+	void *b = sf_malloc(130);
+	void *c = sf_malloc(130);
+	void *d = sf_malloc(130);
+	void *e = sf_malloc(130);
+	void *f = sf_malloc(130);
+	sf_free(a);
+	sf_free(b);
+	sf_free(c);
+	sf_free(d);
+	sf_free(e);
+
+	/* Assure Main Free List and Quick Lists are as expected */
+	assert_free_block_count(0, 6);
+	assert_free_block_count(3184, 1);
+	assert_quick_list_block_count(144, 5);
+
+	/* Flushing occurs after freeing the 6th pointer */
+	sf_free(f);
+
+	/* Assure Quick Lists were Flushed and Coalesced */
+	assert_free_block_count(0, 3);
+	assert_free_block_count(720, 1);
+	assert_free_block_count(3184, 1);
+	assert_quick_list_block_count(144, 1);
+}
+
+/* Test Coalescing with Block going Directly to Main Free List after Freeing */
+Test(sf_memsuite_student, main_free_coalesce, .init = sf_mem_init, .fini = sf_mem_fini) {
+	void *a = sf_malloc(200);
+	void *b = sf_malloc(2000);
+	void *c = sf_malloc(200);
+	sf_malloc(320);
+
+	sf_free(a);
+	sf_free(c);
+	sf_free(b);
+
+	/* Assure Main Free List and Quick Lists are as expected */
+	assert_free_block_count(0, 2);
+	assert_free_block_count(2432, 1);
+	assert_free_block_count(1280, 1);
+}
+
+/* Equal data after Reallocing Larger and Smaller*/
+Test(sf_memsuite_student, equal_data_after_realloc, .init = sf_mem_init, .fini = sf_mem_fini) {
+	char str[] = "Wilmer, I'm still here.";
+	char* ptr = sf_malloc(24);
+	strcpy(ptr, str);
+
+	/* Realloc to a larger block size */
+	ptr = sf_realloc(ptr, 100);
+	
+	/* Assure data is still instact */
+	cr_assert(!strcmp(ptr, str), "Reallocation failed to preserve data when growing size");
+
+	/* Realloc to a smaller block size */
+	ptr = sf_realloc(ptr, 30);
+
+	/* Data will now be incorrect */
+	cr_assert(!strcmp(ptr, str), "Reallocation failed to preserve data when shrinking size");
+	
+	/* Assure Main Free List and Quick Lists are as expected */
+	assert_free_block_count(0, 2);
+	assert_free_block_count(3968, 1);
+	assert_quick_list_block_count(32, 1);	
+}
+

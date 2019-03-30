@@ -394,7 +394,7 @@ sf_malloc(size_t size) {
             insert_main(c_block);
         }
     }
-    
+
     return &a_block->body.payload;
 }
 
@@ -578,7 +578,12 @@ sf_realloc(void *pp, size_t rsize) {
 
         /* Update new block header */
         new_block->header.requested_size = rsize;
-        new_block->header.block_size = new_size;
+        if(new_block->header.block_size & PREV_BLOCK_ALLOCATED) {
+            new_block->header.block_size = new_size; 
+            new_block->header.block_size |= PREV_BLOCK_ALLOCATED;
+        } else {    
+            new_block->header.block_size = new_size; 
+        }
         new_block->header.block_size |= THIS_BLOCK_ALLOCATED;
 
         /* Free old block */
