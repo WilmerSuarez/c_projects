@@ -217,6 +217,11 @@ Test(sf_memsuite_student, realloc_smaller_block_free_block, .init = sf_mem_init,
 //DO NOT DELETE THESE COMMENTS
 //############################################
 
+// /* Basic Allocating */
+// Test() {
+
+// }
+
 /* Test Allocating Multiple Pages & Coalescing */
 // Test(sf_memsuite_student, multi_page_alloc, .init = sf_mem_init, .fini = sf_mem_fini) {
 // 	void *ptr = sf_malloc(8116);

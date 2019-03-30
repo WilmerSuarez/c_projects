@@ -28,24 +28,61 @@
  *     1 : alloc bit = quick_alloc
 */
 static void 
-init_free_block(unsigned bsize, sf_block *free_block, unsigned prev) {
+init_free_block(unsigned bsize, sf_block *free_block) {
     sf_header *footer; // Free Block Footer
 
     /* Setup Header */
-    free_block->header.block_size = bsize;
-    free_block->header.requested_size = 0;
-    /* prev_alloc Flag */
-    if(prev)
+    if(free_block->header.block_size & PREV_BLOCK_ALLOCATED) {
+        free_block->header.block_size = bsize; 
         free_block->header.block_size |= PREV_BLOCK_ALLOCATED;
-    else
-        free_block->header.block_size &= ~(2UL);
-    /* alloc Flag */
+    } else {    
+        free_block->header.block_size = bsize; 
+    }
+    free_block->header.requested_size = 0;
+    /* Clear alloc Flag */
     free_block->header.block_size &= ~(1UL);
 
     /* Setup Footer - Identical to Header */
     footer = (sf_header *)((void *)free_block+bsize-FOOTER_SIZE); 
     footer->block_size = free_block->header.block_size; 
     footer->requested_size = free_block->header.requested_size; 
+}
+
+/*
+ * Clear or Set the prev_alloc flag of the block
+ * after the one pointed to by block_ptr.
+ * 
+ * @param block_ptr : pointer of previous block
+ * @param cs        : 
+ *     0 : clear prev_alloc flag
+ *     1 : set prev_alloc flag
+*/
+static void
+set_clear_prev_alloc(sf_header *block_ptr, unsigned bsize, unsigned cs) {
+    /* Pointer to header of the block being updated */
+    sf_header *h = ((sf_header *)((void*)block_ptr + bsize)); 
+    /* Pointer to footer of the block being updated */
+    sf_header *f = (sf_header *)((void *)h + (h->block_size & BLOCK_SIZE_MASK) - FOOTER_SIZE);
+
+    if(cs) {
+        /* Header Update */
+        h->block_size |= PREV_BLOCK_ALLOCATED;
+        
+        /* Is block Free? */
+        if(!(h->block_size & 1UL)) {
+            /* Footer Update */
+            f->block_size |= PREV_BLOCK_ALLOCATED;
+        }
+    } else {
+        /* Header Update */
+        h->block_size &= ~(PREV_BLOCK_ALLOCATED);
+
+        /* Is block Free? */
+        if(!(h->block_size & 1UL)) {
+            /* Footer Update */
+            f->block_size &= ~(PREV_BLOCK_ALLOCATED);
+        }
+    }
 }
 
 /*
@@ -114,12 +151,15 @@ remove_main(sf_block *free_block) {
  * @param : block_ptr      : Pointer to the Block being Split
  * @param : bsize          : Size of Allocation Request (with padding)
  * @param : requested_size : Size of orignal Allocation Request
+ * @param : alloc          : Block to be split is :
+ *     0 : free
+ *     1 : allocated
  * 
  * @returns : NULL : If block cannot be split due to splinter
  * @returns : Address to remainder of block after splitting
 */
 static void *
-split_block(sf_block *block_ptr, unsigned bsize, unsigned requested_size) {
+split_block(sf_block *block_ptr, unsigned bsize, unsigned requested_size, unsigned alloc) {
     unsigned r_flag = 0; // Flag signaling a New Free Block (splitting successful)
 
     /* Make sure Splitting wont cause a Splinter */
@@ -131,11 +171,20 @@ split_block(sf_block *block_ptr, unsigned bsize, unsigned requested_size) {
     }
 
     /* Setup Allocated Block Header */
-    block_ptr->header.block_size = bsize; // New block size
-    /* Block is now allcoated */
-    block_ptr->header.block_size |= THIS_BLOCK_ALLOCATED | PREV_BLOCK_ALLOCATED; 
+    /* Preserve prev_alloc flag */
+    if(block_ptr->header.block_size & PREV_BLOCK_ALLOCATED) {
+        block_ptr->header.block_size = bsize; 
+        block_ptr->header.block_size |= PREV_BLOCK_ALLOCATED;
+    } else {    
+        block_ptr->header.block_size = bsize; 
+    }
     block_ptr->header.requested_size = requested_size; 
+    /* Block is now allcoated */
+    block_ptr->header.block_size |= THIS_BLOCK_ALLOCATED;
 
+    /* Update next block prev_alloc flag (set) */
+    set_clear_prev_alloc((sf_header *)block_ptr, bsize, 1);
+    
     return (r_flag) ? ((void *)block_ptr + bsize) : NULL;
 }
 
@@ -170,12 +219,15 @@ search_main(unsigned bsize, unsigned requested_size) {
         remove_main(block_ptr);
 
         /* Split the Block if possible */
-        if(!(new_free_block = (sf_block *)split_block(block_ptr, bsize, requested_size))) {
+        if(!(new_free_block = (sf_block *)split_block(block_ptr, bsize, requested_size, 0))) {
             /* Spliting not possible - return Full Block */
             return block_ptr;
         } else {
             /* Initialze the remainder as a Free Block */
-            init_free_block(bsize_cpy-bsize, new_free_block, 1);
+            init_free_block(bsize_cpy-bsize, new_free_block);
+
+            /* Update next block prev_alloc flag (clear) */
+            set_clear_prev_alloc((sf_header *)new_free_block, bsize_cpy-bsize, 0);
 
             /* Insert remainder back into the Main Free List */
             insert_main(new_free_block);
@@ -223,8 +275,10 @@ coalesce(sf_block *block_ptr) {
     }
 
     /* Initialize the Coalesced Block to a free block*/
-    init_free_block((old_size+size_preceding+size_following), new_free_block, 
-                    (new_free_block->header.block_size & ~(BLOCK_SIZE_MASK)) >> 1);
+    init_free_block((old_size+size_preceding+size_following), new_free_block);
+
+    /* Update next block prev_alloc flag (clear) */
+    set_clear_prev_alloc((sf_header *)new_free_block, old_size+size_preceding+size_following, 0);
 
     return new_free_block;
 }
@@ -274,12 +328,18 @@ sf_malloc(size_t size) {
         epilogue = sf_mem_end()-sizeof(sf_epilogue);
         epilogue->header.block_size = 0;
         epilogue->header.block_size |= THIS_BLOCK_ALLOCATED;
-
+        
         /* Initialze the rest of the page as a Free Block*/
         f_bsize = (sf_mem_end()-sizeof(sf_epilogue))-(sf_mem_start()+sizeof(sf_prologue));
         free_block = sf_mem_start()+sizeof(sf_prologue);
-        init_free_block(f_bsize, free_block, 1);
+        init_free_block(f_bsize, free_block);
 
+        /* Update next block prev_alloc flag (set) */
+        set_clear_prev_alloc((sf_header *)prologue, sizeof(sf_prologue), 1);
+
+        /* Update next block prev_alloc flag (clear) */
+        set_clear_prev_alloc((sf_header *)free_block, f_bsize, 0);
+        
         /* Initialize Main Free List */
         sf_free_list_head.body.links.next = &sf_free_list_head;
         sf_free_list_head.body.links.prev = &sf_free_list_head;
@@ -298,7 +358,7 @@ sf_malloc(size_t size) {
             remove_quick(quick_i);
     } else {
     /* ==================== MAIN FREE LIST ==================== */
-    /* Find first fit in the Main Free List */
+        /* Find first fit in the Main Free List */
         while(!(a_block = search_main(bsize, size))) {
             /* Big enough block not found - Get more memory */
             sf_block *new_free_block = NULL;   // New Free Block to be inserted to Main Free List
@@ -322,7 +382,10 @@ sf_malloc(size_t size) {
 
             /* Initialze the rest of the page as a Free Block */
             f_bsize = ((sf_mem_end()-sizeof(sf_epilogue)) - (void*)new_free_block) ;
-            init_free_block(f_bsize, new_free_block, 0);
+            init_free_block(f_bsize, new_free_block);
+
+            /* Update next block prev_alloc flag (clear) */
+            set_clear_prev_alloc((sf_header *)new_free_block, f_bsize, 0);
 
             /* Coalesce the newly created Free Block with the Preceding Free Block */
             sf_block *c_block = coalesce(new_free_block);
@@ -401,28 +464,6 @@ insert_quick(unsigned quick_i, sf_block *new_block) {
     sf_quick_lists[quick_i].length++; 
 }
 
-/*
- * Clear the next block's prev_alloc flag once
- * "fb" has been freed.
- * 
- * @param : fb : The block directly before the block being updated
- * 
-*/
-static void
-update_prev_alloc_status(sf_block *fb) {
-    /* Pointer to header or footer of the block being updated */
-    sf_header *hf = ((sf_header *)((void*)fb + (fb->header.block_size & BLOCK_SIZE_MASK))); 
-
-    /* Header Update */
-    hf->block_size &= ~(2UL);
-
-    /* Is block Free? */
-    if(!(hf->block_size & 1UL)) {
-        /* Footer Update */
-        ((sf_header *)((void *)hf + hf->block_size - FOOTER_SIZE))->block_size &= ~(2UL);
-    }
-}
-
 void 
 sf_free(void *pp) {
     /* ==================== ARGUMENT VALIDATION ==================== */
@@ -460,8 +501,7 @@ sf_free(void *pp) {
                 rm_q = remove_quick(quick_i);
 
                 /* Initialize as a Free Block */
-                init_free_block(bsize, rm_q, 
-                    (rm_q->header.block_size & ~(BLOCK_SIZE_MASK)) >> 1);
+                init_free_block(bsize, rm_q);
 
                 /* Coalesce with adjacent Blocks & */
                 /* Insert into Main Free List */
@@ -470,9 +510,6 @@ sf_free(void *pp) {
                 } else {
                     insert_main(rm_q);
                 }
-
-                /* Clear next block's prev_alloc flag */
-                update_prev_alloc_status(rm_q);
             }           
         }
 
@@ -484,17 +521,13 @@ sf_free(void *pp) {
 
     /* ==================== MAIN FREE LIST ==================== */
     /* Free the Block */
-    init_free_block(bsize, block_ptr, 
-        (block_ptr->header.block_size & ~(BLOCK_SIZE_MASK)) >> 1);
-    
+    init_free_block(bsize, block_ptr);
+
     /* Coalesce with adjacent Blocks */
     new_free_block = coalesce(block_ptr);
 
     /* Add to Main Free List */
     insert_main(new_free_block);
-
-    /* Clear next block prev_alloc flag */
-    update_prev_alloc_status(new_free_block);
 }
 
 void *
@@ -555,12 +588,12 @@ sf_realloc(void *pp, size_t rsize) {
         sf_block *new_free_block = NULL; // Remainder of Split Block
 
         /* Attempty to split the Block */
-        if(!(new_free_block = split_block(old_block, new_size, rsize))) {
+        if(!(new_free_block = split_block(old_block, new_size, rsize, 1))) {
             return &old_block->body.payload;
         }
 
         /* Initialze the remainder as a Free Block */
-        init_free_block(old_size-new_size, new_free_block, 1);
+        init_free_block(old_size-new_size, new_free_block);
 
         /* Coalesce the split remainder */
         sf_block* new_c = coalesce(new_free_block);

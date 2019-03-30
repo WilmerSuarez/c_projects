@@ -98,7 +98,9 @@ int main(int argc, char const *argv[]) {
     // sf_show_heap();
 
     void *a = sf_malloc(500);
+    sf_show_heap();
     void *b = sf_malloc(1285);
+    sf_show_heap();
     void *c = sf_malloc(500);
     sf_show_heap();
     sf_free(a);
