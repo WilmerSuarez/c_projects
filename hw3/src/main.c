@@ -5,6 +5,7 @@ int main(int argc, char const *argv[]) {
     sf_mem_init();
     
     /* SF_MALLOC */
+
     // /* Test Allocating minimum Block size */
     // double* ptr = sf_malloc(sizeof(double));
     // sf_show_heap();
@@ -28,6 +29,16 @@ int main(int argc, char const *argv[]) {
     // sf_show_heap();
 
     /* SF_FREE */
+
+    /* Free Quick */
+    // sf_malloc(8);
+    // void *y = sf_malloc(32);
+    // sf_malloc(1);
+
+    // sf_show_heap();
+
+    // sf_free(y);
+
     /* Teset Flushing */
     // void *a = sf_malloc(130);
     // void *b = sf_malloc(130);
@@ -63,6 +74,38 @@ int main(int argc, char const *argv[]) {
     // /* Test multiple Pages */
     // sf_malloc(12928);
     // sf_show_heap();
+
+    /* SF_REALLOC */
+    /* Growing */
+    // void *a = sf_malloc(500);
+    // void *b = sf_malloc(1285);
+    // void *c = sf_malloc(4);
+    // sf_show_heap();
+    // sf_free(a);
+    // sf_free(b);
+    // sf_show_heap();
+    // sf_realloc(c, 40);
+    // sf_show_heap();
+
+    // sf_show_heap();
+
+    // sf_free(x);
+
+    /* Shrinking */
+    // void *a = sf_malloc(sizeof(int) * 8);
+    // a = sf_realloc(a, sizeof(char));
+
+    // sf_show_heap();
+
+    void *a = sf_malloc(500);
+    void *b = sf_malloc(1285);
+    void *c = sf_malloc(500);
+    sf_show_heap();
+    sf_free(a);
+    sf_free(b);
+    sf_show_heap();
+    sf_realloc(c, 400);
+    sf_show_heap();
 
     sf_mem_fini();
 

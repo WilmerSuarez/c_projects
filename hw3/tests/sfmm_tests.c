@@ -238,3 +238,7 @@ Test(sf_memsuite_student, realloc_smaller_block_free_block, .init = sf_mem_init,
 /* Test No Coalescing When No Free Adjacent Blocks */
 
 /* Test Invalid Free Pointers */
+
+/* Test equal data after Realloc */
+
+/* Realloc to same size */
