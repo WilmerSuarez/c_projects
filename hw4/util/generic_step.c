@@ -14,7 +14,6 @@
  */
 
 int main(int argc, char *argv[]) {
-    int c;
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     srandom((unsigned int)ts.tv_nsec);
@@ -24,12 +23,13 @@ int main(int argc, char *argv[]) {
 	    ts.tv_sec-1553700000, ts.tv_nsec % 1000,
 	    getpid(), delay, argv[0]);
     for(int i = 1; i < argc; i++) {
-	fprintf(stderr, " %s", argv[i]);
+	    fprintf(stderr, " %s", argv[i]);
     }
     fprintf(stderr, "\n");
     if(argc > 1 && !strcmp(argv[1], "-")) {
-	while((c = getchar()) != EOF)
-	    putchar(c);
+        int c;
+	    while((c = getchar()) != EOF)
+	        putchar(c);
     }
     sleep(delay);
     clock_gettime(CLOCK_REALTIME, &ts);
