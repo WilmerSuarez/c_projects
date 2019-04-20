@@ -21,7 +21,7 @@ DFLAGS := -g -DDEBUG -DCOLOR
 PRINT_STAMENTS := -DERROR -DSUCCESS -DWARN -DINFO
 
 TEST_LIB := -lcriterion
-LIBS := lib/cookbook_parser.o
+LIBS := lib/cookbook_parser.o -lpthread
 
 EXEC := cook
 TEST_EXEC := $(EXEC)_tests

@@ -17,13 +17,13 @@ int main(int argc, char *argv[]) {
                 max_cooks = strtol(optarg, NULL, 10);
                 if(max_cooks <= 0) { // Max cooks cannot be 0 or negative
                     fprintf(stderr, "Invalid Cook count: %d\n", max_cooks);
-                    exit(1);
+                    exit(ARG_ERROR);
                 }
             break;
             case '?':
             default:
             fprintf(stderr, USAGE); // Usage of the program
-            exit(1);
+            exit(ARG_ERROR);
         }
     }
     /* Get the Main Recipe Name (if supplied) */
@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
         main_recipe = argv[optind];
 
     /* ==================== START COOKING! ==================== */
-    if(!cook()) {
-      exit(0);
+    if(!(exit_code = cook())) {
+      exit(EXIT_SUCCESS);
     }   
 
-    exit(1);
+    exit(exit_code);
 }

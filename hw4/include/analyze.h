@@ -3,14 +3,6 @@
 
 #include "cookbook.h"
 
-/* ==================== RECIPE STATES ==================== */
-typedef enum states {
-    NEEDED,
-    PROCESSING,
-    FAILED,
-    COMPLETED
-} STATES;
-
 /* Linked list of the main_recipe dependencies */
 typedef struct node {
     RECIPE *recipe;    // Recipe
@@ -31,6 +23,15 @@ NODE *list_head;
 */
 void
 analyize_recipe(const char *main_recipe, const COOKBOOK *cb);
+
+/*
+ * Removes the entry at the beginning of the "leaf" list
+ * 
+ * @returns : RECIPE * : Pointer to the recipe in the removed,
+ *                       list entry, or NULL if list if empty
+*/
+RECIPE *
+remove_head();
 
 #endif /* ANALYZE_H */
 

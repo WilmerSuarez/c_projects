@@ -2,9 +2,14 @@
 #include <string.h>
 #include "debug.h"
 #include "analyze.h"
+#include "cook.h"
 
 /*
- * Create a node with the given recipe 
+ * Create a "leaf" list node with the given recipe 
+ * 
+ * @param : recipe : the recipe to be integrated in the node
+ * 
+ * @returns : NODE * : A pointer to the newly created node
 */
 static NODE *
 create_node(RECIPE *recipe) {
@@ -18,7 +23,6 @@ create_node(RECIPE *recipe) {
  * Add next "leaf" recipe to the intitial list
  * to be used in the work queue
  * 
- * @param : head   : Reference to the head of the list
  * @param : recipe : Recipe to add to the "leaf" list
 */
 static void
@@ -40,6 +44,31 @@ add_to_list(RECIPE *recipe) {
 }
 
 /*
+ * Removes the entry at the beginning of the "leaf" list
+ * 
+ * @returns : RECIE * : Recipe from the removed entry
+*/
+RECIPE *
+remove_head() {
+    /* If list is empty */
+    if(!list_head) {
+        // Do nothing
+    } else {
+        NODE *prev = list_head;
+        RECIPE *recipe = prev->recipe;
+        
+        /* Next entry in list is new head */
+        list_head = list_head->next;
+
+        free(prev); // Remove the old head
+
+        return recipe;
+    }
+
+    return NULL;
+}
+
+/*
  * Mark the required recipe dependencies needed by the 
  * main recipe.
  * Create a list of all the "needed"
@@ -56,7 +85,7 @@ create_list(RECIPE *current_recipe) {
 
     /* Mark recipe as "required" by the main recipe */
     unsigned *state = (unsigned *)malloc(sizeof(unsigned));
-    *state = NEEDED; /* 0 = NEEDED state */
+    *state = REQUIRED; /* 0 = NEEDED state */
     current_recipe->state = state;
 
     /* 
@@ -64,21 +93,15 @@ create_list(RECIPE *current_recipe) {
         its dependency list
     */
     RECIPE_LINK *r = current_recipe->this_depends_on;
+
+    /* Add "leaves" (recipes with no dependencies) to the list */
     if(!r) 
-        /* Add "leaves" to the list */
         add_to_list(current_recipe);
+    
+    /* Recursively traverse the dependencies */
     while(r != NULL) { 
-        /* Recursively traverse the dependencies */
         create_list(r->recipe);
         r = r->next;
-    }
-}
-
-void
-print(NODE *list) {
-    while(list != NULL) {
-        debug("%s : state : %d", list->recipe->name, *((unsigned *)list->recipe->state));
-        list = list->next;
     }
 }
 
@@ -94,12 +117,10 @@ analyize_recipe(const char *main_recipe, const COOKBOOK *cb) {
     RECIPE *r = cb->recipes; // Recipe list traversal pointer
     while(r != NULL) {
         if(!strcmp(r->name, main_recipe)) {
-            /* ==================== "ANALYZE" & CREATE LIST ==================== */
+            /* ==================== ANALYZE & CREATE "LEAF" LIST ==================== */
             create_list(r);
             break;
         }
         r = r->next;
     } 
-
-    print(list_head);
 }

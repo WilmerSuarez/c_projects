@@ -4,10 +4,7 @@
 #include "cookbook.h"
 #include "cook.h"
 #include "analyze.h"
-#include "processing.h"
-
-#define RED "\x1B[31m"
-#define WHT "\x1B[37m"
+#include "recipe_processing.h"
 
 /* Maximum Number of Concurrent Processes is Initially 1 */
 int max_cooks = 1;      
@@ -45,7 +42,7 @@ validate_main_recipe(COOKBOOK *cb) {
     }
    
     if(!found) { /* Provided recipe is not in cookbook recipe list */
-        fprintf(stderr, "%sGiven recipe does not exist\n%s%s", RED, WHT, USAGE);
+        fprintf(stderr, "%sGiven recipe does not exist\n%s%s", KRED, KWHT, USAGE);
         return 1;
     }
 
@@ -63,6 +60,14 @@ free_cookbook(COOKBOOK *cb) {
 }
 
 /*
+ *
+*/
+static void
+free_work_queue(WQ_NODE *queue) {
+
+}
+
+/*
  * The function performs the necessary tasks 
  * needed to "cook" the main recipe given.
 */
@@ -70,16 +75,17 @@ int
 cook() {
     /* ==================== COOKBOOK PARSING ==================== */
     COOKBOOK *cb;
-    FILE *cb_file; // File pointer to given coobook
-    int err = 0;   // Parser error flag
+    FILE *cb_file;     // File pointer to given coobook
+    int err = 0;       // Parser error flag
+
     if(!(cb_file = fopen(cookbook, "r"))) {
-        fprintf(stderr, "%sCannot open cookbook\n%s%s", RED, WHT, USAGE);
+        fprintf(stderr, "%sCannot open cookbook\n%s%s", KRED, KWHT, USAGE);
         return 1;
     }
     cb = parse_cookbook(cb_file, &err);
     fclose(cb_file); // Finished parsing cookbook
     if(err) {
-        fprintf(stderr, "%sError parsing cookbook\n%s%s", RED, WHT, USAGE);
+        fprintf(stderr, "%sError parsing cookbook\n%s%s", KRED, KWHT, USAGE);
         return 1;
     } else {
         /* ===== VALIDATE MAIN RECIPE ===== */
@@ -94,14 +100,24 @@ cook() {
         analyize_recipe(main_recipe, cb);
 
         /* ==================== PROCESS RECIPES ==================== */
-        if(process_recipes())
-            return 1;
+        processing();
     }
 
-    /* ===== Free Cookbook & Lists ===== */
-    free_cookbook(cb);
-    //free_work_queue();
-    //free_list(list_head); // There might be some entries left (duplicates)
+    /* ===== FREE USED DATA STRUCTURES ===== */
+    free_cookbook(cb); // also free the states if they are not null
+    /* 
+        If Main Porcessing Loop exited abnormally, 
+        free the unused Work Queue entries 
+    */
+    if(exit_code)
+        free_work_queue(work_head);
 
-    return 0;
+    /* Handle Error code */
+    switch(exit_code) {
+        case FAILED_RECIPE:
+            //fprintf(stderr, "%sRecipe %s failed to cook\n", KRED);
+            break;
+    }
+
+    return exit_code;
 }
