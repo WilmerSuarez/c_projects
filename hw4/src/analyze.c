@@ -106,21 +106,45 @@ create_list(RECIPE *current_recipe) {
 }
 
 /*
+ * Checks to see if main_recipe is associated with
+ * any infinite cycles in the cookbook with other
+ * recipes
+ * 
+ * @param : recipe : main recipe
+ * 
+ * @return : 
+ *     0           : No cycle
+ *     CYCLE_ERROR : When an infinite cycle is found
+*/
+static int
+cycle_check(RECIPE *recipe) {
+    return 0;
+}
+
+/*
  * The function finds the main_recipe structure 
  * and traverses it's dependencies; marking them
  * as "needed" and created a list of all the "needed"
  * recipes that do not have their own dependencies
 */
-void
+int
 analyize_recipe(const char *main_recipe, const COOKBOOK *cb) {
     /* ==================== FIND ROOT ==================== */
     RECIPE *r = cb->recipes; // Recipe list traversal pointer
     while(r != NULL) {
         if(!strcmp(r->name, main_recipe)) {
             /* ==================== ANALYZE & CREATE "LEAF" LIST ==================== */
+            /* Check for infinite cycles */
+            if(cycle_check(r)) {
+                exit_code = CYCLE_ERROR;
+                fprintf(stderr, "%sInfinite cycle found in cookbook\n%s%s", KRED, KNRM, USAGE);
+                break;
+            }
             create_list(r);
             break;
         }
         r = r->next;
     } 
+
+    return exit_code;
 }

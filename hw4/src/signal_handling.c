@@ -9,77 +9,6 @@
 #include "recipe_pid_map.h"
 #include "cook.h"
 
-#include <string.h>
-static void sio_reverse(char s[])
-{
-    int c, i, j;
-
-    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
-        c = s[i];
-        s[i] = s[j];
-        s[j] = c;
-    }
-}
-
-static void sio_ltoa(long v, char s[], int b) 
-{
-    int c, i = 0;
-    int neg = v < 0;
-
-    if (neg)
-	v = -v;
-
-    do {  
-        s[i++] = ((c = (v % b)) < 10)  ?  c + '0' : c - 10 + 'a';
-    } while ((v /= b) > 0);
-
-    if (neg)
-	s[i++] = '-';
-
-    s[i] = '\0';
-    sio_reverse(s);
-}
-
-static size_t sio_strlen(char s[])
-{
-    int i = 0;
-
-    while (s[i] != '\0')
-        ++i;
-    return i;
-}
-
-ssize_t sio_puts(char s[]) /* Put string */
-{
-    return write(STDOUT_FILENO, s, sio_strlen(s)); //line:csapp:siostrlen
-}
-
-ssize_t sio_putl(long v) /* Put long */
-{
-    char s[128];
-    
-    sio_ltoa(v, s, 10); /* Based on K&R itoa() */  //line:csapp:sioltoa
-    return sio_puts(s);
-}
-
-ssize_t Sio_puts(char s[])
-{
-    ssize_t n;
-  
-    if ((n = sio_puts(s)) < 0) {}
-
-    return n;
-}
-
-ssize_t Sio_putl(long v)
-{
-    ssize_t n;
-  
-    if ((n = sio_putl(v)) < 0) {}
-
-    return n;
-}
-
 /*
  * Check if any recipies that depends on the 
  * given recipe are ready to be processed. Add
@@ -131,7 +60,7 @@ sigchld_handler(int sig) {
     __pid_t pid;          // Child processes ID
 
     /* Reap all child processes that completed a recipe */
-    while((pid = waitpid(-1, &status, 0)) > 0) {
+    while((pid = wait(&status)) > 0) {
         if(WIFEXITED(status)) {  // Check if child process exited normally 
             current_num_cooks--; // Decrement number of running child processes
 
@@ -147,20 +76,8 @@ sigchld_handler(int sig) {
             } else {
                 /* Recipe failed to cook */
                 *(unsigned *)recipe->state = FAILED;
+                exit_code = WEXITSTATUS(status);
             }
-            Sio_puts("Num Cooks: ");
-            Sio_putl((long)current_num_cooks);
-            Sio_puts("\n");
-            
-            Sio_puts("Child returned normally : PID : ");
-            Sio_putl((long)pid);
-            Sio_puts(" : Exit Status :  ");
-            Sio_putl((long)WEXITSTATUS(status));
-            Sio_puts("\n");
-
-            Sio_puts("Recipe: ");
-            Sio_puts(recipe->name);
-            Sio_puts("\n");
         } else {
             exit_code = FAILED_RECIPE;
         }

@@ -42,7 +42,7 @@ validate_main_recipe(COOKBOOK *cb) {
     }
    
     if(!found) { /* Provided recipe is not in cookbook recipe list */
-        fprintf(stderr, "%sGiven recipe does not exist\n%s%s", KRED, KWHT, USAGE);
+        fprintf(stderr, "%sGiven recipe does not exist\n%s%s", KRED, KNRM, USAGE);
         return 1;
     }
 
@@ -51,8 +51,6 @@ validate_main_recipe(COOKBOOK *cb) {
 
 /*
  * Free the Cookbook structure
- * 
- * @param : cb : Cookbook being free'd
 */
 static void
 free_cookbook(COOKBOOK *cb) {
@@ -60,7 +58,8 @@ free_cookbook(COOKBOOK *cb) {
 }
 
 /*
- *
+ * Free unused Work Queue nodes 
+ * after abnormal processing loop termination
 */
 static void
 free_work_queue(WQ_NODE *queue) {
@@ -79,13 +78,13 @@ cook() {
     int err = 0;       // Parser error flag
 
     if(!(cb_file = fopen(cookbook, "r"))) {
-        fprintf(stderr, "%sCannot open cookbook\n%s%s", KRED, KWHT, USAGE);
+        fprintf(stderr, "%sCannot open cookbook\n%s%s", KRED, KNRM, USAGE);
         return 1;
     }
     cb = parse_cookbook(cb_file, &err);
     fclose(cb_file); // Finished parsing cookbook
     if(err) {
-        fprintf(stderr, "%sError parsing cookbook\n%s%s", KRED, KWHT, USAGE);
+        fprintf(stderr, "%sError parsing cookbook\n%s%s", KRED, KNRM, USAGE);
         return 1;
     } else {
         /* ===== VALIDATE MAIN RECIPE ===== */
@@ -97,7 +96,9 @@ cook() {
             Create initial list for work queue & 
             "mark" the needed recipes in the cookbook 
         */
-        analyize_recipe(main_recipe, cb);
+        if(analyize_recipe(main_recipe, cb)) {
+            return exit_code;
+        }
 
         /* ==================== PROCESS RECIPES ==================== */
         processing();
@@ -111,13 +112,6 @@ cook() {
     */
     if(exit_code)
         free_work_queue(work_head);
-
-    /* Handle Error code */
-    switch(exit_code) {
-        case FAILED_RECIPE:
-            //fprintf(stderr, "%sRecipe %s failed to cook\n", KRED);
-            break;
-    }
 
     return exit_code;
 }

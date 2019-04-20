@@ -20,8 +20,12 @@ NODE *list_head;
  * 
  * @param : main_recipe : Recipe used as the root of the tree
  * @param : cb : Cookbook being traversed to create the tree
+ * 
+ * @return : 
+ *     0           : No cycle
+ *     CYCLE_ERROR : When an infinite cycle is found
 */
-void
+int
 analyize_recipe(const char *main_recipe, const COOKBOOK *cb);
 
 /*

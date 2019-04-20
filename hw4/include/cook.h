@@ -5,8 +5,14 @@
 #define USAGE "Usage: cook [-f cookbook] [-c max_cooks] [main_recipe_name]\n"
 
 /* ==================== EXIT CODES ==================== */
-#define ARG_ERROR     1 // Invalid Argument Error
-#define FAILED_RECIPE 2 // Recipe Failed to Cook Error
+#define ARG_ERROR           2 // Invalid Argument Error
+#define CYCLE_ERROR         3 // Infinite cycle in cookbook
+#define FAILED_RECIPE       4 // Recipe Failed to Cook Error
+#define INVALID_INPUT_FILE  5 // Input redirection file could not be open
+#define INVALID_OUTPUT_FILE 6 // Ouput redirection file could not be open
+#define PIPE_ERROR          7 // One of the pipe'd processes exited abnomally
+#define COMMAND_ERROR       8 // Invalid command
+
 unsigned exit_code;
 
 /* ==================== RECIPE STATES ==================== */

@@ -35,5 +35,26 @@ int main(int argc, char *argv[]) {
       exit(EXIT_SUCCESS);
     }   
 
+    /* Handle Error code */
+    switch(exit_code) {
+        case FAILED_RECIPE:
+            fprintf(stderr, "%sRecipe failed to cook\n", KRED);
+            break;
+        case INVALID_INPUT_FILE:
+            fprintf(stderr, "%sInvalid input redirection file\n", KRED);
+            break;
+        case INVALID_OUTPUT_FILE:
+            fprintf(stderr, "%sInvalid output redirection file\n", KRED);
+            break;
+        case PIPE_ERROR:
+            fprintf(stderr, "%sPipe'd process exited abnormally\n", KRED);
+            break;
+        case COMMAND_ERROR:
+            fprintf(stderr, "%sInvalid Command\n", KRED);
+            break;
+        default:
+            break;
+    }
+
     exit(exit_code);
 }
