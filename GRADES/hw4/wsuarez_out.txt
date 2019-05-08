@@ -1,0 +1,1215 @@
+Running test 1 run number 1 of 1, cookbook: welcome.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -m welcome -x "Welcome to cse320"
+Running  bin/cook -c 1 welcome
+stdout:
+ b'"Welcome to cse320"\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 2 run number 1 of 1, cookbook: basic_tasks_no_pipeline.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3561906.496, 18691, 3] say hello world\nEND\t[3561906.796, 18691, 3]\nSTART\t[3561906.797, 18692, 1] say welcome to cse320\nEND\t[3561906.897, 18692, 1]\nSTART\t[3561906.898, 18693, 6] say welcome again\nEND\t[3561907.498, 18693, 6]\n'
+rc:  0
+START	[3561906.496, 18691, 3] say hello world
+END	[3561906.796, 18691, 3]
+START	[3561906.797, 18692, 1] say welcome to cse320
+END	[3561906.897, 18692, 1]
+START	[3561906.898, 18693, 6] say welcome again
+END	[3561907.498, 18693, 6]
+SUCCESSFUL COMPLETION OF RECIPE: all
+
+
+
+
+Running test 3 run number 1 of 1, cookbook: basic_tasks_with_pipeline.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3561985.479, 19632, 5] say hello world\nSTART\t[3561985.479, 19633, 8] hear something\nSTART\t[3561985.479, 19634, 1] reply welcome to cse320\nEND\t[3561985.579, 19634, 1]\nEND\t[3561985.979, 19632, 5]\nEND\t[3561986.279, 19633, 8]\n'
+rc:  0
+START	[3561985.479, 19632, 5] say hello world
+START	[3561985.479, 19633, 8] hear something
+START	[3561985.479, 19634, 1] reply welcome to cse320
+END	[3561985.579, 19634, 1]
+END	[3561985.979, 19632, 5]
+END	[3561986.279, 19633, 8]
+SUCCESSFUL COMPLETION OF RECIPE: all
+
+
+
+
+Running test 4 run number 1 of 1, cookbook: basic_subrecipe_single_dep.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3562139.227, 20882, 1] say recipe3 done\nEND\t[3562139.327, 20882, 1]\nSTART\t[3562139.328, 20884, 2] say recipe2 done\nEND\t[3562139.528, 20884, 2]\nSTART\t[3562139.530, 20886, 1] say recipe1 done\nEND\t[3562139.630, 20886, 1]\nSTART\t[3562139.631, 20888, 9] say main recipe done\nEND\t[3562140.531, 20888, 9]\n'
+rc:  0
+START	[3562139.227, 20882, 1] say recipe3 done
+END	[3562139.327, 20882, 1]
+START	[3562139.328, 20884, 2] say recipe2 done
+END	[3562139.528, 20884, 2]
+START	[3562139.530, 20886, 1] say recipe1 done
+END	[3562139.630, 20886, 1]
+START	[3562139.631, 20888, 9] say main recipe done
+END	[3562140.531, 20888, 9]
+SUCCESSFUL COMPLETION OF RECIPE: main
+
+
+
+
+Running test 5 run number 1 of 3, cookbook: basic_subrecipe_multiple_deps.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3562916.136, 26109, 7] say recipe3 done\nEND\t[3562916.836, 26109, 7]\nSTART\t[3562916.837, 26114, 8] say recipe5 done\nEND\t[3562917.637, 26114, 8]\nSTART\t[3562917.638, 26116, 4] say recipe4 done\nEND\t[3562918.038, 26116, 4]\nSTART\t[3562918.039, 26121, 0] say recipe3 done\nEND\t[3562918.039, 26121, 0]\nSTART\t[3562918.039, 26123, 1] say recipe3 done\nEND\t[3562918.139, 26123, 1]\nSTART\t[3562918.140, 26125, 4] say main recipe done\nEND\t[3562918.540, 26125, 4]\n'
+rc:  0
+START	[3562916.136, 26109, 7] say recipe3 done
+END	[3562916.836, 26109, 7]
+START	[3562916.837, 26114, 8] say recipe5 done
+END	[3562917.637, 26114, 8]
+START	[3562917.638, 26116, 4] say recipe4 done
+END	[3562918.038, 26116, 4]
+START	[3562918.039, 26121, 0] say recipe3 done
+END	[3562918.039, 26121, 0]
+START	[3562918.039, 26123, 1] say recipe3 done
+END	[3562918.139, 26123, 1]
+START	[3562918.140, 26125, 4] say main recipe done
+END	[3562918.540, 26125, 4]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 5 run number 2 of 3, cookbook: basic_subrecipe_multiple_deps.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3562918.598, 26129, 4] say recipe3 done\nEND\t[3562918.998, 26129, 4]\nSTART\t[3562918.999, 26134, 3] say recipe5 done\nEND\t[3562919.299, 26134, 3]\nSTART\t[3562919.301, 26136, 3] say recipe4 done\nEND\t[3562919.601, 26136, 3]\nSTART\t[3562919.603, 26138, 1] say recipe3 done\nEND\t[3562919.704, 26138, 1]\nSTART\t[3562919.705, 26143, 4] say recipe3 done\nEND\t[3562920.105, 26143, 4]\nSTART\t[3562920.106, 26145, 8] say main recipe done\nEND\t[3562920.906, 26145, 8]\n'
+rc:  0
+START	[3562918.598, 26129, 4] say recipe3 done
+END	[3562918.998, 26129, 4]
+START	[3562918.999, 26134, 3] say recipe5 done
+END	[3562919.299, 26134, 3]
+START	[3562919.301, 26136, 3] say recipe4 done
+END	[3562919.601, 26136, 3]
+START	[3562919.603, 26138, 1] say recipe3 done
+END	[3562919.704, 26138, 1]
+START	[3562919.705, 26143, 4] say recipe3 done
+END	[3562920.105, 26143, 4]
+START	[3562920.106, 26145, 8] say main recipe done
+END	[3562920.906, 26145, 8]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 5 run number 3 of 3, cookbook: basic_subrecipe_multiple_deps.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3562920.957, 26152, 7] say recipe3 done\nEND\t[3562921.657, 26152, 7]\nSTART\t[3562921.658, 26154, 3] say recipe5 done\nEND\t[3562921.958, 26154, 3]\nSTART\t[3562921.960, 26159, 9] say recipe4 done\nEND\t[3562922.860, 26159, 9]\nSTART\t[3562922.861, 26164, 9] say recipe3 done\nEND\t[3562923.761, 26164, 9]\nSTART\t[3562923.762, 26170, 0] say recipe3 done\nEND\t[3562923.762, 26170, 0]\nSTART\t[3562923.763, 26172, 0] say main recipe done\nEND\t[3562923.763, 26172, 0]\n'
+rc:  0
+START	[3562920.957, 26152, 7] say recipe3 done
+END	[3562921.657, 26152, 7]
+START	[3562921.658, 26154, 3] say recipe5 done
+END	[3562921.958, 26154, 3]
+START	[3562921.960, 26159, 9] say recipe4 done
+END	[3562922.860, 26159, 9]
+START	[3562922.861, 26164, 9] say recipe3 done
+END	[3562923.761, 26164, 9]
+START	[3562923.762, 26170, 0] say recipe3 done
+END	[3562923.762, 26170, 0]
+START	[3562923.763, 26172, 0] say main recipe done
+END	[3562923.763, 26172, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 6 run number 1 of 3, cookbook: basic_subrecipe_multiple_deps.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3563678.000,  1274, 2] say recipe4 done\nSTART\t[3563678.000,  1272, 0] say recipe3 done\nSTART\t[3563678.000,  1273, 6] say recipe5 done\nEND\t[3563678.000,  1272, 0]\nEND\t[3563678.200,  1274, 2]\nEND\t[3563678.600,  1273, 6]\nSTART\t[3563678.601,  1279, 4] say recipe3 done\nEND\t[3563679.001,  1279, 4]\nSTART\t[3563679.002,  1281, 7] say recipe3 done\nEND\t[3563679.703,  1281, 7]\nSTART\t[3563679.705,  1287, 8] say main recipe done\nEND\t[3563680.505,  1287, 8]\n'
+rc:  0
+START	[3563678.000,  1274, 2] say recipe4 done
+START	[3563678.000,  1272, 0] say recipe3 done
+START	[3563678.000,  1273, 6] say recipe5 done
+END	[3563678.000,  1272, 0]
+END	[3563678.200,  1274, 2]
+END	[3563678.600,  1273, 6]
+START	[3563678.601,  1279, 4] say recipe3 done
+END	[3563679.001,  1279, 4]
+START	[3563679.002,  1281, 7] say recipe3 done
+END	[3563679.703,  1281, 7]
+START	[3563679.705,  1287, 8] say main recipe done
+END	[3563680.505,  1287, 8]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 6 run number 2 of 3, cookbook: basic_subrecipe_multiple_deps.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3563680.555,  1297, 2] say recipe5 done\nSTART\t[3563680.556,  1295, 6] say recipe3 done\nSTART\t[3563680.556,  1298, 6] say recipe4 done\nEND\t[3563680.756,  1297, 2]\nEND\t[3563681.156,  1295, 6]\nEND\t[3563681.156,  1298, 6]\nSTART\t[3563681.157,  1300, 9] say recipe3 done\nEND\t[3563682.057,  1300, 9]\nSTART\t[3563682.059,  1305, 5] say recipe3 done\nEND\t[3563682.560,  1305, 5]\nSTART\t[3563682.560,  1310, 3] say main recipe done\nEND\t[3563682.861,  1310, 3]\n'
+rc:  0
+START	[3563680.555,  1297, 2] say recipe5 done
+START	[3563680.556,  1295, 6] say recipe3 done
+START	[3563680.556,  1298, 6] say recipe4 done
+END	[3563680.756,  1297, 2]
+END	[3563681.156,  1295, 6]
+END	[3563681.156,  1298, 6]
+START	[3563681.157,  1300, 9] say recipe3 done
+END	[3563682.057,  1300, 9]
+START	[3563682.059,  1305, 5] say recipe3 done
+END	[3563682.560,  1305, 5]
+START	[3563682.560,  1310, 3] say main recipe done
+END	[3563682.861,  1310, 3]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 6 run number 3 of 3, cookbook: basic_subrecipe_multiple_deps.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3563682.921,  1318, 7] say recipe5 done\nSTART\t[3563682.921,  1319, 9] say recipe4 done\nSTART\t[3563682.921,  1315, 6] say recipe3 done\nEND\t[3563683.521,  1315, 6]\nEND\t[3563683.621,  1318, 7]\nEND\t[3563683.821,  1319, 9]\nSTART\t[3563683.823,  1328, 6] say recipe3 done\nEND\t[3563684.423,  1328, 6]\nSTART\t[3563684.424,  1334, 3] say recipe3 done\nEND\t[3563684.724,  1334, 3]\nSTART\t[3563684.725,  1336, 0] say main recipe done\nEND\t[3563684.725,  1336, 0]\n'
+rc:  0
+START	[3563682.921,  1318, 7] say recipe5 done
+START	[3563682.921,  1319, 9] say recipe4 done
+START	[3563682.921,  1315, 6] say recipe3 done
+END	[3563683.521,  1315, 6]
+END	[3563683.621,  1318, 7]
+END	[3563683.821,  1319, 9]
+START	[3563683.823,  1328, 6] say recipe3 done
+END	[3563684.423,  1328, 6]
+START	[3563684.424,  1334, 3] say recipe3 done
+END	[3563684.724,  1334, 3]
+START	[3563684.725,  1336, 0] say main recipe done
+END	[3563684.725,  1336, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 1 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3565771.485, 12650, 2] say recipe6 done\nSTART\t[3565771.485, 12651, 8] say recipe5 done\nEND\t[3565771.685, 12650, 2]\nEND\t[3565772.285, 12651, 8]\nSTART\t[3565772.287, 12658, 2] say recipe3 done\nSTART\t[3565772.288, 12657, 8] say recipe4 done\nEND\t[3565772.488, 12658, 2]\nEND\t[3565773.088, 12657, 8]\nSTART\t[3565773.089, 12663, 7] say recipe3 done\nEND\t[3565773.789, 12663, 7]\nSTART\t[3565773.790, 12669, 2] say recipe3 done\nEND\t[3565773.990, 12669, 2]\nSTART\t[3565773.991, 12671, 3] say main recipe done\nEND\t[3565774.292, 12671, 3]\n'
+rc:  0
+START	[3565771.485, 12650, 2] say recipe6 done
+START	[3565771.485, 12651, 8] say recipe5 done
+END	[3565771.685, 12650, 2]
+END	[3565772.285, 12651, 8]
+START	[3565772.287, 12658, 2] say recipe3 done
+START	[3565772.288, 12657, 8] say recipe4 done
+END	[3565772.488, 12658, 2]
+END	[3565773.088, 12657, 8]
+START	[3565773.089, 12663, 7] say recipe3 done
+END	[3565773.789, 12663, 7]
+START	[3565773.790, 12669, 2] say recipe3 done
+END	[3565773.990, 12669, 2]
+START	[3565773.991, 12671, 3] say main recipe done
+END	[3565774.292, 12671, 3]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 2 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3565774.350, 12676, 0] say recipe6 done\nEND\t[3565774.350, 12676, 0]\nSTART\t[3565774.350, 12677, 4] say recipe5 done\nEND\t[3565774.750, 12677, 4]\nSTART\t[3565774.752, 12683, 2] say recipe4 done\nSTART\t[3565774.753, 12684, 2] say recipe3 done\nEND\t[3565774.952, 12683, 2]\nEND\t[3565774.953, 12684, 2]\nSTART\t[3565774.955, 12686, 2] say recipe3 done\nEND\t[3565775.155, 12686, 2]\nSTART\t[3565775.156, 12688, 8] say recipe3 done\nEND\t[3565775.956, 12688, 8]\nSTART\t[3565775.958, 12693, 9] say main recipe done\nEND\t[3565776.859, 12693, 9]\n'
+rc:  0
+START	[3565774.350, 12676, 0] say recipe6 done
+END	[3565774.350, 12676, 0]
+START	[3565774.350, 12677, 4] say recipe5 done
+END	[3565774.750, 12677, 4]
+ERROR: recipes in queue waiting too long (recipes ready/cooking: 3, active cooks: 1, max cooks: 2)
+
+
+
+
+Running test 7 run number 3 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3565776.908, 12701, 2] say recipe6 done\nSTART\t[3565776.909, 12702, 0] say recipe5 done\nEND\t[3565776.909, 12702, 0]\nEND\t[3565777.108, 12701, 2]\nSTART\t[3565777.109, 12705, 0] say recipe4 done\nSTART\t[3565777.109, 12706, 5] say recipe3 done\nEND\t[3565777.110, 12705, 0]\nEND\t[3565777.610, 12706, 5]\nSTART\t[3565777.610, 12711, 5] say recipe3 done\nEND\t[3565778.111, 12711, 5]\nSTART\t[3565778.112, 12713, 1] say recipe3 done\nEND\t[3565778.212, 12713, 1]\nSTART\t[3565778.213, 12715, 3] say main recipe done\nEND\t[3565778.513, 12715, 3]\n'
+rc:  0
+START	[3565776.908, 12701, 2] say recipe6 done
+START	[3565776.909, 12702, 0] say recipe5 done
+END	[3565776.909, 12702, 0]
+END	[3565777.108, 12701, 2]
+START	[3565777.109, 12705, 0] say recipe4 done
+START	[3565777.109, 12706, 5] say recipe3 done
+END	[3565777.110, 12705, 0]
+END	[3565777.610, 12706, 5]
+START	[3565777.610, 12711, 5] say recipe3 done
+END	[3565778.111, 12711, 5]
+START	[3565778.112, 12713, 1] say recipe3 done
+END	[3565778.212, 12713, 1]
+START	[3565778.213, 12715, 3] say main recipe done
+END	[3565778.513, 12715, 3]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 1 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3566492.504, 18058, 7] say recipe5 done\nSTART\t[3566492.504, 18059, 3] say recipe6 done\nEND\t[3566492.804, 18059, 3]\nEND\t[3566493.204, 18058, 7]\nSTART\t[3566493.205, 18062, 8] say recipe4 done\nSTART\t[3566493.205, 18063, 1] say recipe3 done\nEND\t[3566493.305, 18063, 1]\nEND\t[3566494.005, 18062, 8]\nSTART\t[3566494.005, 18068, 3] say recipe3 done\nEND\t[3566494.306, 18068, 3]\nSTART\t[3566494.306, 18070, 5] say recipe3 done\nEND\t[3566494.806, 18070, 5]\nSTART\t[3566494.807, 18076, 1] say main recipe done\nEND\t[3566494.908, 18076, 1]\n'
+rc:  0
+START	[3566492.504, 18058, 7] say recipe5 done
+START	[3566492.504, 18059, 3] say recipe6 done
+END	[3566492.804, 18059, 3]
+END	[3566493.204, 18058, 7]
+START	[3566493.205, 18062, 8] say recipe4 done
+START	[3566493.205, 18063, 1] say recipe3 done
+END	[3566493.305, 18063, 1]
+END	[3566494.005, 18062, 8]
+START	[3566494.005, 18068, 3] say recipe3 done
+END	[3566494.306, 18068, 3]
+START	[3566494.306, 18070, 5] say recipe3 done
+END	[3566494.806, 18070, 5]
+START	[3566494.807, 18076, 1] say main recipe done
+END	[3566494.908, 18076, 1]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 2 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3566494.961, 18081, 1] say recipe6 done\nSTART\t[3566494.961, 18082, 6] say recipe5 done\nEND\t[3566495.061, 18081, 1]\nEND\t[3566495.561, 18082, 6]\nSTART\t[3566495.562, 18088, 1] say recipe4 done\nSTART\t[3566495.563, 18089, 2] say recipe3 done\nEND\t[3566495.662, 18088, 1]\nEND\t[3566495.763, 18089, 2]\nSTART\t[3566495.764, 18091, 9] say recipe3 done\nEND\t[3566496.664, 18091, 9]\nSTART\t[3566496.665, 18096, 2] say recipe3 done\nEND\t[3566496.865, 18096, 2]\nSTART\t[3566496.866, 18098, 1] say main recipe done\nEND\t[3566496.966, 18098, 1]\n'
+rc:  0
+START	[3566494.961, 18081, 1] say recipe6 done
+START	[3566494.961, 18082, 6] say recipe5 done
+END	[3566495.061, 18081, 1]
+END	[3566495.561, 18082, 6]
+START	[3566495.562, 18088, 1] say recipe4 done
+START	[3566495.563, 18089, 2] say recipe3 done
+END	[3566495.662, 18088, 1]
+END	[3566495.763, 18089, 2]
+START	[3566495.764, 18091, 9] say recipe3 done
+END	[3566496.664, 18091, 9]
+START	[3566496.665, 18096, 2] say recipe3 done
+END	[3566496.865, 18096, 2]
+START	[3566496.866, 18098, 1] say main recipe done
+END	[3566496.966, 18098, 1]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 3 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3566497.022, 18103, 2] say recipe6 done\nSTART\t[3566497.022, 18104, 9] say recipe5 done\nEND\t[3566497.222, 18103, 2]\nEND\t[3566497.922, 18104, 9]\nSTART\t[3566497.923, 18110, 0] say recipe3 done\nEND\t[3566497.923, 18110, 0]\nSTART\t[3566497.924, 18111, 3] say recipe4 done\nEND\t[3566498.224, 18111, 3]\nSTART\t[3566498.225, 18113, 2] say recipe3 done\nEND\t[3566498.425, 18113, 2]\nSTART\t[3566498.426, 18118, 2] say recipe3 done\nEND\t[3566498.626, 18118, 2]\nSTART\t[3566498.627, 18120, 4] say main recipe done\nEND\t[3566499.027, 18120, 4]\n'
+rc:  0
+START	[3566497.022, 18103, 2] say recipe6 done
+START	[3566497.022, 18104, 9] say recipe5 done
+END	[3566497.222, 18103, 2]
+END	[3566497.922, 18104, 9]
+START	[3566497.923, 18110, 0] say recipe3 done
+END	[3566497.923, 18110, 0]
+START	[3566497.924, 18111, 3] say recipe4 done
+END	[3566498.224, 18111, 3]
+ERROR: recipes in queue waiting too long (recipes ready/cooking: 2, active cooks: 1, max cooks: 2)
+
+
+
+
+Running test 7 run number 1 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3567477.580, 27037, 3] say recipe6 done\nSTART\t[3567477.580, 27038, 8] say recipe5 done\nEND\t[3567477.880, 27037, 3]\nEND\t[3567478.380, 27038, 8]\nSTART\t[3567478.381, 27046, 3] say recipe3 done\nSTART\t[3567478.381, 27047, 8] say recipe4 done\nEND\t[3567478.681, 27046, 3]\nEND\t[3567479.181, 27047, 8]\nSTART\t[3567479.182, 27052, 6] say recipe3 done\nEND\t[3567479.783, 27052, 6]\nSTART\t[3567479.785, 27054, 3] say recipe3 done\nEND\t[3567480.085, 27054, 3]\nSTART\t[3567480.086, 27059, 1] say main recipe done\nEND\t[3567480.186, 27059, 1]\n'
+rc:  0
+START	[3567477.580, 27037, 3] say recipe6 done
+START	[3567477.580, 27038, 8] say recipe5 done
+END	[3567477.880, 27037, 3]
+END	[3567478.380, 27038, 8]
+START	[3567478.381, 27046, 3] say recipe3 done
+START	[3567478.381, 27047, 8] say recipe4 done
+END	[3567478.681, 27046, 3]
+END	[3567479.181, 27047, 8]
+START	[3567479.182, 27052, 6] say recipe3 done
+END	[3567479.783, 27052, 6]
+START	[3567479.785, 27054, 3] say recipe3 done
+END	[3567480.085, 27054, 3]
+START	[3567480.086, 27059, 1] say main recipe done
+END	[3567480.186, 27059, 1]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 2 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3567480.236, 27064, 6] say recipe6 done\nSTART\t[3567480.236, 27065, 0] say recipe5 done\nEND\t[3567480.236, 27065, 0]\nEND\t[3567480.836, 27064, 6]\nSTART\t[3567480.837, 27068, 7] say recipe4 done\nSTART\t[3567480.838, 27069, 1] say recipe3 done\nEND\t[3567480.938, 27069, 1]\nEND\t[3567481.537, 27068, 7]\nSTART\t[3567481.539, 27074, 1] say recipe3 done\nEND\t[3567481.639, 27074, 1]\nSTART\t[3567481.640, 27076, 7] say recipe3 done\nEND\t[3567482.340, 27076, 7]\nSTART\t[3567482.341, 27081, 5] say main recipe done\nEND\t[3567482.841, 27081, 5]\n'
+rc:  0
+START	[3567480.236, 27064, 6] say recipe6 done
+START	[3567480.236, 27065, 0] say recipe5 done
+END	[3567480.236, 27065, 0]
+END	[3567480.836, 27064, 6]
+START	[3567480.837, 27068, 7] say recipe4 done
+START	[3567480.838, 27069, 1] say recipe3 done
+END	[3567480.938, 27069, 1]
+END	[3567481.537, 27068, 7]
+START	[3567481.539, 27074, 1] say recipe3 done
+END	[3567481.639, 27074, 1]
+START	[3567481.640, 27076, 7] say recipe3 done
+END	[3567482.340, 27076, 7]
+START	[3567482.341, 27081, 5] say main recipe done
+END	[3567482.841, 27081, 5]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 7 run number 3 of 3, cookbook: more_than_max_cook_parallelism.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3567482.898, 27089, 5] say recipe6 done\nSTART\t[3567482.898, 27090, 0] say recipe5 done\nEND\t[3567482.899, 27090, 0]\nEND\t[3567483.398, 27089, 5]\nSTART\t[3567483.399, 27093, 2] say recipe4 done\nSTART\t[3567483.400, 27094, 6] say recipe3 done\nEND\t[3567483.599, 27093, 2]\nEND\t[3567484.000, 27094, 6]\nSTART\t[3567484.001, 27099, 7] say recipe3 done\nEND\t[3567484.701, 27099, 7]\nSTART\t[3567484.702, 27101, 7] say recipe3 done\nEND\t[3567485.402, 27101, 7]\nSTART\t[3567485.403, 27106, 1] say main recipe done\nEND\t[3567485.503, 27106, 1]\n'
+rc:  0
+START	[3567482.898, 27089, 5] say recipe6 done
+START	[3567482.898, 27090, 0] say recipe5 done
+END	[3567482.899, 27090, 0]
+END	[3567483.398, 27089, 5]
+START	[3567483.399, 27093, 2] say recipe4 done
+START	[3567483.400, 27094, 6] say recipe3 done
+END	[3567483.599, 27093, 2]
+END	[3567484.000, 27094, 6]
+START	[3567484.001, 27099, 7] say recipe3 done
+END	[3567484.701, 27099, 7]
+START	[3567484.702, 27101, 7] say recipe3 done
+END	[3567485.402, 27101, 7]
+START	[3567485.403, 27106, 1] say main recipe done
+END	[3567485.503, 27106, 1]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 8 run number 1 of 1, cookbook: error_in_pipeline.ckb, cooks: 5
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 5 -e
+Running  bin/cook -c 5
+stdout:
+ b''
+stderr:
+ b"START\t[3567982.959, 29943, 2] say this is recipe2\nSTART\t[3567982.959, 29942, 0] say about to see error\nEND\t[3567982.959, 29942, 0]\nEND\t[3567983.159, 29943, 2]\nPipe'd process exited abnormally\nSTART\t[3567983.160, 29945, 8] say hello\nSTART\t[3567983.161, 29947, 4] say noexec this task\nEND\t[3567983.561, 29947, 4]\nEND\t[3567983.960, 29945, 8]\n"
+rc:  7
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 8 run number 1 of 1, cookbook: error_in_pipeline.ckb, cooks: 5
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 5 -e
+Running  bin/cook -c 5
+stdout:
+ b''
+stderr:
+ b"START\t[3568382.378, 32060, 6] say about to see error\nSTART\t[3568382.378, 32061, 1] say this is recipe2\nEND\t[3568382.478, 32061, 1]\nEND\t[3568382.978, 32060, 6]\nPipe'd process exited abnormally\nSTART\t[3568382.980, 32063, 4] say hello\nSTART\t[3568382.981, 32065, 8] say noexec this task\nEND\t[3568383.380, 32063, 4]\nEND\t[3568383.781, 32065, 8]\n"
+rc:  7
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 9 run number 1 of 1, cookbook: error_in_pipeline1.ckb, cooks: 5
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 5 -e
+Running  bin/cook -c 5
+stdout:
+ b''
+stderr:
+ b'START\t[3568853.283,  2294, 1] say about to see error\nSTART\t[3568853.283,  2295, 2] say this is recipe2\nEND\t[3568853.383,  2294, 1]\nEND\t[3568853.483,  2295, 2]\nInvalid input redirection file\n'
+rc:  5
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 10 run number 1 of 1, cookbook: invalid_subrecipe.ckb, cooks: 5
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 5 -e
+Dependent recipe does not exist
+Running  bin/cook -c 5
+stdout:
+ b''
+stderr:
+ b'Recipe recipe1 depends on non-existent sub-recipe invalid\nError parsing cookbook\nUsage: cook [-f cookbook] [-c max_cooks] [main_recipe_name]\n'
+rc:  1
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 11 run number 1 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 2 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 3 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 1 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 2 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 3 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 1 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 2 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 11 run number 3 of 3, cookbook: hello_world.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -x Hello world!
+Running  bin/cook -c 1
+stdout:
+ b'Hello world!\n\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 12 run number 1 of 1, cookbook: basic_tasks_with_pipeline_nonzero.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -e
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b"Pipe'd process exited abnormally\nSTART\t[3586877.933, 29730, 3] say hello world\nSTART\t[3586877.933, 29732, 8] reply welcome to cse320\nEND\t[3586878.234, 29730, 3]\nEND\t[3586878.733, 29732, 8]\n"
+rc:  7
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 13 run number 1 of 3, cookbook: basic_tasks_with_pipeline_signal.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -e
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b"START\t[3587802.561,  2389, 5] say hello world\nSTART\t[3587802.561,  2392, 2] reply welcome to cse320\nPipe'd process exited abnormally\nEND\t[3587802.761,  2392, 2]\nEND\t[3587803.061,  2389, 5]\n"
+rc:  7
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 13 run number 2 of 3, cookbook: basic_tasks_with_pipeline_signal.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -e
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b"START\t[3587803.114,  2399, 3] say hello world\nPipe'd process exited abnormally\nSTART\t[3587803.115,  2402, 5] reply welcome to cse320\nEND\t[3587803.414,  2399, 3]\nEND\t[3587803.615,  2402, 5]\n"
+rc:  7
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 13 run number 3 of 3, cookbook: basic_tasks_with_pipeline_signal.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -e
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b"START\t[3587803.666,  2409, 5] say hello world\nPipe'd process exited abnormally\nSTART\t[3587803.667,  2412, 3] reply welcome to cse320\nEND\t[3587803.968,  2412, 3]\nEND\t[3587804.166,  2409, 5]\n"
+rc:  7
+SUCCESSFUL HANDLING OF ERROR (student returned non-zero)
+
+
+
+
+Running test 14 run number 1 of 1, cookbook: welcome.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -f ../../../dev_repo/solution/rsrc/welcome.ckb -x "Hello World"
+Running  bin/cook -f ../../../dev_repo/solution/rsrc/welcome.ckb -c 1
+stdout:
+ b'"Hello World"\n'
+stderr:
+ b''
+rc:  0
+SUCCESS: Expected Output produced
+
+
+
+
+Running test 15 run number 1 of 1, cookbook: basic_extra_recipe.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3588527.473,  5789, 5] say recipe1 done\nEND\t[3588527.973,  5789, 5]\nSTART\t[3588527.974,  5794, 2] say main recipe done\nEND\t[3588528.174,  5794, 2]\n'
+rc:  0
+START	[3588527.473,  5789, 5] say recipe1 done
+END	[3588527.973,  5789, 5]
+START	[3588527.974,  5794, 2] say main recipe done
+END	[3588528.174,  5794, 2]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 16 run number 1 of 3, cookbook: large_parallelism.ckb, cooks: 10
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 10
+Running  bin/cook -c 10
+stdout:
+ b''
+stderr:
+ b'START\t[3621545.992, 20526, 2] say recipe6 done\nSTART\t[3621545.993, 20530, 9] say recipe7 done\nSTART\t[3621545.993, 20529, 3] say recipe8 done\nSTART\t[3621545.993, 20537, 2] say recipe10 done\nSTART\t[3621545.993, 20539, 7] say recipe14 done\nSTART\t[3621545.993, 20540, 6] say recipe15 done\nSTART\t[3621545.993, 20533, 1] say recipe9 done\nSTART\t[3621545.994, 20541, 6] say recipe11 done\nSTART\t[3621545.994, 20542, 2] say recipe12 done\nSTART\t[3621545.994, 20543, 9] say recipe13 done\nEND\t[3621546.094, 20533, 1]\nEND\t[3621546.193, 20526, 2]\nEND\t[3621546.193, 20537, 2]\nEND\t[3621546.194, 20542, 2]\nEND\t[3621546.293, 20529, 3]\nEND\t[3621546.593, 20540, 6]\nEND\t[3621546.594, 20541, 6]\nEND\t[3621546.693, 20539, 7]\nEND\t[3621546.893, 20530, 9]\nEND\t[3621546.894, 20543, 9]\nSTART\t[3621546.895, 20551, 5] say recipe4 done\nSTART\t[3621546.895, 20552, 7] say recipe3 done\nSTART\t[3621546.895, 20549, 6] say recipe5 done\nEND\t[3621547.395, 20551, 5]\nEND\t[3621547.495, 20549, 6]\nEND\t[3621547.595, 20552, 7]\nSTART\t[3621547.596, 20554, 4] say recipe3 done\nEND\t[3621547.996, 20554, 4]\nSTART\t[3621547.997, 20559, 5] say recipe3 done\nEND\t[3621548.497, 20559, 5]\nSTART\t[3621548.498, 20561, 9] say main recipe done\nEND\t[3621549.399, 20561, 9]\n'
+rc:  0
+START	[3621545.992, 20526, 2] say recipe6 done
+START	[3621545.993, 20530, 9] say recipe7 done
+START	[3621545.993, 20529, 3] say recipe8 done
+START	[3621545.993, 20537, 2] say recipe10 done
+START	[3621545.993, 20539, 7] say recipe14 done
+START	[3621545.993, 20540, 6] say recipe15 done
+START	[3621545.993, 20533, 1] say recipe9 done
+START	[3621545.994, 20541, 6] say recipe11 done
+START	[3621545.994, 20542, 2] say recipe12 done
+START	[3621545.994, 20543, 9] say recipe13 done
+END	[3621546.094, 20533, 1]
+END	[3621546.193, 20526, 2]
+END	[3621546.193, 20537, 2]
+END	[3621546.194, 20542, 2]
+END	[3621546.293, 20529, 3]
+END	[3621546.593, 20540, 6]
+END	[3621546.594, 20541, 6]
+END	[3621546.693, 20539, 7]
+END	[3621546.893, 20530, 9]
+END	[3621546.894, 20543, 9]
+START	[3621546.895, 20551, 5] say recipe4 done
+START	[3621546.895, 20552, 7] say recipe3 done
+START	[3621546.895, 20549, 6] say recipe5 done
+END	[3621547.395, 20551, 5]
+END	[3621547.495, 20549, 6]
+END	[3621547.595, 20552, 7]
+START	[3621547.596, 20554, 4] say recipe3 done
+END	[3621547.996, 20554, 4]
+START	[3621547.997, 20559, 5] say recipe3 done
+END	[3621548.497, 20559, 5]
+START	[3621548.498, 20561, 9] say main recipe done
+END	[3621549.399, 20561, 9]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 16 run number 2 of 3, cookbook: large_parallelism.ckb, cooks: 10
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 10
+Running  bin/cook -c 10
+stdout:
+ b''
+stderr:
+ b'START\t[3621549.468, 20573, 2] say recipe7 done\nSTART\t[3621549.468, 20576, 1] say recipe9 done\nSTART\t[3621549.468, 20569, 2] say recipe6 done\nSTART\t[3621549.468, 20577, 2] say recipe11 done\nSTART\t[3621549.469, 20579, 7] say recipe10 done\nSTART\t[3621549.469, 20584, 3] say recipe12 done\nSTART\t[3621549.469, 20583, 1] say recipe13 done\nSTART\t[3621549.469, 20582, 3] say recipe8 done\nSTART\t[3621549.469, 20586, 7] say recipe14 done\nSTART\t[3621549.469, 20585, 9] say recipe15 done\nEND\t[3621549.568, 20576, 1]\nEND\t[3621549.569, 20583, 1]\nEND\t[3621549.668, 20573, 2]\nEND\t[3621549.668, 20569, 2]\nEND\t[3621549.669, 20577, 2]\nEND\t[3621549.769, 20584, 3]\nEND\t[3621549.769, 20582, 3]\nEND\t[3621550.169, 20579, 7]\nEND\t[3621550.169, 20586, 7]\nEND\t[3621550.369, 20585, 9]\nSTART\t[3621550.370, 20593, 3] say recipe5 done\nSTART\t[3621550.370, 20594, 2] say recipe4 done\nSTART\t[3621550.370, 20595, 6] say recipe3 done\nEND\t[3621550.570, 20594, 2]\nEND\t[3621550.670, 20593, 3]\nEND\t[3621550.971, 20595, 6]\nSTART\t[3621550.971, 20600, 7] say recipe3 done\nEND\t[3621551.671, 20600, 7]\nSTART\t[3621551.672, 20602, 2] say recipe3 done\nEND\t[3621551.872, 20602, 2]\nSTART\t[3621551.873, 20607, 8] say main recipe done\nEND\t[3621552.673, 20607, 8]\n'
+rc:  0
+START	[3621549.468, 20573, 2] say recipe7 done
+START	[3621549.468, 20576, 1] say recipe9 done
+START	[3621549.468, 20569, 2] say recipe6 done
+START	[3621549.468, 20577, 2] say recipe11 done
+START	[3621549.469, 20579, 7] say recipe10 done
+START	[3621549.469, 20584, 3] say recipe12 done
+START	[3621549.469, 20583, 1] say recipe13 done
+START	[3621549.469, 20582, 3] say recipe8 done
+START	[3621549.469, 20586, 7] say recipe14 done
+START	[3621549.469, 20585, 9] say recipe15 done
+END	[3621549.568, 20576, 1]
+END	[3621549.569, 20583, 1]
+END	[3621549.668, 20573, 2]
+END	[3621549.668, 20569, 2]
+END	[3621549.669, 20577, 2]
+END	[3621549.769, 20584, 3]
+END	[3621549.769, 20582, 3]
+END	[3621550.169, 20579, 7]
+END	[3621550.169, 20586, 7]
+END	[3621550.369, 20585, 9]
+START	[3621550.370, 20593, 3] say recipe5 done
+START	[3621550.370, 20594, 2] say recipe4 done
+START	[3621550.370, 20595, 6] say recipe3 done
+END	[3621550.570, 20594, 2]
+END	[3621550.670, 20593, 3]
+END	[3621550.971, 20595, 6]
+START	[3621550.971, 20600, 7] say recipe3 done
+END	[3621551.671, 20600, 7]
+START	[3621551.672, 20602, 2] say recipe3 done
+END	[3621551.872, 20602, 2]
+START	[3621551.873, 20607, 8] say main recipe done
+END	[3621552.673, 20607, 8]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 16 run number 3 of 3, cookbook: large_parallelism.ckb, cooks: 10
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 10
+Running  bin/cook -c 10
+stdout:
+ b''
+stderr:
+ b'START\t[3621552.730, 20618, 5] say recipe8 done\nSTART\t[3621552.730, 20615, 8] say recipe7 done\nSTART\t[3621552.730, 20624, 4] say recipe9 done\nSTART\t[3621552.731, 20625, 3] say recipe10 done\nSTART\t[3621552.731, 20626, 8] say recipe11 done\nSTART\t[3621552.731, 20627, 5] say recipe12 done\nSTART\t[3621552.731, 20623, 8] say recipe6 done\nSTART\t[3621552.731, 20628, 6] say recipe14 done\nSTART\t[3621552.731, 20629, 8] say recipe13 done\nSTART\t[3621552.731, 20630, 8] say recipe15 done\nEND\t[3621553.031, 20625, 3]\nEND\t[3621553.130, 20624, 4]\nEND\t[3621553.230, 20618, 5]\nEND\t[3621553.231, 20627, 5]\nEND\t[3621553.331, 20628, 6]\nEND\t[3621553.530, 20615, 8]\nEND\t[3621553.531, 20626, 8]\nEND\t[3621553.531, 20623, 8]\nEND\t[3621553.531, 20629, 8]\nEND\t[3621553.531, 20630, 8]\nSTART\t[3621553.532, 20637, 2] say recipe5 done\nSTART\t[3621553.532, 20638, 7] say recipe4 done\nSTART\t[3621553.533, 20639, 7] say recipe3 done\nEND\t[3621553.732, 20637, 2]\nEND\t[3621554.233, 20638, 7]\nEND\t[3621554.233, 20639, 7]\nSTART\t[3621554.234, 20644, 2] say recipe3 done\nEND\t[3621554.434, 20644, 2]\nSTART\t[3621554.435, 20646, 9] say recipe3 done\nEND\t[3621555.335, 20646, 9]\nSTART\t[3621555.336, 20651, 2] say main recipe done\nEND\t[3621555.537, 20651, 2]\n'
+rc:  0
+START	[3621552.730, 20618, 5] say recipe8 done
+START	[3621552.730, 20615, 8] say recipe7 done
+START	[3621552.730, 20624, 4] say recipe9 done
+START	[3621552.731, 20625, 3] say recipe10 done
+START	[3621552.731, 20626, 8] say recipe11 done
+START	[3621552.731, 20627, 5] say recipe12 done
+START	[3621552.731, 20623, 8] say recipe6 done
+START	[3621552.731, 20628, 6] say recipe14 done
+START	[3621552.731, 20629, 8] say recipe13 done
+START	[3621552.731, 20630, 8] say recipe15 done
+END	[3621553.031, 20625, 3]
+END	[3621553.130, 20624, 4]
+END	[3621553.230, 20618, 5]
+END	[3621553.231, 20627, 5]
+END	[3621553.331, 20628, 6]
+END	[3621553.530, 20615, 8]
+END	[3621553.531, 20626, 8]
+END	[3621553.531, 20623, 8]
+END	[3621553.531, 20629, 8]
+END	[3621553.531, 20630, 8]
+START	[3621553.532, 20637, 2] say recipe5 done
+START	[3621553.532, 20638, 7] say recipe4 done
+START	[3621553.533, 20639, 7] say recipe3 done
+END	[3621553.732, 20637, 2]
+END	[3621554.233, 20638, 7]
+END	[3621554.233, 20639, 7]
+START	[3621554.234, 20644, 2] say recipe3 done
+END	[3621554.434, 20644, 2]
+START	[3621554.435, 20646, 9] say recipe3 done
+END	[3621555.335, 20646, 9]
+START	[3621555.336, 20651, 2] say main recipe done
+END	[3621555.537, 20651, 2]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 17 run number 1 of 1, cookbook: cycle.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1 -e
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b''
+rc:  -11
+ERROR: student program segfaulted
+
+
+
+
+Running test 18 run number 1 of 3, cookbook: large_parallelism_nodelay.ckb, cooks: 10
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 10
+Running  bin/cook -c 10
+stdout:
+ b''
+stderr:
+ b'START\t[3623377.130,  8187, 0] say -d recipe8 done\nEND\t[3623377.130,  8187, 0]\nSTART\t[3623377.130,  8184, 0] say -d recipe6 done\nSTART\t[3623377.130,  8189, 0] say -d recipe9 done\nEND\t[3623377.130,  8184, 0]\nEND\t[3623377.131,  8189, 0]\nSTART\t[3623377.130,  8185, 0] say -d recipe7 done\nEND\t[3623377.131,  8185, 0]\nSTART\t[3623377.131,  8196, 0] say -d recipe11 done\nEND\t[3623377.131,  8196, 0]\nSTART\t[3623377.131,  8192, 0] say -d recipe10 done\nEND\t[3623377.131,  8192, 0]\nSTART\t[3623377.131,  8198, 0] say -d recipe14 done\nEND\t[3623377.131,  8198, 0]\nSTART\t[3623377.131,  8197, 0] say -d recipe12 done\nSTART\t[3623377.132,  8200, 0] say -d recipe15 done\nEND\t[3623377.132,  8197, 0]\nEND\t[3623377.132,  8200, 0]\nSTART\t[3623377.132,  8199, 0] say -d recipe13 done\nEND\t[3623377.132,  8199, 0]\nSTART\t[3623377.133,  8205, 0] say -d recipe4 done\nSTART\t[3623377.133,  8204, 0] say -d recipe5 done\nSTART\t[3623377.133,  8206, 0] say -d recipe3 done\nEND\t[3623377.133,  8205, 0]\nEND\t[3623377.133,  8204, 0]\nEND\t[3623377.133,  8206, 0]\nSTART\t[3623377.133,  8208, 0] say -d recipe3 done\nEND\t[3623377.133,  8208, 0]\nSTART\t[3623377.134,  8210, 0] say -d recipe3 done\nEND\t[3623377.134,  8210, 0]\nSTART\t[3623377.135,  8212, 0] say -d main recipe done\nEND\t[3623377.135,  8212, 0]\n'
+rc:  0
+START	[3623377.130,  8187, 0] say -d recipe8 done
+END	[3623377.130,  8187, 0]
+START	[3623377.130,  8184, 0] say -d recipe6 done
+START	[3623377.130,  8189, 0] say -d recipe9 done
+END	[3623377.130,  8184, 0]
+END	[3623377.131,  8189, 0]
+START	[3623377.130,  8185, 0] say -d recipe7 done
+END	[3623377.131,  8185, 0]
+START	[3623377.131,  8196, 0] say -d recipe11 done
+END	[3623377.131,  8196, 0]
+START	[3623377.131,  8192, 0] say -d recipe10 done
+END	[3623377.131,  8192, 0]
+START	[3623377.131,  8198, 0] say -d recipe14 done
+END	[3623377.131,  8198, 0]
+START	[3623377.131,  8197, 0] say -d recipe12 done
+START	[3623377.132,  8200, 0] say -d recipe15 done
+END	[3623377.132,  8197, 0]
+END	[3623377.132,  8200, 0]
+START	[3623377.132,  8199, 0] say -d recipe13 done
+END	[3623377.132,  8199, 0]
+START	[3623377.133,  8205, 0] say -d recipe4 done
+START	[3623377.133,  8204, 0] say -d recipe5 done
+START	[3623377.133,  8206, 0] say -d recipe3 done
+END	[3623377.133,  8205, 0]
+END	[3623377.133,  8204, 0]
+END	[3623377.133,  8206, 0]
+START	[3623377.133,  8208, 0] say -d recipe3 done
+END	[3623377.133,  8208, 0]
+START	[3623377.134,  8210, 0] say -d recipe3 done
+END	[3623377.134,  8210, 0]
+START	[3623377.135,  8212, 0] say -d main recipe done
+END	[3623377.135,  8212, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 18 run number 2 of 3, cookbook: large_parallelism_nodelay.ckb, cooks: 10
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 10
+Running  bin/cook -c 10
+stdout:
+ b''
+stderr:
+ b'START\t[3623377.187,  8220, 0] say -d recipe8 done\nEND\t[3623377.187,  8220, 0]\nSTART\t[3623377.187,  8218, 0] say -d recipe7 done\nEND\t[3623377.188,  8218, 0]\nSTART\t[3623377.188,  8221, 0] say -d recipe6 done\nSTART\t[3623377.188,  8231, 0] say -d recipe13 done\nSTART\t[3623377.188,  8227, 0] say -d recipe10 done\nEND\t[3623377.188,  8221, 0]\nSTART\t[3623377.188,  8230, 0] say -d recipe12 done\nEND\t[3623377.188,  8230, 0]\nEND\t[3623377.188,  8227, 0]\nSTART\t[3623377.188,  8232, 0] say -d recipe15 done\nEND\t[3623377.188,  8231, 0]\nEND\t[3623377.188,  8232, 0]\nSTART\t[3623377.189,  8224, 0] say -d recipe9 done\nSTART\t[3623377.189,  8233, 0] say -d recipe14 done\nEND\t[3623377.189,  8224, 0]\nEND\t[3623377.189,  8233, 0]\nSTART\t[3623377.189,  8234, 0] say -d recipe11 done\nEND\t[3623377.189,  8234, 0]\nSTART\t[3623377.190,  8238, 0] say -d recipe5 done\nSTART\t[3623377.190,  8239, 0] say -d recipe4 done\nSTART\t[3623377.190,  8240, 0] say -d recipe3 done\nEND\t[3623377.190,  8238, 0]\nEND\t[3623377.190,  8239, 0]\nEND\t[3623377.190,  8240, 0]\nSTART\t[3623377.190,  8242, 0] say -d recipe3 done\nEND\t[3623377.191,  8242, 0]\nSTART\t[3623377.191,  8244, 0] say -d recipe3 done\nEND\t[3623377.191,  8244, 0]\nSTART\t[3623377.192,  8246, 0] say -d main recipe done\nEND\t[3623377.192,  8246, 0]\n'
+rc:  0
+START	[3623377.187,  8220, 0] say -d recipe8 done
+END	[3623377.187,  8220, 0]
+START	[3623377.187,  8218, 0] say -d recipe7 done
+END	[3623377.188,  8218, 0]
+START	[3623377.188,  8221, 0] say -d recipe6 done
+START	[3623377.188,  8231, 0] say -d recipe13 done
+START	[3623377.188,  8227, 0] say -d recipe10 done
+END	[3623377.188,  8221, 0]
+START	[3623377.188,  8230, 0] say -d recipe12 done
+END	[3623377.188,  8230, 0]
+END	[3623377.188,  8227, 0]
+START	[3623377.188,  8232, 0] say -d recipe15 done
+END	[3623377.188,  8231, 0]
+END	[3623377.188,  8232, 0]
+START	[3623377.189,  8224, 0] say -d recipe9 done
+START	[3623377.189,  8233, 0] say -d recipe14 done
+END	[3623377.189,  8224, 0]
+END	[3623377.189,  8233, 0]
+START	[3623377.189,  8234, 0] say -d recipe11 done
+END	[3623377.189,  8234, 0]
+START	[3623377.190,  8238, 0] say -d recipe5 done
+START	[3623377.190,  8239, 0] say -d recipe4 done
+START	[3623377.190,  8240, 0] say -d recipe3 done
+END	[3623377.190,  8238, 0]
+END	[3623377.190,  8239, 0]
+END	[3623377.190,  8240, 0]
+START	[3623377.190,  8242, 0] say -d recipe3 done
+END	[3623377.191,  8242, 0]
+START	[3623377.191,  8244, 0] say -d recipe3 done
+END	[3623377.191,  8244, 0]
+START	[3623377.192,  8246, 0] say -d main recipe done
+END	[3623377.192,  8246, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 18 run number 3 of 3, cookbook: large_parallelism_nodelay.ckb, cooks: 10
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 10
+Running  bin/cook -c 10
+stdout:
+ b''
+stderr:
+ b'START\t[3623377.245,  8251, 0] say -d recipe6 done\nSTART\t[3623377.245,  8253, 0] say -d recipe7 done\nEND\t[3623377.245,  8251, 0]\nSTART\t[3623377.245,  8258, 0] say -d recipe9 done\nEND\t[3623377.245,  8253, 0]\nSTART\t[3623377.245,  8265, 0] say -d recipe14 done\nEND\t[3623377.245,  8258, 0]\nEND\t[3623377.246,  8265, 0]\nSTART\t[3623377.246,  8255, 0] say -d recipe8 done\nEND\t[3623377.246,  8255, 0]\nSTART\t[3623377.246,  8267, 0] say -d recipe10 done\nSTART\t[3623377.246,  8266, 0] say -d recipe15 done\nEND\t[3623377.246,  8266, 0]\nSTART\t[3623377.246,  8268, 0] say -d recipe12 done\nEND\t[3623377.246,  8267, 0]\nSTART\t[3623377.246,  8264, 0] say -d recipe13 done\nEND\t[3623377.246,  8268, 0]\nEND\t[3623377.246,  8264, 0]\nSTART\t[3623377.246,  8261, 0] say -d recipe11 done\nEND\t[3623377.247,  8261, 0]\nSTART\t[3623377.247,  8271, 0] say -d recipe5 done\nEND\t[3623377.247,  8271, 0]\nSTART\t[3623377.247,  8274, 0] say -d recipe3 done\nEND\t[3623377.247,  8274, 0]\nSTART\t[3623377.248,  8273, 0] say -d recipe4 done\nEND\t[3623377.248,  8273, 0]\nSTART\t[3623377.248,  8276, 0] say -d recipe3 done\nEND\t[3623377.248,  8276, 0]\nSTART\t[3623377.249,  8278, 0] say -d recipe3 done\nEND\t[3623377.249,  8278, 0]\nSTART\t[3623377.250,  8280, 0] say -d main recipe done\nEND\t[3623377.250,  8280, 0]\n'
+rc:  0
+START	[3623377.245,  8251, 0] say -d recipe6 done
+START	[3623377.245,  8253, 0] say -d recipe7 done
+END	[3623377.245,  8251, 0]
+START	[3623377.245,  8258, 0] say -d recipe9 done
+END	[3623377.245,  8253, 0]
+START	[3623377.245,  8265, 0] say -d recipe14 done
+END	[3623377.245,  8258, 0]
+END	[3623377.246,  8265, 0]
+START	[3623377.246,  8255, 0] say -d recipe8 done
+END	[3623377.246,  8255, 0]
+START	[3623377.246,  8267, 0] say -d recipe10 done
+START	[3623377.246,  8266, 0] say -d recipe15 done
+END	[3623377.246,  8266, 0]
+START	[3623377.246,  8268, 0] say -d recipe12 done
+END	[3623377.246,  8267, 0]
+START	[3623377.246,  8264, 0] say -d recipe13 done
+END	[3623377.246,  8268, 0]
+END	[3623377.246,  8264, 0]
+START	[3623377.246,  8261, 0] say -d recipe11 done
+END	[3623377.247,  8261, 0]
+START	[3623377.247,  8271, 0] say -d recipe5 done
+END	[3623377.247,  8271, 0]
+START	[3623377.247,  8274, 0] say -d recipe3 done
+END	[3623377.247,  8274, 0]
+START	[3623377.248,  8273, 0] say -d recipe4 done
+END	[3623377.248,  8273, 0]
+START	[3623377.248,  8276, 0] say -d recipe3 done
+END	[3623377.248,  8276, 0]
+START	[3623377.249,  8278, 0] say -d recipe3 done
+END	[3623377.249,  8278, 0]
+START	[3623377.250,  8280, 0] say -d main recipe done
+END	[3623377.250,  8280, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 19 run number 1 of 3, cookbook: basic_subrecipe_multiple_deps_nodelay.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3624734.323, 22821, 0] say -d recipe3 done\nEND\t[3624734.323, 22821, 0]\nSTART\t[3624734.324, 22823, 0] say -d recipe5 done\nEND\t[3624734.324, 22823, 0]\nSTART\t[3624734.325, 22825, 0] say -d recipe4 done\nEND\t[3624734.325, 22825, 0]\nSTART\t[3624734.325, 22827, 0] say -d recipe3 done\nEND\t[3624734.326, 22827, 0]\nSTART\t[3624734.326, 22829, 0] say -d recipe3 done\nEND\t[3624734.326, 22829, 0]\nSTART\t[3624734.327, 22831, 0] say -d main recipe done\nEND\t[3624734.327, 22831, 0]\n'
+rc:  0
+START	[3624734.323, 22821, 0] say -d recipe3 done
+END	[3624734.323, 22821, 0]
+START	[3624734.324, 22823, 0] say -d recipe5 done
+END	[3624734.324, 22823, 0]
+START	[3624734.325, 22825, 0] say -d recipe4 done
+END	[3624734.325, 22825, 0]
+START	[3624734.325, 22827, 0] say -d recipe3 done
+END	[3624734.326, 22827, 0]
+START	[3624734.326, 22829, 0] say -d recipe3 done
+END	[3624734.326, 22829, 0]
+START	[3624734.327, 22831, 0] say -d main recipe done
+END	[3624734.327, 22831, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 19 run number 2 of 3, cookbook: basic_subrecipe_multiple_deps_nodelay.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3624734.378, 22835, 0] say -d recipe3 done\nEND\t[3624734.378, 22835, 0]\nSTART\t[3624734.379, 22837, 0] say -d recipe5 done\nEND\t[3624734.379, 22837, 0]\nSTART\t[3624734.380, 22839, 0] say -d recipe4 done\nEND\t[3624734.380, 22839, 0]\nSTART\t[3624734.381, 22841, 0] say -d recipe3 done\nEND\t[3624734.381, 22841, 0]\nSTART\t[3624734.381, 22843, 0] say -d recipe3 done\nEND\t[3624734.381, 22843, 0]\nSTART\t[3624734.382, 22845, 0] say -d main recipe done\nEND\t[3624734.382, 22845, 0]\n'
+rc:  0
+START	[3624734.378, 22835, 0] say -d recipe3 done
+END	[3624734.378, 22835, 0]
+START	[3624734.379, 22837, 0] say -d recipe5 done
+END	[3624734.379, 22837, 0]
+START	[3624734.380, 22839, 0] say -d recipe4 done
+END	[3624734.380, 22839, 0]
+START	[3624734.381, 22841, 0] say -d recipe3 done
+END	[3624734.381, 22841, 0]
+START	[3624734.381, 22843, 0] say -d recipe3 done
+END	[3624734.381, 22843, 0]
+START	[3624734.382, 22845, 0] say -d main recipe done
+END	[3624734.382, 22845, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 19 run number 3 of 3, cookbook: basic_subrecipe_multiple_deps_nodelay.ckb, cooks: 1
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 1
+Running  bin/cook -c 1
+stdout:
+ b''
+stderr:
+ b'START\t[3624734.435, 22850, 0] say -d recipe3 done\nEND\t[3624734.436, 22850, 0]\nSTART\t[3624734.436, 22852, 0] say -d recipe5 done\nEND\t[3624734.436, 22852, 0]\nSTART\t[3624734.437, 22854, 0] say -d recipe4 done\nEND\t[3624734.437, 22854, 0]\nSTART\t[3624734.438, 22856, 0] say -d recipe3 done\nEND\t[3624734.438, 22856, 0]\nSTART\t[3624734.438, 22858, 0] say -d recipe3 done\nEND\t[3624734.438, 22858, 0]\nSTART\t[3624734.439, 22860, 0] say -d main recipe done\nEND\t[3624734.439, 22860, 0]\n'
+rc:  0
+START	[3624734.435, 22850, 0] say -d recipe3 done
+END	[3624734.436, 22850, 0]
+START	[3624734.436, 22852, 0] say -d recipe5 done
+END	[3624734.436, 22852, 0]
+START	[3624734.437, 22854, 0] say -d recipe4 done
+END	[3624734.437, 22854, 0]
+START	[3624734.438, 22856, 0] say -d recipe3 done
+END	[3624734.438, 22856, 0]
+START	[3624734.438, 22858, 0] say -d recipe3 done
+END	[3624734.438, 22858, 0]
+START	[3624734.439, 22860, 0] say -d main recipe done
+END	[3624734.439, 22860, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 20 run number 1 of 3, cookbook: basic_subrecipe_multiple_deps_nodelay.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3625156.536, 27146, 0] say -d recipe3 done\nSTART\t[3625156.536, 27149, 0] say -d recipe4 done\nEND\t[3625156.536, 27146, 0]\nEND\t[3625156.536, 27149, 0]\nSTART\t[3625156.537, 27148, 0] say -d recipe5 done\nEND\t[3625156.537, 27148, 0]\nSTART\t[3625156.537, 27151, 0] say -d recipe3 done\nEND\t[3625156.538, 27151, 0]\nSTART\t[3625156.538, 27153, 0] say -d recipe3 done\nEND\t[3625156.538, 27153, 0]\nSTART\t[3625156.539, 27155, 0] say -d main recipe done\nEND\t[3625156.539, 27155, 0]\n'
+rc:  0
+START	[3625156.536, 27146, 0] say -d recipe3 done
+START	[3625156.536, 27149, 0] say -d recipe4 done
+END	[3625156.536, 27146, 0]
+END	[3625156.536, 27149, 0]
+START	[3625156.537, 27148, 0] say -d recipe5 done
+END	[3625156.537, 27148, 0]
+START	[3625156.537, 27151, 0] say -d recipe3 done
+END	[3625156.538, 27151, 0]
+START	[3625156.538, 27153, 0] say -d recipe3 done
+END	[3625156.538, 27153, 0]
+START	[3625156.539, 27155, 0] say -d main recipe done
+END	[3625156.539, 27155, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 20 run number 2 of 3, cookbook: basic_subrecipe_multiple_deps_nodelay.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3625156.590, 27162, 0] say -d recipe5 done\nSTART\t[3625156.590, 27160, 0] say -d recipe3 done\nEND\t[3625156.591, 27160, 0]\nEND\t[3625156.591, 27162, 0]\nSTART\t[3625156.591, 27163, 0] say -d recipe4 done\nEND\t[3625156.591, 27163, 0]\nSTART\t[3625156.592, 27165, 0] say -d recipe3 done\nEND\t[3625156.592, 27165, 0]\nSTART\t[3625156.592, 27167, 0] say -d recipe3 done\nEND\t[3625156.593, 27167, 0]\nSTART\t[3625156.593, 27169, 0] say -d main recipe done\nEND\t[3625156.593, 27169, 0]\n'
+rc:  0
+START	[3625156.590, 27162, 0] say -d recipe5 done
+START	[3625156.590, 27160, 0] say -d recipe3 done
+END	[3625156.591, 27160, 0]
+END	[3625156.591, 27162, 0]
+START	[3625156.591, 27163, 0] say -d recipe4 done
+END	[3625156.591, 27163, 0]
+START	[3625156.592, 27165, 0] say -d recipe3 done
+END	[3625156.592, 27165, 0]
+START	[3625156.592, 27167, 0] say -d recipe3 done
+END	[3625156.593, 27167, 0]
+START	[3625156.593, 27169, 0] say -d main recipe done
+END	[3625156.593, 27169, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 20 run number 3 of 3, cookbook: basic_subrecipe_multiple_deps_nodelay.ckb, cooks: 3
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 3
+Running  bin/cook -c 3
+stdout:
+ b''
+stderr:
+ b'START\t[3625156.648, 27178, 0] say -d recipe3 done\nEND\t[3625156.648, 27178, 0]\nSTART\t[3625156.649, 27179, 0] say -d recipe4 done\nSTART\t[3625156.649, 27180, 0] say -d recipe5 done\nEND\t[3625156.649, 27179, 0]\nEND\t[3625156.649, 27180, 0]\nSTART\t[3625156.649, 27182, 0] say -d recipe3 done\nEND\t[3625156.649, 27182, 0]\nSTART\t[3625156.650, 27184, 0] say -d recipe3 done\nEND\t[3625156.650, 27184, 0]\nSTART\t[3625156.651, 27186, 0] say -d main recipe done\nEND\t[3625156.651, 27186, 0]\n'
+rc:  0
+START	[3625156.648, 27178, 0] say -d recipe3 done
+END	[3625156.648, 27178, 0]
+START	[3625156.649, 27179, 0] say -d recipe4 done
+START	[3625156.649, 27180, 0] say -d recipe5 done
+END	[3625156.649, 27179, 0]
+END	[3625156.649, 27180, 0]
+START	[3625156.649, 27182, 0] say -d recipe3 done
+END	[3625156.649, 27182, 0]
+START	[3625156.650, 27184, 0] say -d recipe3 done
+END	[3625156.650, 27184, 0]
+START	[3625156.651, 27186, 0] say -d main recipe done
+END	[3625156.651, 27186, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 21 run number 1 of 3, cookbook: more_than_max_cook_parallelism_nodelay.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3625604.665, 32030, 0] say -d recipe5 done\nSTART\t[3625604.665, 32029, 0] say -d recipe6 done\nEND\t[3625604.665, 32030, 0]\nEND\t[3625604.665, 32029, 0]\nSTART\t[3625604.666, 32033, 0] say -d recipe4 done\nSTART\t[3625604.666, 32034, 0] say -d recipe3 done\nEND\t[3625604.666, 32033, 0]\nEND\t[3625604.666, 32034, 0]\nSTART\t[3625604.666, 32036, 0] say -d recipe3 done\nEND\t[3625604.666, 32036, 0]\nSTART\t[3625604.667, 32038, 0] say -d recipe3 done\nEND\t[3625604.667, 32038, 0]\nSTART\t[3625604.668, 32040, 0] say -d main recipe done\nEND\t[3625604.668, 32040, 0]\n'
+rc:  0
+START	[3625604.665, 32030, 0] say -d recipe5 done
+START	[3625604.665, 32029, 0] say -d recipe6 done
+END	[3625604.665, 32030, 0]
+END	[3625604.665, 32029, 0]
+START	[3625604.666, 32033, 0] say -d recipe4 done
+START	[3625604.666, 32034, 0] say -d recipe3 done
+END	[3625604.666, 32033, 0]
+END	[3625604.666, 32034, 0]
+START	[3625604.666, 32036, 0] say -d recipe3 done
+END	[3625604.666, 32036, 0]
+START	[3625604.667, 32038, 0] say -d recipe3 done
+END	[3625604.667, 32038, 0]
+START	[3625604.668, 32040, 0] say -d main recipe done
+END	[3625604.668, 32040, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 21 run number 2 of 3, cookbook: more_than_max_cook_parallelism_nodelay.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3625604.721, 32046, 0] say -d recipe5 done\nSTART\t[3625604.721, 32045, 0] say -d recipe6 done\nEND\t[3625604.722, 32045, 0]\nEND\t[3625604.722, 32046, 0]\nSTART\t[3625604.722, 32050, 0] say -d recipe4 done\nSTART\t[3625604.722, 32051, 0] say -d recipe3 done\nEND\t[3625604.722, 32050, 0]\nEND\t[3625604.722, 32051, 0]\nSTART\t[3625604.723, 32053, 0] say -d recipe3 done\nEND\t[3625604.723, 32053, 0]\nSTART\t[3625604.724, 32055, 0] say -d recipe3 done\nEND\t[3625604.724, 32055, 0]\nSTART\t[3625604.724, 32057, 0] say -d main recipe done\nEND\t[3625604.724, 32057, 0]\n'
+rc:  0
+START	[3625604.721, 32046, 0] say -d recipe5 done
+START	[3625604.721, 32045, 0] say -d recipe6 done
+END	[3625604.722, 32045, 0]
+END	[3625604.722, 32046, 0]
+START	[3625604.722, 32050, 0] say -d recipe4 done
+START	[3625604.722, 32051, 0] say -d recipe3 done
+END	[3625604.722, 32050, 0]
+END	[3625604.722, 32051, 0]
+START	[3625604.723, 32053, 0] say -d recipe3 done
+END	[3625604.723, 32053, 0]
+START	[3625604.724, 32055, 0] say -d recipe3 done
+END	[3625604.724, 32055, 0]
+START	[3625604.724, 32057, 0] say -d main recipe done
+END	[3625604.724, 32057, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
+Running test 21 run number 3 of 3, cookbook: more_than_max_cook_parallelism_nodelay.ckb, cooks: 2
+command: python3 ../../../dev_repo/solution/grading/script.py -p bin/cook -c 2
+Running  bin/cook -c 2
+stdout:
+ b''
+stderr:
+ b'START\t[3625604.774, 32063, 0] say -d recipe5 done\nSTART\t[3625604.774, 32062, 0] say -d recipe6 done\nEND\t[3625604.774, 32062, 0]\nEND\t[3625604.774, 32063, 0]\nSTART\t[3625604.775, 32067, 0] say -d recipe3 done\nSTART\t[3625604.775, 32066, 0] say -d recipe4 done\nEND\t[3625604.775, 32067, 0]\nEND\t[3625604.775, 32066, 0]\nSTART\t[3625604.776, 32069, 0] say -d recipe3 done\nEND\t[3625604.776, 32069, 0]\nSTART\t[3625604.776, 32071, 0] say -d recipe3 done\nEND\t[3625604.776, 32071, 0]\nSTART\t[3625604.777, 32073, 0] say -d main recipe done\nEND\t[3625604.777, 32073, 0]\n'
+rc:  0
+START	[3625604.774, 32063, 0] say -d recipe5 done
+START	[3625604.774, 32062, 0] say -d recipe6 done
+END	[3625604.774, 32062, 0]
+END	[3625604.774, 32063, 0]
+START	[3625604.775, 32067, 0] say -d recipe3 done
+START	[3625604.775, 32066, 0] say -d recipe4 done
+END	[3625604.775, 32067, 0]
+END	[3625604.775, 32066, 0]
+START	[3625604.776, 32069, 0] say -d recipe3 done
+END	[3625604.776, 32069, 0]
+START	[3625604.776, 32071, 0] say -d recipe3 done
+END	[3625604.776, 32071, 0]
+START	[3625604.777, 32073, 0] say -d main recipe done
+END	[3625604.777, 32073, 0]
+SUCCESSFUL COMPLETION OF RECIPE: recipe
+
+
+
+
