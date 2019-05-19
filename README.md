@@ -1,42 +1,55 @@
-# WILMER SUAREZ
-## 109592501
-:🐒:
-Eugene Stark - 01
+# C_PROJECTS
 
-ACADEMIC HONESTY STATEMENT
-================================================================================
-I certify the following:
+Projects done in Stony Brook's CSE 320 Course: System Fundamentals II
 
-1. All files hosted in this repository at any time, including any written
-material and code, are entirely of my own work. The only exception permitted to
-this rule is if the Professor(s) give explicit, written permission, in the
-assignment handout, on the webpage/PIAZZA, or in E-mail, to use or adapt other
-source code into my work. In this case, the origins of all such code is clearly
-cited in my files.
+## HW 1
+Command Line utility that performs data compression using Huffman Coding.
+    - I/O Redirection
+    - Strings
+    - Bitwise Manipulations
+    - Pointers
 
-2. I have not shared, transmitted, or received source code written for this
-class (including in any semester) from anyone else except the Professor(s) and
-the TAs. This includes both electronic forms (E-mail or downloading), as well as
-written or printed source code.
+## HW 2
+Updating legacy software: The ged2html program. The program takes in a GEDCOM file and outputs a set of interlinked HTML files.
+    - GDB & Valgrind
+    - Memory management & pointers
+    - File management & Standard I/O library
 
-3. Except in the case of explicit written permission given by the Professor(s),
-I have not included in my repository any source code obtained from a textbook,
-downloaded from the Internet, extracted from a software package or source code
-library, or from any other similar source.
+## HW 3
+Dynamic memory allocator. Implemented mallloc(), free(), & realloc(). 
+    - Inner workings of a dynamic memory allocator
+    - Memory padding and alignment
+    - Structs & Linked lists
+    - errno numbers
+    - Unit Testing
 
-I understand that the appearance of extremely similar code fragments in more
-than one homework submission will be treated as evidence that code has been
-shared and an academic dishonesty case will be filed against me.
+## HW 4
+Implemeted a program called **cook**, a simplified version of **make** that runs jobs in parallel.
+    - Multiprocessing
+        - Forking
+	- Executing 
+	- Reaping
+    - Low-level UNIX/POSIX syscalls
+    - Signal Handling
+    	- signal()
+	- sigprocmask()
+	- sigsuspend()
+    - Files
+    - I/O redirection
+        - Pipelining
+	- dup()
+    - Execution using execve()
 
-I understand that code fragments can be extremely similar even if they are
-formatted differently and use different identifiers/labels/variables. The
-appearance of extremely similar code fragments that differ in this way will be
-regarded as evidence of an attempt to conceal that sharing has taken place.
+## HW 5
+Multi-threaded network game server.
+    - Multithreading
+    	- Low-level POSIX threads
+	- Multi-threading safety
+	- Concurrency Guarantees
+	- Networking
+    - Socket programming
+    - Thread execution
+    	- Locks
+	- Semaphores
+    - Design of concurrent data structures
 
-When in doubt about whether or not I am permitted to use particular source
-materials, I will obtain written permission from the Professor(s), in advance of
-my submission. Such permission is best requested and obtained by E-mail to
-cse320@cs.stonybrook.edu
-================================================================================
-Signed:
-Wed Jan 30 00:08:52 UTC 2019 - WILMER SUAREZ
